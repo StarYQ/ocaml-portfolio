@@ -1,0 +1,5 @@
+(executable
+ (public_name portfolio20240602)
+ (name main)
+ (libraries lib)
+)
