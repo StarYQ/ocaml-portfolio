@@ -1,32 +1,8 @@
 (library
+ (public_name portfolio20240602.lib)
  (name lib)
-(modules
-router
-css
-page_about
-page_index
-page_contact
-page_projects
-page_words
-)
- (libraries dream)
- (preprocess (pps lwt_ppx))
-)
-
-(rule
- (targets
- page_index.ml
- page_about.ml
- page_contact.ml
- page_projects.ml
- page_words.ml
-)
- (deps
- page_index.eml.html
- page_about.eml.html
- page_contact.eml.html
- page_projects.eml.html
- page_words.eml.html
-)
- (action (run dream_eml %{deps} --workspace %{workspace_root}))
- )
+ (modules)
+ (libraries 
+  client
+  server
+  shared))

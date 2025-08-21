@@ -1,1 +1,1 @@
-let () = Lib.Router.run_router
+let () = Server.Router.run_server

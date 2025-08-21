@@ -1,0 +1,17 @@
+(library
+ (public_name portfolio20240602.client.pages)
+ (name pages)
+ (modules
+   pages
+   page_about_simple
+   page_home_simple
+   page_projects_simple
+   page_words_simple
+   page_contact_simple)
+ (libraries 
+   shared
+   bonsai
+   bonsai.web
+   virtual_dom
+   js_of_ocaml)
+ (preprocess (pps ppx_jane js_of_ocaml-ppx bonsai.ppx_bonsai)))

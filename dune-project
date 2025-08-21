@@ -7,9 +7,9 @@
 (source
  (github username/reponame))
 
-(authors "Author Name")
+(authors "Arnab Bhowmik")
 
-(maintainers "Maintainer Name")
+(maintainers "")
 
 (license LICENSE)
 
@@ -17,12 +17,24 @@
 
 (package
  (name portfolio20240602)
- (synopsis "A short synopsis")
- (description "A longer description")
- (depends ocaml dune dream)
+ (synopsis "Pure OCaml Portfolio Website")
+ (description
+  "A modern portfolio website built entirely in OCaml using Dream backend and Bonsai Web frontend")
+ (depends
+  ocaml
+  dune
+  dream
+  lwt_ppx
+  bonsai
+  (virtual_dom
+   (>= v0.16))
+  (js_of_ocaml
+   (>= 5.0))
+  (js_of_ocaml-ppx
+   (>= 5.0))
+  ppx_jane
+  ppx_css)
  (tags
-  (topics "to describe" your project))
-
-)
+  (portfolio ocaml bonsai web)))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project

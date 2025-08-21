@@ -4,3 +4,12 @@
 tmp/
 
 _build
+
+# claude
+CLAUDE.md
+
+# docs
+CHANGELOG.md
+TPM-PROTOCOL.md
+
+# misc
