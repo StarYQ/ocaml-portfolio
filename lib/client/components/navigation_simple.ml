@@ -11,7 +11,8 @@ let render ~current_route =
       else 
         []
     in
-    Router.Link.create ~route ~text ~attrs ()
+    (* Using the Jane Street nav_link module we copied *)
+    Nav_link.create ~route ~text ~attrs ()
   in
   
   Vdom.Node.create "nav"

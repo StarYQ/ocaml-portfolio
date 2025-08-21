@@ -12,6 +12,7 @@
    shared
    bonsai
    bonsai.web
+   bonsai.web_ui_form
    virtual_dom
    js_of_ocaml)
  (preprocess (pps ppx_jane js_of_ocaml-ppx bonsai.ppx_bonsai)))

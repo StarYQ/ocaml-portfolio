@@ -4,9 +4,11 @@
  (modules
    components
    layout_simple
+   nav_link
    navigation_simple
    router)
  (libraries 
+   core
    shared
    bonsai
    bonsai.web
