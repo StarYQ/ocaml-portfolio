@@ -1,28 +1,25 @@
 open! Core
 open Virtual_dom
+open Shared.Types
 
 let render ~current_route =
-  ignore current_route;
-  Vdom.Node.div
-    [Vdom.Node.div
-      [Vdom.Node.a ~attrs:[
-         Vdom.Attr.href "/";
-         Vdom.Attr.create "data-nav-link" "true"
-       ] [Vdom.Node.text "Home"];
-       Vdom.Node.a ~attrs:[
-         Vdom.Attr.href "/about";
-         Vdom.Attr.create "data-nav-link" "true"
-       ] [Vdom.Node.text "About"];
-       Vdom.Node.a ~attrs:[
-         Vdom.Attr.href "/projects";
-         Vdom.Attr.create "data-nav-link" "true"
-       ] [Vdom.Node.text "Projects"];
-       Vdom.Node.a ~attrs:[
-         Vdom.Attr.href "/words";
-         Vdom.Attr.create "data-nav-link" "true"
-       ] [Vdom.Node.text "Words"];
-       Vdom.Node.a ~attrs:[
-         Vdom.Attr.href "/contact";
-         Vdom.Attr.create "data-nav-link" "true"
-       ] [Vdom.Node.text "Contact"];
-      ]]
+  let nav_item route text =
+    let is_active = Shared.Types.equal_route current_route route in
+    let attrs = 
+      if is_active then 
+        [Vdom.Attr.class_ "active"]
+      else 
+        []
+    in
+    Router.Link.create ~route ~text ~attrs ()
+  in
+  
+  Vdom.Node.create "nav"
+    ~attrs:[Vdom.Attr.class_ "main-navigation"]
+    [
+      nav_item Home "Home";
+      nav_item About "About";
+      nav_item Projects "Projects";
+      nav_item Words "Words";
+      nav_item Contact "Contact";
+    ]

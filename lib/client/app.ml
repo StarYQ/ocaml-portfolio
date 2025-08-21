@@ -5,7 +5,7 @@ open Virtual_dom
 
 let app_computation =
   (* Get the route state from the router *)
-  let%sub current_route = Router.create_route_state () in
+  let%sub current_route = Components.Router.create_route_state () in
   
   (* Render content based on the current route *)
   let%arr route = current_route in

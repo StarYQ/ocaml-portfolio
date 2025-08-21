@@ -4,7 +4,8 @@
  (modules
    components
    layout_simple
-   navigation_simple)
+   navigation_simple
+   router)
  (libraries 
    shared
    bonsai

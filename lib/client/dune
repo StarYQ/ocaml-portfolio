@@ -2,8 +2,7 @@
  (public_name portfolio20240602.client)
  (name client)
  (modules 
-   app
-   router)
+   app)
  (libraries 
    shared
    pages

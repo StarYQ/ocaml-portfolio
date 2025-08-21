@@ -51,11 +51,11 @@ let create_route_state () =
       Vdom.Effect.Ignore
   in
   
-  (* Poll for URL changes every 100ms to handle browser back/forward *)
+  (* Poll for URL changes every 50ms for more responsive navigation *)
   let%sub () = 
     Bonsai.Clock.every
       ~when_to_start_next_effect:`Every_multiple_of_period_blocking
-      (Time_ns.Span.of_sec 0.1)
+      (Time_ns.Span.of_ms 50.0)
       polling_effect
   in
   
