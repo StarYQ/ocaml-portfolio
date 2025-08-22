@@ -61,7 +61,7 @@ let create_route_state () =
   
   return route
 
-(* Navigate to a route *)
+(* Navigate to a route - Used by nav_link component *)
 let navigate_to_route route =
   match !route_setter_ref with
   | Some set_route ->
@@ -74,23 +74,3 @@ let navigate_to_route route =
   | None ->
       (* Fallback: just update URL if setter not available yet *)
       Vdom.Effect.of_sync_fun update_browser_url route
-
-(* Link component for navigation *)
-module Link = struct
-  let create ~route ~text ?(attrs = []) () =
-    Vdom.Node.a
-      ~attrs:(
-        (* Include href for accessibility and fallback *)
-        Vdom.Attr.href (route_to_string route) ::
-        (* Handle click to navigate without page reload *)
-        Vdom.Attr.on_click (fun _evt ->
-          (* Prevent default browser navigation *)
-          Vdom.Effect.Many [
-            Vdom.Effect.Prevent_default;
-            (* Navigate using our router *)
-            navigate_to_route route
-          ]
-        ) :: attrs
-      )
-      [Vdom.Node.text text]
-end
