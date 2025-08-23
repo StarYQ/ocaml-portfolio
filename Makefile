@@ -1,35 +1,33 @@
-# Build targets
-.PHONY: build build-client build-server clean install-deps
+# Production build configuration for OCaml Portfolio
 
-build: build-client build-server
+.PHONY: build build-dev build-prod serve clean
 
-build-client:
-	@echo "Building Bonsai client..."
-	eval $$(opam env) && dune build lib/client_main/main.bc.js
+# Development build (default)
+build: build-dev
 
-build-server:
-	@echo "Building Dream server..."
-	eval $$(opam env) && dune build bin/main.exe
+build-dev:
+	dune build
 
+# Production build with optimizations
+build-prod:
+	@echo "Building for production with dead code elimination..."
+	FORCE_DROP_INLINE_TEST=true \
+	INSIDE_DUNE=true \
+	dune build --profile=release
+
+# Serve the application
+serve: build-dev
+	dune exec bin/server/main.exe
+
+serve-prod: build-prod
+	dune exec --profile=release bin/server/main.exe
+
+# Clean build artifacts
 clean:
 	dune clean
 
-install-deps:
-	opam install . --deps-only -y
-
-# Development targets
-.PHONY: dev serve watch
-
-dev: build serve
-
-serve:
-	@echo "Starting server on http://localhost:8080"
-	eval $$(opam env) && PORT=8080 dune exec portfolio20240602
-
-watch:
-	@echo "Starting development server with file watching..."
-	eval $$(opam env) && dune build --watch &
-	eval $$(opam env) && PORT=8080 dune exec portfolio20240602
-
-# Legacy target
-up: serve
+# Check bundle size
+check-size:
+	@echo "Bundle sizes:"
+	@ls -lh _build/default/lib/client_main/main.bc.js 2>/dev/null || echo "Development build not found"
+	@ls -lh _build/release/lib/client_main/main.bc.js 2>/dev/null || echo "Production build not found"

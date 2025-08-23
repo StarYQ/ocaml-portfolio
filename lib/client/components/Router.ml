@@ -1,76 +1,30 @@
 open! Core
-open Bonsai.Let_syntax
+open Bonsai_web
 open Shared.Types
-open Virtual_dom
-open Js_of_ocaml
 
-(* Module for route state *)
-module Route_model = struct
+(** Module for parsing routes from URLs using Url_var for reactive navigation *)
+module Route_parser = struct
   type t = route [@@deriving sexp, equal]
+  
+  (** Parse a route from URL components *)
+  let parse_exn ({ path; _ } : Bonsai_web_ui_url_var.Components.t) : t =
+    route_of_string path |> Option.value ~default:Home
+    
+  (** Convert a route to URL components *)
+  let unparse (route : t) : Bonsai_web_ui_url_var.Components.t =
+    Bonsai_web_ui_url_var.Components.create ~path:(route_to_string route) ()
 end
 
-(* Global mutable reference for the setter *)
-let route_setter_ref : (route -> unit Vdom.Effect.t) option ref = ref None
+(** Global Url_var instance for reactive routing *)
+let url_var = lazy (Bonsai_web_ui_url_var.create_exn (module Route_parser) ~fallback:Home)
 
-(* Helper to update browser URL without triggering navigation *)
-let update_browser_url route =
-  let path = route_to_string route in
-  let open Js.Unsafe in
-  global##.history##pushState Js.null (Js.string "") (Js.string path)
-
-(* Parse route from current URL *)
-let parse_current_url () =
-  let pathname = 
-    Js.to_string Dom_html.window##.location##.pathname 
-  in
-  match route_of_string pathname with
-  | Some route -> route
-  | None -> Home
-
-(* Create the route state computation *)
+(** Create the route state computation - reactive, no polling *)
 let create_route_state () =
-  (* Get initial route from URL *)
-  let initial_route = parse_current_url () in
-  
-  let%sub route, set_route = 
-    Bonsai.state (module Route_model) ~default_model:initial_route
-  in
-  
-  (* Create the polling effect *)
-  let%sub polling_effect =
-    let%arr route = route
-    and set_route = set_route in
-    (* Store setter globally on each tick *)
-    route_setter_ref := Some set_route;
-    
-    (* Check if URL changed (e.g., from back/forward button) *)
-    let current_url_route = parse_current_url () in
-    if not (equal_route route current_url_route) then
-      set_route current_url_route
-    else
-      Vdom.Effect.Ignore
-  in
-  
-  (* Poll for URL changes every 50ms for more responsive navigation *)
-  let%sub () = 
-    Bonsai.Clock.every
-      ~when_to_start_next_effect:`Every_multiple_of_period_blocking
-      (Time_ns.Span.of_ms 50.0)
-      polling_effect
-  in
-  
-  return route
+  let url_var = Lazy.force url_var in
+  Bonsai.read (Bonsai_web_ui_url_var.value url_var)
 
-(* Navigate to a route - Used by nav_link component *)
+(** Navigate to a route - updates URL reactively *)
 let navigate_to_route route =
-  match !route_setter_ref with
-  | Some set_route ->
-      Vdom.Effect.Many [
-        (* Update the state *)
-        set_route route;
-        (* Update browser URL *)
-        Vdom.Effect.of_sync_fun update_browser_url route;
-      ]
-  | None ->
-      (* Fallback: just update URL if setter not available yet *)
-      Vdom.Effect.of_sync_fun update_browser_url route
+  let url_var = Lazy.force url_var in
+  (* Wrap the unit-returning function in an Effect *)
+  Effect.of_sync_fun (fun r -> Bonsai_web_ui_url_var.set url_var r) route

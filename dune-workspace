@@ -1,0 +1,12 @@
+(lang dune 3.15)
+
+(env
+ (release
+  (ocamlopt_flags (:standard -O3))
+  (js_of_ocaml 
+   (flags 
+    (:standard 
+     --opt=3 
+     --no-source-map 
+     --no-inline
+     --disable=debugger)))))

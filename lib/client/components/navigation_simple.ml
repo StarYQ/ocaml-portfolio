@@ -1,26 +1,183 @@
 open! Core
+open Bonsai_web
+open Bonsai.Let_syntax
 open Virtual_dom
 open Shared.Types
 
-let render ~current_route =
+(* Import navigation styles *)
+module Styles = Navigation_styles.Styles
+
+let component =
+  let%sub menu_open, set_menu_open = Bonsai.state (module Bool) ~default_model:false in
+  let%sub current_route = Router.create_route_state () in
+  
+  let%arr menu_open = menu_open
+  and set_menu_open = set_menu_open
+  and current_route = current_route in
+  
+  (* Toggle mobile menu *)
+  let toggle_menu = 
+    Vdom.Attr.on_click (fun _ ->
+      set_menu_open (not menu_open))
+  in
+  
+  (* Close menu when clicking overlay *)
+  let close_menu = 
+    Vdom.Attr.on_click (fun _ ->
+      set_menu_open false)
+  in
+  
+  (* Create nav link with active state *)
   let nav_item route text =
     let is_active = Shared.Types.equal_route current_route route in
     let attrs = 
       if is_active then 
-        [Vdom.Attr.class_ "active"]
+        [Styles.nav_link; Styles.active]
       else 
-        []
+        [Styles.nav_link]
     in
-    (* Using the Jane Street nav_link module we copied *)
-    Nav_link.create ~route ~text ~attrs ()
+    Nav_link.create' ~route ~attrs [Vdom.Node.text text]
+  in
+  
+  (* Mobile nav link *)
+  let mobile_nav_item route text =
+    let is_active = Shared.Types.equal_route current_route route in
+    let attrs = 
+      if is_active then 
+        [
+          Styles.mobile_nav_link;
+          Styles.active;
+          close_menu (* Close menu on navigation *)
+        ]
+      else 
+        [
+          Styles.mobile_nav_link;
+          close_menu (* Close menu on navigation *)
+        ]
+    in
+    Nav_link.create' ~route ~attrs [Vdom.Node.text text]
+  in
+  
+  (* Hamburger icon attrs *)
+  let hamburger_attrs = 
+    if menu_open then 
+      [Styles.hamburger; Styles.is_open]
+    else 
+      [Styles.hamburger]
+  in
+  
+  (* Mobile menu attrs *)
+  let mobile_menu_attrs = 
+    if menu_open then 
+      [Styles.mobile_menu; Styles.is_open]
+    else 
+      [Styles.mobile_menu]
+  in
+  
+  (* Overlay attrs *)
+  let overlay_attrs = 
+    if menu_open then 
+      [Styles.menu_overlay; Styles.is_open]
+    else 
+      [Styles.menu_overlay]
+  in
+  
+  Vdom.Node.div
+    ~attrs:[]
+    [
+      (* Main Navigation Bar *)
+      Vdom.Node.create "nav"
+        ~attrs:[Styles.navbar]
+        [
+          Vdom.Node.div
+            ~attrs:[Styles.nav_container]
+            [
+              (* Brand/Logo *)
+              Nav_link.create' 
+                ~route:Home 
+                ~attrs:[Styles.nav_brand]
+                [Vdom.Node.text "Portfolio"];
+              
+              (* Desktop Navigation *)
+              Vdom.Node.div
+                ~attrs:[Styles.nav_menu]
+                [
+                  nav_item Home "Home";
+                  nav_item About "About";
+                  nav_item Projects "Projects";
+                  nav_item Words "Words";
+                  nav_item Contact "Contact";
+                ];
+              
+              (* Mobile Menu Toggle *)
+              Vdom.Node.button
+                ~attrs:[
+                  Styles.menu_toggle;
+                  toggle_menu;
+                  Vdom.Attr.create "aria-label" "Toggle menu"
+                ]
+                [
+                  Vdom.Node.span
+                    ~attrs:hamburger_attrs
+                    []
+                ]
+            ]
+        ];
+      
+      (* Mobile Menu Overlay *)
+      Vdom.Node.div
+        ~attrs:(overlay_attrs @ [close_menu])
+        [];
+      
+      (* Mobile Menu Panel *)
+      Vdom.Node.div
+        ~attrs:mobile_menu_attrs
+        [
+          Vdom.Node.div
+            ~attrs:[Styles.mobile_nav_items]
+            [
+              mobile_nav_item Home "Home";
+              mobile_nav_item About "About";
+              mobile_nav_item Projects "Projects";
+              mobile_nav_item Words "Words";
+              mobile_nav_item Contact "Contact";
+            ]
+        ]
+    ]
+
+(* Backward compatibility wrapper *)
+let render ~current_route = 
+  (* For now, return a simple version for compatibility *)
+  let nav_item route text =
+    let is_active = Shared.Types.equal_route current_route route in
+    let attrs = 
+      if is_active then 
+        [Styles.nav_link; Styles.active]
+      else 
+        [Styles.nav_link]
+    in
+    Nav_link.create' ~route ~attrs [Vdom.Node.text text]
   in
   
   Vdom.Node.create "nav"
-    ~attrs:[Vdom.Attr.class_ "main-navigation"]
+    ~attrs:[Styles.navbar]
     [
-      nav_item Home "Home";
-      nav_item About "About";
-      nav_item Projects "Projects";
-      nav_item Words "Words";
-      nav_item Contact "Contact";
+      Vdom.Node.div
+        ~attrs:[Styles.nav_container]
+        [
+          Nav_link.create' 
+            ~route:Home 
+            ~attrs:[Styles.nav_brand]
+            [Vdom.Node.text "Portfolio"];
+          
+          Vdom.Node.div
+            ~attrs:[Styles.nav_menu]
+            [
+              nav_item Home "Home";
+              nav_item About "About";
+              nav_item Projects "Projects";
+              nav_item Words "Words";
+              nav_item Contact "Contact";
+            ]
+        ]
     ]

@@ -1,11 +1,34 @@
+(** Project filter types *)
+type project_filter = 
+  | All 
+  | Web 
+  | Mobile 
+  | CLI
+  | Backend
+  | Tool
+[@@deriving sexp, equal, compare]
+
 (** Project data type for portfolio projects *)
 type project = {
+  id : string;
   title : string;
   description : string;
+  long_description : string;
+  tags : string list;
   tech_stack : string list;
   github_url : string option;
   demo_url : string option;
+  featured : bool;
 }
+
+(** Convert filter to display string *)
+let filter_to_string = function
+  | All -> "All"
+  | Web -> "Web"
+  | Mobile -> "Mobile"
+  | CLI -> "CLI"
+  | Backend -> "Backend"
+  | Tool -> "Tool"
 
 (** Blog post data type for articles/words section *)
 type blog_post = {

@@ -6,12 +6,15 @@
    layout_simple
    nav_link
    navigation_simple
+   navigation_styles
    router)
  (libraries 
    core
    shared
    bonsai
    bonsai.web
+   bonsai.web_ui_url_var
    virtual_dom
-   js_of_ocaml)
- (preprocess (pps ppx_jane js_of_ocaml-ppx bonsai.ppx_bonsai)))
+   js_of_ocaml
+   ppx_css.inline_css)
+ (preprocess (pps ppx_jane js_of_ocaml-ppx bonsai.ppx_bonsai ppx_css)))

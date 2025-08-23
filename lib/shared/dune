@@ -1,5 +1,6 @@
 (library
  (public_name portfolio20240602.shared)
  (name shared)
- (libraries ppx_typed_fields.typed_variants_lib)
+ (modules Types Data)
+ (libraries core ppx_typed_fields.typed_variants_lib str)
  (preprocess (pps ppx_jane ppx_typed_fields)))

@@ -6,14 +6,17 @@
    page_about_simple
    page_home_simple
    page_projects_simple
+   project_styles
    page_words_simple
    page_contact_simple)
  (libraries 
    shared
+   components
    bonsai
    bonsai.web
    bonsai.web_ui_form
    bonsai.web_ui_accordion
    virtual_dom
-   js_of_ocaml)
- (preprocess (pps ppx_jane js_of_ocaml-ppx bonsai.ppx_bonsai)))
+   js_of_ocaml
+   core)
+ (preprocess (pps ppx_jane js_of_ocaml-ppx bonsai.ppx_bonsai ppx_css)))
