@@ -251,8 +251,8 @@ module Styles = [%css stylesheet {|
   }
   
   .tag {
-    background: #f1f5f9;
-    color: #475569;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
     padding: 0.25rem 0.75rem;
     border-radius: 12px;
     font-size: 0.85rem;
@@ -261,7 +261,7 @@ module Styles = [%css stylesheet {|
   }
   
   .tag:hover {
-    background: #e2e8f0;
+    background: var(--card-border);
     transform: scale(1.05);
   }
   
@@ -273,20 +273,20 @@ module Styles = [%css stylesheet {|
   
   /* Custom accordion styling */
   .accordion_wrapper {
-    border: 1px solid #e2e8f0;
+    border: 1px solid var(--card-border);
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.3s ease;
   }
   
   .accordion_wrapper:hover {
-    border-color: #cbd5e1;
+    border-color: var(--input-border);
   }
   
   .accordion_header {
     padding: 0.875rem 1.25rem;
-    background: #f8fafc;
-    color: #475569;
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -296,13 +296,14 @@ module Styles = [%css stylesheet {|
   }
   
   .accordion_header:hover {
-    background: #f1f5f9;
-    color: #667eea;
+    background: var(--bg-tertiary);
+    color: var(--gradient-start);
   }
   
   .accordion_content {
     padding: 1.25rem;
-    background: white;
+    background: var(--card-bg);
+    color: var(--text-secondary);
     animation: slideDown 0.3s ease-out;
   }
   
@@ -324,7 +325,7 @@ module Styles = [%css stylesheet {|
   
   .tech_stack_title {
     font-weight: 600;
-    color: #334155;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
   }
   
@@ -346,7 +347,7 @@ module Styles = [%css stylesheet {|
   /* Links section */
   .card_links {
     padding: 1rem 1.5rem;
-    background: #f8fafc;
+    background: var(--bg-secondary);
     display: flex;
     gap: 1rem;
   }
@@ -355,7 +356,7 @@ module Styles = [%css stylesheet {|
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #667eea;
+    color: var(--gradient-start);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -364,16 +365,16 @@ module Styles = [%css stylesheet {|
   }
   
   .card_link:hover {
-    background: white;
+    background: var(--bg-primary);
     transform: translateX(3px);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+    box-shadow: 0 2px 8px var(--card-shadow);
   }
   
   /* Empty state */
   .empty_state {
     text-align: center;
     padding: 4rem 2rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
   }
   
   .empty_icon {
@@ -386,12 +387,12 @@ module Styles = [%css stylesheet {|
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 0.5rem;
-    color: #64748b;
+    color: var(--text-secondary);
   }
   
   .empty_message {
     font-size: 1rem;
-    color: #94a3b8;
+    color: var(--text-tertiary);
   }
   
   /* Loading state */
@@ -405,8 +406,8 @@ module Styles = [%css stylesheet {|
   .loading_spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid #e2e8f0;
-    border-top-color: #667eea;
+    border: 3px solid var(--card-border);
+    border-top-color: var(--gradient-start);
     border-radius: 50%;
     animation: spin 1s linear infinite;
   }
@@ -442,67 +443,4 @@ module Styles = [%css stylesheet {|
     }
   }
   
-  /* Dark mode support */
-  @media (prefers-color-scheme: dark) {
-    .gallery {
-      background: #0f172a;
-    }
-    
-    .gallery_title {
-      color: white;
-    }
-    
-    .gallery_subtitle {
-      color: #94a3b8;
-    }
-    
-    .project_card {
-      background: #1e293b;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-    }
-    
-    .project_card.current {
-      background: linear-gradient(#1e293b, #1e293b) padding-box,
-                  linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
-    }
-    
-    .card_title {
-      color: white;
-    }
-    
-    .card_description {
-      color: #cbd5e1;
-    }
-    
-    .tag {
-      background: #334155;
-      color: #e2e8f0;
-    }
-    
-    .accordion_header {
-      background: #334155;
-      color: #e2e8f0;
-    }
-    
-    .accordion_content {
-      background: #1e293b;
-      color: #cbd5e1;
-    }
-    
-    .card_links {
-      background: #334155;
-    }
-    
-    .search_input {
-      background: #1e293b;
-      border-color: #334155;
-      color: white;
-    }
-    
-    .filter_button {
-      background: #1e293b;
-      border-color: #334155;
-      color: #cbd5e1;
-    }
-  }
 |}]
