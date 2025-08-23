@@ -267,27 +267,25 @@ module Styles = [%css stylesheet {|
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   }
   
-  /* Theme toggle button styles */
+  /* Sliding theme toggle styles */
   .theme-toggle {
+    width: 60px;
+    height: 30px;
     background: rgba(255, 255, 255, 0.2);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50px;
-    padding: 0.5rem 1rem;
-    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+    position: relative;
     cursor: pointer;
+    transition: background 0.3s ease, border-color 0.3s ease;
+    margin-left: 1rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    margin-left: 1rem;
+    padding: 0;
   }
   
   .theme-toggle:hover {
     background: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
   }
   
   .theme-toggle:focus-visible {
@@ -295,13 +293,42 @@ module Styles = [%css stylesheet {|
     outline-offset: 2px;
   }
   
-  .theme-icon {
-    font-size: 1.2rem;
-    display: inline-block;
-    transition: transform 0.3s ease;
+  /* Dark mode toggle background */
+  .theme-toggle.dark {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.4);
   }
   
-  .theme-toggle:hover .theme-icon {
-    transform: rotate(20deg);
+  /* Sliding toggle knob */
+  .theme-slider {
+    position: absolute;
+    width: 26px;
+    height: 26px;
+    background: white;
+    border-radius: 50%;
+    top: 1px;
+    left: 2px;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Dark mode slider position */
+  .theme-toggle.dark .theme-slider {
+    transform: translateX(30px);
+  }
+  
+  /* Icon inside the slider */
+  .theme-icon {
+    font-size: 14px;
+    line-height: 1;
+    color: #667eea;
+    transition: opacity 0.3s ease;
+  }
+  
+  .theme-toggle.dark .theme-icon {
+    color: #764ba2;
   }
 |}]

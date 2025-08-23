@@ -17,9 +17,11 @@ let app_computation =
     let%arr theme = theme 
     and set_theme = set_theme in
     let toggle_button = 
-      Vdom.Node.button
+      Vdom.Node.div
         ~attrs:[
-          Nav_styles.theme_toggle;
+          (match theme with
+           | Theme.Light -> Nav_styles.theme_toggle
+           | Theme.Dark -> Vdom.Attr.many [Nav_styles.theme_toggle; Nav_styles.dark]);
           Vdom.Attr.on_click (fun _ ->
             let new_theme = Theme.toggle theme in
             (* Update document class immediately *)
@@ -28,18 +30,28 @@ let app_computation =
               Js.string (Theme.to_class_name new_theme);
             Theme.store_theme new_theme;
             set_theme new_theme);
+          Vdom.Attr.create "role" "switch";
+          Vdom.Attr.create "aria-checked" 
+            (match theme with
+             | Theme.Light -> "false"
+             | Theme.Dark -> "true");
           Vdom.Attr.create "aria-label" 
             (match theme with
              | Theme.Light -> "Switch to dark mode"
              | Theme.Dark -> "Switch to light mode")
         ]
         [
-          Vdom.Node.span
-            ~attrs:[Nav_styles.theme_icon]
-            [Vdom.Node.text 
-              (match theme with
-               | Theme.Light -> "🌙"
-               | Theme.Dark -> "☀️")]
+          (* Sliding knob with icon *)
+          Vdom.Node.div
+            ~attrs:[Nav_styles.theme_slider]
+            [
+              Vdom.Node.span
+                ~attrs:[Nav_styles.theme_icon]
+                [Vdom.Node.text 
+                  (match theme with
+                   | Theme.Light -> "☀"
+                   | Theme.Dark -> "🌙")]
+            ]
         ]
     in
     (* Return navigation with theme toggle *)
