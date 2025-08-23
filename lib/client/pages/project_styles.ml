@@ -337,11 +337,10 @@ module Styles = [%css stylesheet {|
   }
   
   .tech_item {
-    background: rgba(139, 92, 246, 0.1);
-    color: #8b5cf6;
-    border: 1px solid #8b5cf6;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.375rem 0.875rem;
+    border-radius: 15px;
     font-size: 0.85rem;
     font-weight: 500;
   }
