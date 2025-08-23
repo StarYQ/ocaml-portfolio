@@ -28,17 +28,10 @@ module Styles = [%css stylesheet {|
   }
   
   .gallery_title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
-    /* Ensure text is always visible - use solid color as base */
-    color: var(--text-primary);
     margin-bottom: 1rem;
-    /* Optional gradient overlay for supported browsers */
-    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 100% 100%;
+    color: var(--text-primary);
   }
   
   .gallery_subtitle {
