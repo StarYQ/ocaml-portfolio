@@ -1,7 +1,7 @@
 (library
  (public_name portfolio20240602.styles)
  (name styles)
- (modules theme_styles)
+ (modules styles theme_styles)
  (libraries 
    core
    virtual_dom

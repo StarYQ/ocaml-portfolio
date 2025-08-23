@@ -3,10 +3,24 @@ open Bonsai.Let_syntax
 open Shared.Types
 open Bonsai_web
 module Nav_styles = Components.Navigation_styles.Styles
+module Theme_styles = Styles.Theme_styles.Styles
+
+let apply_theme_to_body theme =
+  let open Js_of_ocaml in
+  let body = Dom_html.document##.body in
+  let class_list = body##.classList in
+  (* Remove both classes first *)
+  class_list##remove (Js.string "light-theme");
+  class_list##remove (Js.string "dark-theme");
+  (* Add the appropriate class *)
+  class_list##add (Js.string (Theme.to_class_name theme))
 
 let app_computation =
   (* Initialize theme state with proper state management *)
-  let%sub theme, set_theme = Bonsai.state (module Theme) ~default_model:(Theme.initial_theme ()) in
+  let initial = Theme.initial_theme () in
+  (* Apply initial theme to body immediately *)
+  apply_theme_to_body initial;
+  let%sub theme, set_theme = Bonsai.state (module Theme) ~default_model:initial in
   
   
   (* Create app with theme-aware navigation *)
@@ -24,11 +38,11 @@ let app_computation =
            | Theme.Dark -> Vdom.Attr.many [Nav_styles.theme_toggle; Nav_styles.dark]);
           Vdom.Attr.on_click (fun _ ->
             let new_theme = Theme.toggle theme in
-            (* Update document class immediately *)
-            let open Js_of_ocaml in
-            Dom_html.document##.body##.className := 
-              Js.string (Theme.to_class_name new_theme);
+            (* Apply theme to body *)
+            apply_theme_to_body new_theme;
+            (* Store in localStorage *)
             Theme.store_theme new_theme;
+            (* Update state *)
             set_theme new_theme);
           Vdom.Attr.create "role" "switch";
           Vdom.Attr.create "aria-checked" 

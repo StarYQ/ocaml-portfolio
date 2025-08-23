@@ -4,9 +4,9 @@ open! Core
 module Styles = [%css stylesheet {|
   /* Main navigation bar with gradient and animations */
   .navbar {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: var(--nav-bg);
     padding: 1rem 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px var(--card-shadow);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -39,7 +39,7 @@ module Styles = [%css stylesheet {|
   .nav-brand {
     font-size: 1.5rem;
     font-weight: 700;
-    color: white;
+    color: var(--nav-text-hover);
     text-decoration: none;
     transition: transform 0.3s ease;
   }
@@ -59,7 +59,7 @@ module Styles = [%css stylesheet {|
   
   /* Navigation links with animations */
   .nav-link {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--nav-text);
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 0.25rem;
@@ -70,14 +70,14 @@ module Styles = [%css stylesheet {|
   }
   
   .nav-link:hover {
-    color: white;
+    color: var(--nav-text-hover);
     transform: translateY(-2px);
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--nav-link-bg-hover);
   }
   
   /* Active link with animated underline */
   .nav-link.active {
-    color: white;
+    color: var(--nav-text-hover);
     font-weight: 600;
   }
   
@@ -88,7 +88,7 @@ module Styles = [%css stylesheet {|
     left: 1rem;
     right: 1rem;
     height: 2px;
-    background: white;
+    background: var(--nav-text-hover);
     animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     border-radius: 1px;
   }
