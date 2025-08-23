@@ -1,0 +1,65 @@
+name: Deploy OCaml Portfolio to Pages
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up OCaml
+        uses: avsm/setup-ocaml@v2
+        with:
+          ocaml-compiler: 5.2.1
+
+      - name: System deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y m4 pkg-config libgmp-dev
+
+      - name: Install opam deps
+        run: opam install . --deps-only -y
+
+      - name: Build (production)
+        run: make build-prod
+
+      # -- Assemble exactly what index.html expects --
+      - name: Assemble Pages artifact
+        run: |
+          mkdir -p _site/_build/default/lib/client_main
+          cp index.html _site/index.html
+          # find the built JS (adjust if your path changes)
+          JS_PATH=$(find _build -type f -path '*/lib/client_main/main.bc.js' | head -n1)
+          if [ -z "$JS_PATH" ]; then
+            echo "ERROR: main.bc.js not found. Check your dune/js_of_ocaml output path."
+            exit 1
+          fi
+          cp "$JS_PATH" _site/_build/default/lib/client_main/main.bc.js
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
