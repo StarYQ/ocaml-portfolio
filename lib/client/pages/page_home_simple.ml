@@ -116,13 +116,13 @@ module Styles = [%css
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        color: #1a202c;
+        color: var(--text-primary);
         text-align: center;
       }
       
       .section_subtitle {
         font-size: 1.2rem;
-        color: #718096;
+        color: var(--text-secondary);
         text-align: center;
         margin-bottom: 3rem;
         max-width: 800px;
@@ -139,15 +139,15 @@ module Styles = [%css
       
       .feature_card {
         padding: 2rem;
-        background: white;
+        background: var(--card-bg);
         border-radius: 12px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 6px var(--card-shadow);
         transition: all 0.3s ease;
       }
       
       .feature_card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        box-shadow: 0 10px 20px var(--card-shadow-hover);
       }
       
       .feature_icon {
@@ -159,16 +159,16 @@ module Styles = [%css
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: #2d3748;
+        color: var(--text-primary);
       }
       
       .feature_description {
-        color: #718096;
+        color: var(--text-secondary);
         line-height: 1.6;
       }
       
       .tech_stack {
-        background: #f7fafc;
+        background: var(--bg-secondary);
         padding: 4rem 2rem;
       }
       
@@ -182,19 +182,19 @@ module Styles = [%css
       
       .tech_badge {
         padding: 0.75rem 1.5rem;
-        background: white;
+        background: var(--card-bg);
         border-radius: 25px;
         font-weight: 600;
-        color: #4a5568;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        color: var(--text-secondary);
+        box-shadow: 0 2px 4px var(--card-shadow);
         transition: all 0.2s ease;
       }
       
       .tech_badge:hover {
         transform: scale(1.05);
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        background: #667eea;
-        color: white;
+        box-shadow: 0 4px 8px var(--card-shadow-hover);
+        background: var(--gradient-start);
+        color: var(--text-inverse);
       }
       
       @media (max-width: 768px) {
