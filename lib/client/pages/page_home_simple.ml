@@ -226,11 +226,11 @@ let hero_section =
         ~attrs:[ Styles.hero_content ]
         [ Vdom.Node.h1
             ~attrs:[ Styles.hero_title ]
-            [ Vdom.Node.text "Full-Stack OCaml Developer" ]
+            [ Vdom.Node.text "Software Engineer" ]
         ; Vdom.Node.p
             ~attrs:[ Styles.hero_subtitle ]
             [ Vdom.Node.text
-                "Building elegant, type-safe solutions with functional programming"
+                "Stony Brook University | Computer Science"
             ]
         ; Vdom.Node.div
             ~attrs:[ Styles.cta_container ]
@@ -249,18 +249,15 @@ let hero_section =
 
 let features_section =
   let features =
-    [ ( "🚀"
-      , "Performance First"
-      , "Leveraging OCaml's native compilation for blazing-fast applications with \
-         minimal runtime overhead" )
-    ; ( "🛡️"
-      , "Type Safety"
-      , "Building robust systems with OCaml's powerful type system that catches bugs at \
-         compile time" )
-    ; ( "🎯"
-      , "Functional Excellence"
-      , "Applying functional programming principles for maintainable, scalable, and \
-         elegant solutions" )
+    [ ( "Education"
+      , "Stony Brook University"
+      , "BS Computer Science (Honors) • GPA: 3.79 • Aug 2023 - May 2027" )
+    ; ( "Current Roles"
+      , "Teaching Assistant & Researcher"
+      , "TA for Data Structures & Algorithms • Undergraduate Researcher in Assistive Technology" )
+    ; ( "Experience"
+      , "Software Development"
+      , "Building full-stack applications with modern frameworks and technologies" )
     ]
   in
   Bonsai.const (
@@ -268,20 +265,21 @@ let features_section =
     ~attrs:[ Styles.section ]
     [ Vdom.Node.h2
         ~attrs:[ Styles.section_title ]
-        [ Vdom.Node.text "Why OCaml?" ]
+        [ Vdom.Node.text "About" ]
     ; Vdom.Node.p
         ~attrs:[ Styles.section_subtitle ]
         [ Vdom.Node.text
-            "Combining the best of functional programming with practical software \
-             engineering"
+            "Computer Science student passionate about building impactful software solutions"
         ]
     ; Vdom.Node.div
         ~attrs:[ Styles.features_grid ]
-        (List.map features ~f:(fun (icon, title, description) ->
+        (List.map features ~f:(fun (title, subtitle, description) ->
            Vdom.Node.div
              ~attrs:[ Styles.feature_card ]
-             [ Vdom.Node.div ~attrs:[ Styles.feature_icon ] [ Vdom.Node.text icon ]
-             ; Vdom.Node.h3 ~attrs:[ Styles.feature_title ] [ Vdom.Node.text title ]
+             [ Vdom.Node.h3 ~attrs:[ Styles.feature_title ] [ Vdom.Node.text title ]
+             ; Vdom.Node.p
+                 ~attrs:[ Styles.feature_description; Vdom.Attr.style (Css_gen.font_weight `Bold) ]
+                 [ Vdom.Node.text subtitle ]
              ; Vdom.Node.p
                  ~attrs:[ Styles.feature_description ]
                  [ Vdom.Node.text description ]
@@ -291,14 +289,22 @@ let features_section =
 
 let tech_stack_section =
   let technologies =
-    [ "OCaml"
-    ; "Bonsai"
-    ; "Dream"
-    ; "Lwt/Async"
-    ; "Dune"
-    ; "ppx_jane"
+    [ "Python"
+    ; "JavaScript"
+    ; "TypeScript"  
+    ; "Java"
+    ; "C/C++"
+    ; "Swift"
+    ; "OCaml"
+    ; "React"
+    ; "Next.js"
+    ; "Node.js"
+    ; "Flask"
+    ; "FastAPI"
     ; "PostgreSQL"
+    ; "MongoDB"
     ; "Docker"
+    ; "AWS"
     ; "Git"
     ; "Linux"
     ]
@@ -314,7 +320,7 @@ let tech_stack_section =
         ; Vdom.Node.p
             ~attrs:[ Styles.section_subtitle ]
             [ Vdom.Node.text
-                "Technologies I work with to deliver high-quality solutions"
+                "Languages, frameworks, and tools I use to build software"
             ]
         ; Vdom.Node.div
             ~attrs:[ Styles.tech_list ]
