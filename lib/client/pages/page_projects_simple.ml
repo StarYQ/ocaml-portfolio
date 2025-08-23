@@ -282,7 +282,7 @@ let component () =
             [Vdom.Node.text "Portfolio Projects"];
           Vdom.Node.p
             ~attrs:[Styles.gallery_subtitle]
-            [Vdom.Node.text "Explore my collection of OCaml projects showcasing functional programming excellence"]
+            [Vdom.Node.text "Software engineering projects demonstrating full-stack development and problem-solving skills"]
         ];
       
       (* Controls section *)
