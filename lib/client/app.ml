@@ -94,10 +94,10 @@ let app_computation =
       ]
   in
   
-  (* Render page content based on the current route *)
+  (* Render page content based on the current route with theme *)
   let%sub content = 
     match%sub current_route with
-    | Home -> Pages.Page_home.component ()
+    | Home -> Pages.Page_home.component ~theme ()
     | About -> Pages.Page_about.component ()
     | Projects -> Pages.Page_projects.component ()
     | Words -> Pages.Page_words.component ()

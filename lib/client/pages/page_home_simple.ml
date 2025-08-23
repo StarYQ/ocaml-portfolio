@@ -3,14 +3,15 @@ open Bonsai_web
 open Virtual_dom
 open Shared.Types
 open Components
+open Theme
 
-(* Styles module using ppx_css *)
+(* Styles module using ppx_css - Note: Cannot use CSS variables with ppx_css due to hashing *)
 module Styles = [%css
   stylesheet
     {|
       .hero {
         min-height: 100vh;
-        background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+        /* Background gradient will be set inline based on theme */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -81,18 +82,18 @@ module Styles = [%css
       .cta_button {
         padding: 1rem 2rem;
         background: white;
-        color: var(--gradient-start);
+        color: #667eea;
         border-radius: 50px;
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
         display: inline-block;
-        box-shadow: 0 4px 15px var(--card-shadow);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
       
       .cta_button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 30px var(--card-shadow-hover);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       }
       
       .cta_secondary {
@@ -103,7 +104,7 @@ module Styles = [%css
       
       .cta_secondary:hover {
         background: white;
-        color: var(--gradient-start);
+        color: #667eea;
       }
       
       .section {
@@ -116,13 +117,13 @@ module Styles = [%css
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        color: var(--text-primary);
+        /* Color will be set inline based on theme */
         text-align: center;
       }
       
       .section_subtitle {
         font-size: 1.2rem;
-        color: var(--text-secondary);
+        /* Color will be set inline based on theme */
         text-align: center;
         margin-bottom: 3rem;
         max-width: 800px;
@@ -139,15 +140,14 @@ module Styles = [%css
       
       .feature_card {
         padding: 2rem;
-        background: var(--card-bg);
+        /* Background will be set inline based on theme */
         border-radius: 12px;
-        box-shadow: 0 4px 6px var(--card-shadow);
         transition: all 0.3s ease;
       }
       
       .feature_card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px var(--card-shadow-hover);
+        /* Shadow will be enhanced on hover */
       }
       
       .feature_icon {
@@ -159,16 +159,16 @@ module Styles = [%css
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: var(--text-primary);
+        /* Color will be set inline based on theme */
       }
       
       .feature_description {
-        color: var(--text-secondary);
+        /* Color will be set inline based on theme */
         line-height: 1.6;
       }
       
       .tech_stack {
-        background: var(--bg-secondary);
+        /* Background will be set inline based on theme */
         padding: 4rem 2rem;
       }
       
@@ -182,19 +182,15 @@ module Styles = [%css
       
       .tech_badge {
         padding: 0.75rem 1.5rem;
-        background: var(--card-bg);
+        /* Background and color will be set inline based on theme */
         border-radius: 25px;
         font-weight: 600;
-        color: var(--text-secondary);
-        box-shadow: 0 2px 4px var(--card-shadow);
         transition: all 0.2s ease;
       }
       
       .tech_badge:hover {
         transform: scale(1.05);
-        box-shadow: 0 4px 8px var(--card-shadow-hover);
-        background: var(--gradient-start);
-        color: var(--text-inverse);
+        /* Hover styles will be handled via inline styles */
       }
       
       @media (max-width: 768px) {
@@ -218,10 +214,18 @@ module Styles = [%css
       }
     |}]
 
-let hero_section =
-  Bonsai.const (
+let hero_section theme =
+  let gradient_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style" 
+          "background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+    | Dark -> 
+        Vdom.Attr.create "style" 
+          "background: linear-gradient(135deg, #4c51bf 0%, #553c9a 100%)"
+  in
     Vdom.Node.section
-    ~attrs:[ Styles.hero ]
+    ~attrs:[ Styles.hero; gradient_style ]
     [ Vdom.Node.div
         ~attrs:[ Styles.hero_content ]
         [ Vdom.Node.h1
@@ -245,9 +249,27 @@ let hero_section =
             ]
         ]
     ]
-  )
 
-let features_section =
+let features_section theme =
+  let card_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #2d3748; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);"
+  in
+  let title_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #1a202c;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
+  let text_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #4a5568;"
+    | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
+  in
   let features =
     [ ( "Education"
       , "Stony Brook University"
@@ -260,14 +282,13 @@ let features_section =
       , "Building full-stack applications with modern frameworks and technologies" )
     ]
   in
-  Bonsai.const (
     Vdom.Node.section
     ~attrs:[ Styles.section ]
     [ Vdom.Node.h2
-        ~attrs:[ Styles.section_title ]
+        ~attrs:[ Styles.section_title; title_style ]
         [ Vdom.Node.text "About" ]
     ; Vdom.Node.p
-        ~attrs:[ Styles.section_subtitle ]
+        ~attrs:[ Styles.section_subtitle; text_style ]
         [ Vdom.Node.text
             ""
         ]
@@ -275,19 +296,42 @@ let features_section =
         ~attrs:[ Styles.features_grid ]
         (List.map features ~f:(fun (title, subtitle, description) ->
            Vdom.Node.div
-             ~attrs:[ Styles.feature_card ]
-             [ Vdom.Node.h3 ~attrs:[ Styles.feature_title ] [ Vdom.Node.text title ]
+             ~attrs:[ Styles.feature_card; card_style ]
+             [ Vdom.Node.h3 ~attrs:[ Styles.feature_title; title_style ] [ Vdom.Node.text title ]
              ; Vdom.Node.p
-                 ~attrs:[ Styles.feature_description; Vdom.Attr.style (Css_gen.font_weight `Bold) ]
+                 ~attrs:[ Styles.feature_description; text_style; Vdom.Attr.create "style" "font-weight: bold;" ]
                  [ Vdom.Node.text subtitle ]
              ; Vdom.Node.p
-                 ~attrs:[ Styles.feature_description ]
+                 ~attrs:[ Styles.feature_description; text_style ]
                  [ Vdom.Node.text description ]
              ]))
     ]
-  )
 
-let tech_stack_section =
+let tech_stack_section theme =
+  let bg_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "background-color: #f7fafc;"
+    | Dark -> Vdom.Attr.create "style" "background-color: #2d3748;"
+  in
+  let title_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #1a202c;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
+  let text_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #4a5568;"
+    | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
+  in
+  let badge_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #ffffff; color: #4a5568; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #1a202c; color: #cbd5e0; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);"
+  in
   let technologies =
     [ "Java"
     ; "Python"
@@ -312,33 +356,30 @@ let tech_stack_section =
     ; "PostgreSQL"
     ]
   in
-  Bonsai.const (
     Vdom.Node.section
-    ~attrs:[ Styles.tech_stack ]
+    ~attrs:[ Styles.tech_stack; bg_style ]
     [ Vdom.Node.div
         ~attrs:[ Styles.section ]
         [ Vdom.Node.h2
-            ~attrs:[ Styles.section_title ]
+            ~attrs:[ Styles.section_title; title_style ]
             [ Vdom.Node.text "Tech Stack" ]
         ; Vdom.Node.p
-            ~attrs:[ Styles.section_subtitle ]
+            ~attrs:[ Styles.section_subtitle; text_style ]
             [ Vdom.Node.text
                 "Languages, frameworks, and tools I use to build software"
             ]
         ; Vdom.Node.div
             ~attrs:[ Styles.tech_list ]
             (List.map technologies ~f:(fun tech ->
-               Vdom.Node.div ~attrs:[ Styles.tech_badge ] [ Vdom.Node.text tech ]))
+               Vdom.Node.div ~attrs:[ Styles.tech_badge; badge_style ] [ Vdom.Node.text tech ]))
         ]
     ]
-  )
 
-let component () =
+let component ?(theme = Bonsai.Value.return Light) () =
   let open Bonsai.Let_syntax in
-  let%sub hero = hero_section in
-  let%sub features = features_section in
-  let%sub tech_stack = tech_stack_section in
-  let%arr hero = hero
-  and features = features
-  and tech_stack = tech_stack in
-  Vdom.Node.div [ hero; features; tech_stack ]
+  let%arr theme = theme in
+  Vdom.Node.div [ 
+    hero_section theme; 
+    features_section theme; 
+    tech_stack_section theme 
+  ]
