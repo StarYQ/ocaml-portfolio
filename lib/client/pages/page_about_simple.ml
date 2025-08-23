@@ -212,20 +212,17 @@ let experience_section =
 
 let skills_section =
   let skills = [
-    ( "Languages"
-    , [ "Python"; "JavaScript"; "TypeScript"; "Java"; "C/C++"; "Swift"; "OCaml"; "SQL"; "HTML/CSS" ]
+    ( "Languages/Databases"
+    , [ "Java"; "Python"; "SQL (PostgreSQL, SQLite)"; "MongoDB"; "Pinecone"; "Bash"; "C"; "OCaml"; "JavaScript"; "PHP"; "Swift" ]
     );
-    ( "Web Frameworks"
-    , [ "React"; "Next.js"; "Node.js"; "Express"; "Flask"; "FastAPI"; "PHP" ]
+    ( "Frameworks/Runtimes"
+    , [ "Next.js"; "Express.js"; "Node.js"; "Playwright"; "Flask"; "Tailwind CSS" ]
     );
-    ( "Databases & Cloud"
-    , [ "PostgreSQL"; "MongoDB"; "SQLite"; "Redis"; "AWS"; "Supabase"; "Pinecone" ]
+    ( "Libraries"
+    , [ "NumPy"; "scikit-learn"; "pandas"; "Beautiful Soup"; "Selenium WebDriver"; "React"; "jQuery"; "pytest"; "Jest" ]
     );
-    ( "Tools & Technologies"
-    , [ "Git"; "Docker"; "Linux"; "REST APIs"; "GraphQL"; "JWT"; "OAuth"; "CI/CD" ]
-    );
-    ( "Mobile & AI"
-    , [ "Swift/SwiftUI"; "HealthKit"; "ResearchKit"; "OpenAI API"; "LangChain"; "Pandas"; "NumPy" ]
+    ( "Developer/DevOps Tools"
+    , [ "Git"; "Docker"; "GitHub Actions"; "Ansible"; "Terraform"; "Jira"; "Slurm"; "AWS"; "GCP"; "GKE"; "OpenAI API"; "SonarQube"; "Prisma ORM" ]
     );
   ] in
   Bonsai.const (
