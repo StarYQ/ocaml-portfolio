@@ -143,13 +143,13 @@ let project_card_component ~project =
   and project = project in
   
   Vdom.Node.div
-    ~attrs:(if project.Types.featured then
+    ~attrs:(if project.Types.current then
       [Styles.project_card; Styles.current]
     else
       [Styles.project_card])
     [
       (* Current badge if applicable *)
-      (if project.featured then
+      (if project.current then
         Vdom.Node.div
           ~attrs:[Styles.current_badge]
           [Vdom.Node.text "Current"]
@@ -282,7 +282,7 @@ let component () =
             [Vdom.Node.text "Portfolio Projects"];
           Vdom.Node.p
             ~attrs:[Styles.gallery_subtitle]
-            [Vdom.Node.text "Software engineering projects demonstrating full-stack development and problem-solving skills"]
+            [Vdom.Node.text ""]
         ];
       
       (* Controls section *)

@@ -12,7 +12,7 @@ let portfolio_projects = [
     tech_stack = ["Python"; "Flask"; "Beautiful Soup"; "Selenium WebDriver"; "SQLite"; "JavaScript"];
     github_url = None;
     demo_url = None;
-    featured = true;
+    current = false;
   };
   
   {
@@ -24,7 +24,7 @@ let portfolio_projects = [
     tech_stack = ["Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API"];
     github_url = None;
     demo_url = Some "https://seawolf-accessibility.example.com";
-    featured = true;
+    current = true;
   };
   
   {
@@ -36,7 +36,7 @@ let portfolio_projects = [
     tech_stack = ["PHP"; "OpenAI API"; "Pinecone"; "AWS EC2"; "Terraform"];
     github_url = None;
     demo_url = None;
-    featured = true;
+    current = true;
   };
   
   {
@@ -48,7 +48,7 @@ let portfolio_projects = [
     tech_stack = ["Python"; "Flask"; "JavaScript"; "OpenAI API"; "Wolfram Alpha API"];
     github_url = None;
     demo_url = Some "https://nutriproof-extension.example.com";
-    featured = false;
+    current = false;
   };
 ]
 

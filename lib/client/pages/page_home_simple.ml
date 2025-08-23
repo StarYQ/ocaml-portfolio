@@ -230,7 +230,7 @@ let hero_section =
         ; Vdom.Node.p
             ~attrs:[ Styles.hero_subtitle ]
             [ Vdom.Node.text
-                "Stony Brook University | Computer Science"
+                "Honors CS @ SBU"
             ]
         ; Vdom.Node.div
             ~attrs:[ Styles.cta_container ]
@@ -269,7 +269,7 @@ let features_section =
     ; Vdom.Node.p
         ~attrs:[ Styles.section_subtitle ]
         [ Vdom.Node.text
-            "Computer Science student passionate about building impactful software solutions"
+            ""
         ]
     ; Vdom.Node.div
         ~attrs:[ Styles.features_grid ]

@@ -6,14 +6,17 @@ open Shared.Types
 
 (* Import navigation styles *)
 module Styles = Navigation_styles.Styles
+module Theme_styles = Styles.Theme_styles.Styles
 
 let component =
   let%sub menu_open, set_menu_open = Bonsai.state (module Bool) ~default_model:false in
   let%sub current_route = Router.create_route_state () in
+  let%sub theme = Theme.current () in
   
   let%arr menu_open = menu_open
   and set_menu_open = set_menu_open
-  and current_route = current_route in
+  and current_route = current_route
+  and theme = theme in
   
   (* Toggle mobile menu *)
   let toggle_menu = 
@@ -107,6 +110,32 @@ let component =
                   nav_item Projects "Projects";
                   nav_item Words "Words";
                   nav_item Contact "Contact";
+                  
+                  (* Theme Toggle Button *)
+                  Vdom.Node.button
+                    ~attrs:[
+                      Theme_styles.theme_toggle;
+                      Vdom.Attr.on_click (fun _ ->
+                        let new_theme = Theme.toggle theme in
+                        Theme.store_theme new_theme;
+                        (* Update document class *)
+                        let open Js_of_ocaml in
+                        Dom_html.document##.body##.className := 
+                          Js.string (Theme.to_class_name new_theme);
+                        Vdom.Effect.Ignore);
+                      Vdom.Attr.create "aria-label" 
+                        (match theme with
+                         | Theme.Light -> "Switch to dark mode"
+                         | Theme.Dark -> "Switch to light mode")
+                    ]
+                    [
+                      Vdom.Node.span
+                        ~attrs:[Theme_styles.theme_icon]
+                        [Vdom.Node.text 
+                          (match theme with
+                           | Theme.Light -> "🌙"
+                           | Theme.Dark -> "☀️")]
+                    ]
                 ];
               
               (* Mobile Menu Toggle *)

@@ -18,7 +18,7 @@ type project = {
   tech_stack : string list;
   github_url : string option;
   demo_url : string option;
-  featured : bool;
+  current : bool;
 }
 
 (** Convert filter to display string *)
