@@ -10,7 +10,7 @@ module Styles = [%css
     {|
       .hero {
         min-height: 100vh;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -81,18 +81,18 @@ module Styles = [%css
       .cta_button {
         padding: 1rem 2rem;
         background: white;
-        color: #667eea;
+        color: var(--gradient-start);
         border-radius: 50px;
         font-weight: 600;
         text-decoration: none;
         transition: all 0.3s ease;
         display: inline-block;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 15px var(--card-shadow);
       }
       
       .cta_button:hover {
         transform: translateY(-3px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        box-shadow: 0 10px 30px var(--card-shadow-hover);
       }
       
       .cta_secondary {
@@ -103,7 +103,7 @@ module Styles = [%css
       
       .cta_secondary:hover {
         background: white;
-        color: #667eea;
+        color: var(--gradient-start);
       }
       
       .section {

@@ -30,9 +30,9 @@ module Styles = [%css stylesheet {|
   .gallery_title {
     font-size: 2.5rem;
     font-weight: 700;
-    color: #1a202c;
+    color: var(--text-primary);
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -40,7 +40,7 @@ module Styles = [%css stylesheet {|
   
   .gallery_subtitle {
     font-size: 1.125rem;
-    color: #64748b;
+    color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto;
   }
@@ -64,18 +64,19 @@ module Styles = [%css stylesheet {|
   .search_input {
     width: 100%;
     padding: 0.875rem 1.25rem 0.875rem 3rem;
-    border: 2px solid #e2e8f0;
+    border: 2px solid var(--input-border);
     border-radius: 50px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    background: white;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    background: var(--input-bg);
+    color: var(--input-text);
+    box-shadow: 0 2px 8px var(--card-shadow);
   }
   
   .search_input:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    border-color: var(--input-border-focus);
+    box-shadow: 0 4px 12px var(--card-shadow-hover);
   }
   
   .search_icon {
@@ -83,7 +84,7 @@ module Styles = [%css stylesheet {|
     left: 1.25rem;
     top: 50%;
     transform: translateY(-50%);
-    color: #94a3b8;
+    color: var(--text-tertiary);
     pointer-events: none;
   }
   
@@ -97,9 +98,9 @@ module Styles = [%css stylesheet {|
   
   .filter_button {
     padding: 0.625rem 1.5rem;
-    border: 2px solid #e2e8f0;
-    background: white;
-    color: #64748b;
+    border: 2px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text-secondary);
     border-radius: 25px;
     font-size: 0.95rem;
     font-weight: 500;
@@ -110,14 +111,14 @@ module Styles = [%css stylesheet {|
   }
   
   .filter_button:hover {
-    border-color: #667eea;
-    color: #667eea;
+    border-color: var(--gradient-start);
+    color: var(--gradient-start);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+    box-shadow: 0 4px 12px var(--card-shadow-hover);
   }
   
   .filter_button.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
     color: white;
     border-color: transparent;
     transform: scale(1.05);
@@ -152,7 +153,7 @@ module Styles = [%css stylesheet {|
   /* Results count */
   .results_count {
     text-align: center;
-    color: #94a3b8;
+    color: var(--text-tertiary);
     font-size: 0.95rem;
     margin-bottom: 2rem;
   }
@@ -167,10 +168,10 @@ module Styles = [%css stylesheet {|
   
   /* Project card */
   .project_card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+    box-shadow: 0 4px 6px var(--card-shadow);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     animation: fadeInUp 0.6s ease-out backwards;
     position: relative;
@@ -196,20 +197,20 @@ module Styles = [%css stylesheet {|
   
   .project_card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 20px 40px var(--card-shadow-hover);
   }
   
   .project_card.current {
     border: 2px solid transparent;
-    background: linear-gradient(var(--card-bg, white), var(--card-bg, white)) padding-box,
-                linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
+    background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
+                linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%) border-box;
   }
   
   .current_badge {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
     color: white;
     padding: 0.375rem 0.875rem;
     border-radius: 20px;
@@ -222,13 +223,13 @@ module Styles = [%css stylesheet {|
   /* Card header */
   .card_header {
     padding: 1.5rem;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--card-border);
   }
   
   .card_title {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #1a202c;
+    color: var(--text-primary);
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
@@ -236,7 +237,7 @@ module Styles = [%css stylesheet {|
   }
   
   .card_description {
-    color: #64748b;
+    color: var(--text-secondary);
     line-height: 1.6;
   }
   
