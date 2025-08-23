@@ -1,16 +1,16 @@
 open! Core
 open Types
 
-(** Actual portfolio projects *)
+(** Actual portfolio projects from resume *)
 let portfolio_projects = [
   {
     id = "ta-tools";
     title = "TA Tools";
-    description = "Web application to streamline teaching assistant workflows and grading";
-    long_description = "Developed a comprehensive web application to help teaching assistants manage their responsibilities more efficiently. Features include automated grading workflows, student progress tracking, assignment management, and office hours scheduling. Built with Python Flask backend and SQLite database for lightweight deployment. The tool significantly reduced grading time and improved feedback consistency across multiple TAs.";
-    tags = ["web"; "backend"; "tool"];
-    tech_stack = ["Python"; "Flask"; "SQLite"; "HTML/CSS"; "JavaScript"];
-    github_url = Some "https://github.com/username/ta-tools";
+    description = "Full-stack web application to automate teaching assistant logistics tasks";
+    long_description = "Developed a full-stack web application to automate logistics tasks for teaching assistants at a previous workplace, improving task efficiency by approximately 200% for those who used it. Built the backend with Python and Flask for seamless web integration, using Jinja and JavaScript for the frontend and SQLite for database management.";
+    tags = ["web"; "backend"; "tool"; "fullstack"];
+    tech_stack = ["Python"; "Flask"; "Beautiful Soup"; "Selenium WebDriver"; "SQLite"; "JavaScript"];
+    github_url = None;
     demo_url = None;
     featured = true;
   };
@@ -18,10 +18,10 @@ let portfolio_projects = [
   {
     id = "seawolf-accessibility";
     title = "Seawolf Accessibility";
-    description = "Assistive technology platform for students with disabilities";
-    long_description = "Leading development of an innovative assistive technology platform designed to improve accessibility for students with disabilities at Stony Brook University. The platform includes screen reader enhancements, voice navigation, real-time captioning for lectures, and personalized learning accommodations. Working with Next.js for the frontend, FastAPI for backend services, and C for low-level system integration to ensure optimal performance for accessibility features.";
-    tags = ["web"; "fullstack"; "accessibility"];
-    tech_stack = ["Next.js"; "React"; "FastAPI"; "Python"; "C"; "PostgreSQL"];
+    description = "Interactive campus navigation web app for accessible route recommendations";
+    long_description = "Developing an interactive campus navigation web app to recommend and visualize optimal accessible routes in real time. Built a custom OpenStreetMap parser in C to extract and preprocess map data to use in Dijkstra's algorithm. Mapped building entrances/exits to support indoor traversal, yielding more inclusive routing. Enhanced the route cost function using scikit-learn and NumPy to perform linear regression on aggregated cost data based on stair penalties and slope gradients computed using Google Maps Elevation API data. Using the K-nearest neighbors (KNN) algorithm to recommend alternative routes with similar accessibility characteristics.";
+    tags = ["web"; "fullstack"; "ai"; "accessibility"];
+    tech_stack = ["Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API"];
     github_url = None;
     demo_url = None;
     featured = true;
@@ -29,84 +29,24 @@ let portfolio_projects = [
   
   {
     id = "real-estate-ai-assistant";
-    title = "Real Estate AI Assistant";
-    description = "AI-powered chatbot for real estate property search and recommendations";
-    long_description = "Building an intelligent conversational assistant that helps users find their ideal properties through natural language queries. The system uses OpenAI's GPT models for natural language understanding, Pinecone vector database for semantic property search, and AWS infrastructure for scalable deployment. Features include personalized property recommendations, virtual property tours scheduling, mortgage calculations, and neighborhood insights. Integrated with multiple MLS databases for real-time property data.";
+    title = "Real Estate Closing AI Assistant";
+    description = "AI classification system for real estate deal-closing platform";
+    long_description = "Developing an AI classification system for a startup's real estate deal-closing platform using LangGraph workflows, integrating with WordPress and using Pinecone vector search to automatically organize documents, emails, and attachments for streamlined document management and communication. Managing backend infrastructure using Terraform on AWS EC2, refining data ingestion pipelines and modifying CI/CD workflows.";
     tags = ["backend"; "ai"; "api"];
-    tech_stack = ["PHP"; "OpenAI API"; "Pinecone"; "AWS"; "MySQL"; "REST API"];
+    tech_stack = ["PHP"; "OpenAI API"; "Pinecone"; "AWS EC2"; "Terraform"];
     github_url = None;
     demo_url = None;
     featured = true;
   };
   
   {
-    id = "nutriproof-extension";
-    title = "NutriProof Chrome Extension";
-    description = "Browser extension for instant nutrition fact verification using AI";
-    long_description = "Created a Chrome extension that helps users verify nutritional claims on websites and social media. The extension uses computer vision to detect nutrition labels and health claims, then cross-references them with scientific databases and uses OpenAI's API to provide fact-checked information. Built with a Python Flask backend for processing and a lightweight JavaScript frontend for seamless browser integration. Helps users make informed dietary decisions by flagging misleading health claims.";
+    id = "nutriproof";
+    title = "NutriProof";
+    description = "Chrome extension for health and nutrition claim verification using AI";
+    long_description = "Built a Chrome extension that uses a GPT model fine-tuned on self-curated labeled data to analyze user-selected text about health and nutrition, automatically querying Wolfram Alpha's Full Results API for factual validation. Parsed claims, generated optimized Wolfram queries, and re-integrated verified results into GPT for more accurate verdicts. Implemented interactive charts with Chart.js and color-coded verdicts for quick, intuitive accuracy assessments.";
     tags = ["tool"; "ai"; "web"];
-    tech_stack = ["Python"; "Flask"; "OpenAI API"; "JavaScript"; "Chrome Extension API"];
-    github_url = Some "https://github.com/username/nutriproof";
-    demo_url = None;
-    featured = false;
-  };
-  
-  {
-    id = "penguinlearn-platform";
-    title = "PenguinLearn Platform";
-    description = "Interactive educational platform for children's learning";
-    long_description = "Developing an engaging educational platform for QuattronKids that makes learning fun for children aged 6-12. Features include gamified lessons, interactive coding tutorials, progress tracking for parents, and real-time collaboration for group projects. Built with Next.js and React for a responsive, animated interface, and Supabase for real-time data synchronization. Implements adaptive learning algorithms to personalize content difficulty based on individual student progress.";
-    tags = ["web"; "fullstack"; "education"];
-    tech_stack = ["Next.js"; "React"; "TypeScript"; "Supabase"; "Tailwind CSS"];
+    tech_stack = ["Python"; "Flask"; "JavaScript"; "OpenAI API"; "Wolfram Alpha API"];
     github_url = None;
-    demo_url = Some "https://penguinlearn.com";
-    featured = false;
-  };
-  
-  {
-    id = "healthbyte-app";
-    title = "HealthByte Mobile App";
-    description = "iOS health tracking app for medical research data collection";
-    long_description = "Developing a comprehensive health tracking iOS application for the Stony Brook VIP program. The app collects health metrics using HealthKit integration, conducts research surveys through ResearchKit, and provides data visualization for both users and researchers. Features include activity tracking, symptom logging, medication reminders, and secure data export for research analysis. Built with Swift and SwiftUI for native iOS performance and user experience.";
-    tags = ["mobile"; "health"; "research"];
-    tech_stack = ["Swift"; "SwiftUI"; "HealthKit"; "ResearchKit"; "Core Data"];
-    github_url = None;
-    demo_url = None;
-    featured = false;
-  };
-  
-  {
-    id = "algorithm-visualizer";
-    title = "Algorithm Visualizer";
-    description = "Interactive web tool for visualizing data structures and algorithms";
-    long_description = "Created an educational tool to help students understand complex algorithms through interactive visualizations. Supports sorting algorithms, graph traversals, dynamic programming problems, and tree operations. Features step-by-step execution, custom input data, complexity analysis, and code generation in multiple languages. Used extensively by students in Data Structures and Analysis of Algorithms courses.";
-    tags = ["web"; "tool"; "education"];
-    tech_stack = ["React"; "TypeScript"; "D3.js"; "Node.js"; "Express"];
-    github_url = Some "https://github.com/username/algo-visualizer";
-    demo_url = Some "https://algovis.example.com";
-    featured = false;
-  };
-  
-  {
-    id = "campus-events-api";
-    title = "Campus Events API";
-    description = "RESTful API for university event management and discovery";
-    long_description = "Designed and implemented a comprehensive API for managing campus events at Stony Brook University. Features include event creation and management, RSVP tracking, location-based discovery, calendar integration, and notification systems. Built with FastAPI for high performance, PostgreSQL for data persistence, and Redis for caching. Implements OAuth 2.0 for secure authentication and role-based access control.";
-    tags = ["backend"; "api"; "web"];
-    tech_stack = ["FastAPI"; "Python"; "PostgreSQL"; "Redis"; "OAuth 2.0"; "Docker"];
-    github_url = Some "https://github.com/username/campus-events-api";
-    demo_url = None;
-    featured = false;
-  };
-  
-  {
-    id = "code-review-bot";
-    title = "Automated Code Review Bot";
-    description = "GitHub bot for automated code quality checks and suggestions";
-    long_description = "Built an intelligent code review bot that automatically analyzes pull requests for code quality issues, potential bugs, and style violations. Uses static analysis tools, custom rule engines, and machine learning models to provide constructive feedback. Integrates with GitHub Actions for seamless CI/CD pipeline integration. Currently used by multiple student organizations for maintaining code quality standards.";
-    tags = ["tool"; "backend"; "automation"];
-    tech_stack = ["Python"; "GitHub API"; "Docker"; "PostgreSQL"; "Celery"];
-    github_url = Some "https://github.com/username/code-review-bot";
     demo_url = None;
     featured = false;
   };
