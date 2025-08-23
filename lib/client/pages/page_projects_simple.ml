@@ -2,6 +2,7 @@ open! Core
 open Bonsai_web
 open Bonsai.Let_syntax
 open Virtual_dom
+open Theme
 
 (* Import shared types and data *)
 module Types = Shared.Types
@@ -78,7 +79,7 @@ let external_icon =
     ]
 
 (* Individual accordion component for project details *)
-let project_accordion_component ~project =
+let project_accordion_component ~project ~theme:_ =
   let%sub accordion_state, set_accordion_state = 
     Bonsai.state (module Bool) ~default_model:false
   in
@@ -86,6 +87,7 @@ let project_accordion_component ~project =
   let%arr accordion_state = accordion_state
   and set_accordion_state = set_accordion_state
   and project = project in
+  
   
   let toggle_accordion = 
     Vdom.Attr.on_click (fun _ ->
@@ -136,11 +138,12 @@ let project_accordion_component ~project =
     ]
 
 (* Project card component *)
-let project_card_component ~project =
-  let%sub accordion = project_accordion_component ~project in
+let project_card_component ~project ~theme =
+  let%sub accordion = project_accordion_component ~project ~theme in
   
   let%arr accordion = accordion
   and project = project in
+  
   
   Vdom.Node.div
     ~attrs:(if project.Types.current then
@@ -207,7 +210,7 @@ let project_card_component ~project =
     ]
 
 (* Filter button component *)
-let filter_button ~label ~filter ~current_filter ~set_filter =
+let filter_button ~label ~filter ~current_filter ~set_filter ~theme:_ =
   let is_active = Types.equal_project_filter current_filter filter in
   let classes = 
     if is_active then 
@@ -223,7 +226,7 @@ let filter_button ~label ~filter ~current_filter ~set_filter =
     [Vdom.Node.text label]
 
 (* Main component *)
-let component () =
+let component ?(theme = Bonsai.Value.return Light) () =
   let%sub current_filter, set_filter = 
     Bonsai.state 
       (module struct 
@@ -258,7 +261,7 @@ let component () =
         |> List.map ~f:(fun p -> (p.Types.id, p))
         |> Map.of_alist_exn (module String))
       ~f:(fun _id project ->
-        project_card_component ~project)
+        project_card_component ~project ~theme)
   in
   
   let%arr current_filter = current_filter
@@ -269,6 +272,7 @@ let component () =
   and project_cards = project_cards in
   
   let project_count = List.length filtered_projects in
+  
   
   Vdom.Node.div
     ~attrs:[Styles.gallery]
@@ -310,15 +314,15 @@ let component () =
             ~attrs:[Styles.filter_bar]
             [
               filter_button ~label:"All" ~filter:Types.All 
-                ~current_filter ~set_filter;
+                ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"Web" ~filter:Types.Web 
-                ~current_filter ~set_filter;
+                ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"Backend" ~filter:Types.Backend 
-                ~current_filter ~set_filter;
+                ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"CLI" ~filter:Types.CLI 
-                ~current_filter ~set_filter;
+                ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"Tools" ~filter:Types.Tool 
-                ~current_filter ~set_filter;
+                ~current_filter ~set_filter ~theme:Light;
             ]
         ];
       
