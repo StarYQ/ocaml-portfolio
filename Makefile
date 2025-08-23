@@ -1,6 +1,6 @@
 # Production build configuration for OCaml Portfolio
 
-.PHONY: build build-dev build-prod serve clean
+.PHONY: build build-dev build-prod serve serve-prod up clean check-size
 
 # Development build (default)
 build: build-dev
@@ -17,10 +17,13 @@ build-prod:
 
 # Serve the application
 serve: build-dev
-	dune exec bin/server/main.exe
+	dune exec bin/main.exe
 
 serve-prod: build-prod
-	dune exec --profile=release bin/server/main.exe
+	dune exec --profile=release bin/main.exe
+
+# Alias for serve (common convention)
+up: serve
 
 # Clean build artifacts
 clean:
