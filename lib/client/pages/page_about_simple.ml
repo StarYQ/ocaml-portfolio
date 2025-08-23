@@ -158,25 +158,30 @@ let education_section =
 
 let experience_section =
   let roles = [
+    ( "Compute Platform Engineering Intern"
+    , "GlaxoSmithKline plc - Seattle, WA"
+    , "May 2025 - August 2025"
+    , "Developed an interactive Python CLI that uses workload diagnosis to auto-select optimal HPC environments and optimize resource specifications, reducing compute costs by ~7%. Containerized and deployed the CLI using both Docker and Apptainer for cross-platform compatibility. Built proof of concept demonstrating architectural optimizations for AI/ML team's prototype agentic system."
+    );
     ( "Teaching Assistant"
-    , "Stony Brook University - Computer Science Department"
-    , "August 2024 - Present"
-    , "Teaching assistant for CSE 214 (Data Structures) and CSE 373 (Analysis of Algorithms). Conduct office hours, grade assignments, and help students understand complex algorithmic concepts."
+    , "Stony Brook University - Stony Brook, NY"
+    , "January 2025 - December 2025"
+    , "Programming Abstractions (CSE 216): Leading weekly recitations, exam review sessions, and office hours for 100+ students, covering functional programming, object-orientation, type systems, memory management, and parallel programming. Software Development (CSE 316): Incoming teaching assistant for fall 2025."
     );
-    ( "Undergraduate Researcher"
-    , "Stony Brook University - Assistive Technology Lab"
-    , "February 2025 - Present"
-    , "Working on Seawolf Accessibility project to develop assistive technologies for students with disabilities. Implementing features using Next.js, FastAPI, and C for system-level components."
-    );
-    ( "Software Developer"
-    , "QuattronKids"
-    , "October 2024 - Present"
-    , "Developing PenguinLearn, an educational platform for children. Building interactive features with Next.js, React, and Supabase for real-time collaboration."
-    );
-    ( "App Developer"
-    , "Stony Brook VIP Program"
+    ( "Student Software Developer"
+    , "Stony Brook University VIP Program - Stony Brook, NY"
     , "September 2024 - Present"
-    , "Developing HealthByte mobile application using Swift, HealthKit, and ResearchKit for health data collection and analysis."
+    , "Developing a mobile app to help SBU clinicians monitor patients' post-surgery recovery progress using Apple Health data and custom forms via HealthKit and ResearchKit frameworks. Leading the HealthByte subteam, creating onboarding resources, delegating tasks, and organizing meetings. Developing a full-stack Next.js web application for clinicians to interact with patient data."
+    );
+    ( "Full Stack Developer"
+    , "QuattronKids - Remote"
+    , "July 2024 - May 2025"
+    , "Led full-stack development of PenguinLearn, a RESTful educational platform using Next.js, React, Supabase, and Prisma ORM, enabling migration from third-party hosting and reducing operational costs by ~20%. Implemented a real-time messaging system for direct communication between parents and teachers. Developed comprehensive test suites using Jest and Playwright."
+    );
+    ( "Teaching Assistant"
+    , "ABCMath - Queens, NY"
+    , "September 2022 - October 2024"
+    , "Tutored and graded homework for programming (Python and Java), honors chemistry, and English and math classes for multiple grades. Supervised and helped guide class for programming classes. Revised material for multiple classes."
     );
   ] in
   Bonsai.const (
