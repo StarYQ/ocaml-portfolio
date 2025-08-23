@@ -30,12 +30,15 @@ module Styles = [%css stylesheet {|
   .gallery_title {
     font-size: 2.5rem;
     font-weight: 700;
+    /* Ensure text is always visible - use solid color as base */
     color: var(--text-primary);
     margin-bottom: 1rem;
+    /* Optional gradient overlay for supported browsers */
     background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-size: 100% 100%;
   }
   
   .gallery_subtitle {
@@ -64,13 +67,14 @@ module Styles = [%css stylesheet {|
   .search_input {
     width: 100%;
     padding: 0.875rem 1.25rem 0.875rem 3rem;
-    border: 2px solid var(--input-border);
+    border: 1px solid var(--border-color) !important;
     border-radius: 50px;
     font-size: 1rem;
     transition: all 0.3s ease;
     background: var(--input-bg);
     color: var(--input-text);
     box-shadow: 0 2px 8px var(--card-shadow);
+    outline: none;
   }
   
   .search_input:focus {
@@ -97,44 +101,38 @@ module Styles = [%css stylesheet {|
   }
   
   .filter_button {
-    padding: 0.625rem 1.5rem;
-    border: 2px solid var(--card-border);
-    background: var(--card-bg);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background: transparent;
     color: var(--text-secondary);
-    border-radius: 25px;
+    border-radius: 0.5rem;
     font-size: 0.95rem;
     font-weight: 500;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.2s ease;
     cursor: pointer;
     position: relative;
     overflow: hidden;
   }
   
   .filter_button:hover {
-    border-color: var(--gradient-start);
-    color: var(--gradient-start);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px var(--card-shadow-hover);
+    background: rgba(139, 92, 246, 0.1);
+    border-color: #8b5cf6;
+    color: #8b5cf6;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.2);
   }
   
   .filter_button.active {
-    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    background: #8b5cf6;
     color: white;
-    border-color: transparent;
-    transform: scale(1.05);
+    border-color: #8b5cf6;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.3);
   }
   
+  /* Removed ripple effect for cleaner active state */
   .filter_button.active::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 5px;
-    height: 5px;
-    background: white;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    animation: ripple 0.6s ease-out;
+    display: none;
   }
   
   @keyframes ripple {
@@ -169,7 +167,7 @@ module Styles = [%css stylesheet {|
   /* Project card */
   .project_card {
     background: var(--card-bg);
-    border: 1px solid var(--card-border);
+    border: 1px solid var(--border-color) !important;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 6px var(--card-shadow);
@@ -202,18 +200,21 @@ module Styles = [%css stylesheet {|
   }
   
   .project_card.current {
-    border: 2px solid #8b5cf6;
-    box-shadow: 0 4px 6px var(--card-shadow), 0 0 0 1px rgba(139, 92, 246, 0.1);
+    border: 2px solid #8b5cf6 !important;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1), 0 4px 12px rgba(139, 92, 246, 0.2);
+    background: var(--card-bg);
   }
   
   .current_badge {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    color: white;
-    padding: 0.375rem 0.875rem;
-    border-radius: 20px;
+    /* Match tech_item badge styling */
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+    border: 1px solid #8b5cf6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
     font-size: 0.75rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -336,10 +337,11 @@ module Styles = [%css stylesheet {|
   }
   
   .tech_item {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 0.375rem 0.875rem;
-    border-radius: 15px;
+    background: rgba(139, 92, 246, 0.1);
+    color: #8b5cf6;
+    border: 1px solid #8b5cf6;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
     font-size: 0.85rem;
     font-weight: 500;
   }
