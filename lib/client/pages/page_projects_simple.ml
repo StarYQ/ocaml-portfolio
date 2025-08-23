@@ -144,15 +144,15 @@ let project_card_component ~project =
   
   Vdom.Node.div
     ~attrs:(if project.Types.featured then
-      [Styles.project_card; Styles.featured]
+      [Styles.project_card; Styles.current]
     else
       [Styles.project_card])
     [
-      (* Featured badge if applicable *)
+      (* Current badge if applicable *)
       (if project.featured then
         Vdom.Node.div
-          ~attrs:[Styles.featured_badge]
-          [Vdom.Node.text "Featured"]
+          ~attrs:[Styles.current_badge]
+          [Vdom.Node.text "Current"]
       else
         Vdom.Node.none);
       
@@ -202,7 +202,7 @@ let project_card_component ~project =
                 Vdom.Attr.create "target" "_blank";
                 Vdom.Attr.create "rel" "noopener noreferrer";
               ]
-              [external_icon; Vdom.Node.text "Demo"])
+              [external_icon; Vdom.Node.text "View"])
         ])
     ]
 

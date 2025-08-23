@@ -23,7 +23,7 @@ let portfolio_projects = [
     tags = ["web"; "fullstack"; "ai"; "accessibility"];
     tech_stack = ["Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API"];
     github_url = None;
-    demo_url = None;
+    demo_url = Some "https://seawolf-accessibility.example.com";
     featured = true;
   };
   
@@ -47,7 +47,7 @@ let portfolio_projects = [
     tags = ["tool"; "ai"; "web"];
     tech_stack = ["Python"; "Flask"; "JavaScript"; "OpenAI API"; "Wolfram Alpha API"];
     github_url = None;
-    demo_url = None;
+    demo_url = Some "https://nutriproof-extension.example.com";
     featured = false;
   };
 ]

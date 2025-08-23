@@ -199,13 +199,13 @@ module Styles = [%css stylesheet {|
     box-shadow: 0 20px 40px rgba(0,0,0,0.12);
   }
   
-  .project_card.featured {
+  .project_card.current {
     border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box,
+    background: linear-gradient(var(--card-bg, white), var(--card-bg, white)) padding-box,
                 linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
   }
   
-  .featured_badge {
+  .current_badge {
     position: absolute;
     top: 1rem;
     right: 1rem;
@@ -458,6 +458,11 @@ module Styles = [%css stylesheet {|
     .project_card {
       background: #1e293b;
       box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    
+    .project_card.current {
+      background: linear-gradient(#1e293b, #1e293b) padding-box,
+                  linear-gradient(135deg, #667eea 0%, #764ba2 100%) border-box;
     }
     
     .card_title {
