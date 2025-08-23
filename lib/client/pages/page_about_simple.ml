@@ -90,6 +90,18 @@ module Styles = [%css
         line-height: 1.6;
       }
       
+      .role_bullets {
+        list-style: disc;
+        padding-left: 1.5rem;
+        margin-top: 0.5rem;
+      }
+      
+      .role_bullet {
+        margin-bottom: 0.5rem;
+        color: #4a5568;
+        line-height: 1.6;
+      }
+      
       .skills_grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -161,27 +173,39 @@ let experience_section =
     ( "Compute Platform Engineering Intern"
     , "GlaxoSmithKline plc - Seattle, WA"
     , "May 2025 - August 2025"
-    , "Developed an interactive Python CLI that uses workload diagnosis to auto-select optimal HPC environments and optimize resource specifications, reducing compute costs by ~7%. Containerized and deployed the CLI using both Docker and Apptainer for cross-platform compatibility. Built proof of concept demonstrating architectural optimizations for AI/ML team's prototype agentic system."
+    , [ "Developed an interactive Python CLI that uses workload diagnosis to auto-select optimal HPC environments and optimize resource specifications when applicable, with two submission modes (automatic job script generation and direct environment access), reducing compute costs by ~7%."
+      ; "Containerized and deployed the CLI using both Docker and Apptainer for cross-platform compatibility on Windows, Linux, and Unix systems, with planned rollout to 3,000+ computational scientists company-wide."
+      ; "Built proof of concept demonstrating architectural optimizations for AI/ML team's prototype agentic system's tool orchestration layer, achieving ~35% reduction in context consumption while improving performance."
+      ]
     );
     ( "Teaching Assistant"
     , "Stony Brook University - Stony Brook, NY"
     , "January 2025 - December 2025"
-    , "Programming Abstractions (CSE 216): Leading weekly recitations, exam review sessions, and office hours for 100+ students, covering functional programming, object-orientation, type systems, memory management, and parallel programming. Software Development (CSE 316): Incoming teaching assistant for fall 2025."
+    , [ "Programming Abstractions (CSE 216): Led weekly recitations, exam review sessions, and office hours for a class of 100+ students, covering functional programming, object-orientation, type systems, memory management, program and data abstractions, parameter passing, modularity, version control, and parallel programming."
+      ; "Software Development (CSE 316): Incoming teaching assistant for fall 2025."
+      ; "Helped develop course materials, graded assignments/exams, and proctored exams to ensure smooth course operations."
+      ]
     );
     ( "Student Software Developer"
-    , "Stony Brook University VIP Program - Stony Brook, NY"
+    , "Stony Brook University Vertically Integrated Projects (VIP) Program - Stony Brook, NY"
     , "September 2024 - Present"
-    , "Developing a mobile app to help SBU clinicians monitor patients' post-surgery recovery progress using Apple Health data and custom forms via HealthKit and ResearchKit frameworks. Leading the HealthByte subteam, creating onboarding resources, delegating tasks, and organizing meetings. Developing a full-stack Next.js web application for clinicians to interact with patient data."
+    , [ "Develop a mobile app to help SBU clinicians monitor patients' post-surgery recovery progress by combining Apple Health data and custom forms to analyze their health via the HealthKit and ResearchKit frameworks."
+      ; "Lead the HealthByte subteam, creating resources for onboarding new team members, delegating tasks, and organizing meetings."
+      ; "Develop a full-stack Next.js web application for clinicians to interact with patient data gathered via the mobile app, with centralized authentication and database management for both applications."
+      ]
     );
     ( "Full Stack Developer"
     , "QuattronKids - Remote"
     , "July 2024 - May 2025"
-    , "Led full-stack development of PenguinLearn, a RESTful educational platform using Next.js, React, Supabase, and Prisma ORM, enabling migration from third-party hosting and reducing operational costs by ~20%. Implemented a real-time messaging system for direct communication between parents and teachers. Developed comprehensive test suites using Jest and Playwright."
+    , [ "Led full-stack development of PenguinLearn, a RESTful educational platform using Next.js, React, Supabase, and Prisma ORM, enabling migration from third-party hosting and reducing operational costs by ∼20%."
+      ; "Implemented a real-time messaging system within the platform for direct communication between parents and teachers."
+      ; "Developed comprehensive test suites using Jest for unit testing and Playwright for end-to-end testing, ensuring platform reliability."
+      ]
     );
     ( "Teaching Assistant"
     , "ABCMath - Queens, NY"
     , "September 2022 - October 2024"
-    , "Tutored and graded homework for programming (Python and Java), honors chemistry, and English and math classes for multiple grades. Supervised and helped guide class for programming classes. Revised material for multiple classes."
+    , [ "Tutored & graded homework for programming (Python and Java), honors chemistry, & English & math classes for multiple grades; supervised & helped guide class for programming classes; revised material for multiple classes." ]
     );
   ] in
   Bonsai.const (
@@ -191,7 +215,7 @@ let experience_section =
           ~attrs:[ Styles.section_title ]
           [ Vdom.Node.text "Experience" ]
       ; Vdom.Node.div
-          (List.map roles ~f:(fun (title, org, date, description) ->
+          (List.map roles ~f:(fun (title, org, date, bullets) ->
              Vdom.Node.div
                ~attrs:[ Styles.role_item ]
                [ Vdom.Node.div
@@ -203,9 +227,12 @@ let experience_section =
                ; Vdom.Node.div
                    ~attrs:[ Styles.role_date ]
                    [ Vdom.Node.text date ]
-               ; Vdom.Node.div
-                   ~attrs:[ Styles.role_description ]
-                   [ Vdom.Node.text description ]
+               ; Vdom.Node.ul
+                   ~attrs:[ Styles.role_bullets ]
+                   (List.map bullets ~f:(fun bullet ->
+                      Vdom.Node.li
+                        ~attrs:[ Styles.role_bullet ]
+                        [ Vdom.Node.text bullet ]))
                ]))
       ]
   )
