@@ -254,7 +254,7 @@ let features_section =
       , "BS Computer Science (Honors) • GPA: 3.79 • Aug 2023 - May 2027" )
     ; ( "Current Roles"
       , "Teaching Assistant & Researcher"
-      , "TA for Data Structures & Algorithms • Undergraduate Researcher in Assistive Technology" )
+      , "TA for Programming Abstractions (CSE 216) & Software Development (CSE 316) • Undergraduate Researcher in OCaml/ML" )
     ; ( "Experience"
       , "Software Development"
       , "Building full-stack applications with modern frameworks and technologies" )
@@ -289,24 +289,27 @@ let features_section =
 
 let tech_stack_section =
   let technologies =
-    [ "Python"
-    ; "JavaScript"
-    ; "TypeScript"  
-    ; "Java"
-    ; "C/C++"
-    ; "Swift"
-    ; "OCaml"
-    ; "React"
-    ; "Next.js"
-    ; "Node.js"
-    ; "Flask"
-    ; "FastAPI"
-    ; "PostgreSQL"
+    [ "Java"
+    ; "Python"
+    ; "SQL"
     ; "MongoDB"
+    ; "Pinecone"
+    ; "Bash"
+    ; "C"
+    ; "OCaml"
+    ; "JavaScript"
+    ; "PHP"
+    ; "Swift"
+    ; "Next.js"
+    ; "Express.js"
+    ; "Node.js"
+    ; "Playwright"
+    ; "Flask"
+    ; "Tailwind CSS"
     ; "Docker"
     ; "AWS"
     ; "Git"
-    ; "Linux"
+    ; "PostgreSQL"
     ]
   in
   Bonsai.const (
