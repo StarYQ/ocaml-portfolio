@@ -145,13 +145,13 @@ let education_section =
               [ Vdom.Node.text "Stony Brook University" ]
           ; Vdom.Node.div
               ~attrs:[ Styles.degree ]
-              [ Vdom.Node.text "Bachelor of Science in Computer Science (Honors)" ]
+              [ Vdom.Node.text "Bachelor of Science with Honors in Computer Science" ]
           ; Vdom.Node.div
               ~attrs:[ Styles.details ]
-              [ Vdom.Node.text "GPA: 3.79 • Expected Graduation: May 2027" ]
+              [ Vdom.Node.text "GPA: 3.79 • August 2023 - May 2027 (expected)" ]
           ; Vdom.Node.div
               ~attrs:[ Styles.details ]
-              [ Vdom.Node.text "Relevant Coursework: Data Structures & Algorithms, Analysis of Algorithms, Computer Architecture, Software Engineering" ]
+              [ Vdom.Node.text "Relevant Coursework: Software Development, Analysis of Algorithms: Honors, Data Structures, Object-Oriented Programming, Systems Fundamentals, Programming Abstractions, Linear Algebra, Probability & Statistics" ]
           ]
       ]
   )
