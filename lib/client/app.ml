@@ -98,10 +98,10 @@ let app_computation =
   let%sub content = 
     match%sub current_route with
     | Home -> Pages.Page_home.component ~theme ()
-    | About -> Pages.Page_about.component ()
-    | Projects -> Pages.Page_projects.component ()
+    | About -> Pages.Page_about.component ~theme ()
+    | Projects -> Pages.Page_projects.component ~theme ()
     | Words -> Pages.Page_words.component ()
-    | Contact -> Pages.Page_contact.component ()
+    | Contact -> Pages.Page_contact.component ~theme ()
   in
   
   let%arr content = content 

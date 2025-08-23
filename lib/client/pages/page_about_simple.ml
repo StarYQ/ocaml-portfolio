@@ -1,6 +1,7 @@
 open! Core
 open Bonsai_web
 open Virtual_dom
+open Theme
 
 (* Styles module using ppx_css *)
 module Styles = [%css
@@ -16,24 +17,24 @@ module Styles = [%css
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 2rem;
-        color: #1a202c;
+        /* Color will be set inline based on theme */
         text-align: center;
       }
       
       .section {
         margin-bottom: 3rem;
-        background: white;
+        /* Background will be set inline based on theme */
         border-radius: 12px;
         padding: 2rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        /* Box-shadow will be set inline based on theme */
       }
       
       .section_title {
         font-size: 1.8rem;
         font-weight: 600;
         margin-bottom: 1.5rem;
-        color: #2d3748;
-        border-bottom: 2px solid #e2e8f0;
+        /* Color will be set inline based on theme */
+        /* Border will be set inline based on theme */
         padding-bottom: 0.5rem;
       }
       
@@ -44,49 +45,49 @@ module Styles = [%css
       .institution {
         font-size: 1.3rem;
         font-weight: 600;
-        color: #2d3748;
+        /* Color will be set inline based on theme */
         margin-bottom: 0.3rem;
       }
       
       .degree {
         font-size: 1.1rem;
-        color: #4a5568;
+        /* Color will be set inline based on theme */
         margin-bottom: 0.2rem;
       }
       
       .details {
         font-size: 1rem;
-        color: #718096;
+        /* Color will be set inline based on theme */
       }
       
       .role_item {
         margin-bottom: 1.5rem;
         padding-left: 1rem;
-        border-left: 3px solid #667eea;
+        /* Border color will be set inline based on theme */
       }
       
       .role_title {
         font-size: 1.2rem;
         font-weight: 600;
-        color: #2d3748;
+        /* Color will be set inline based on theme */
         margin-bottom: 0.3rem;
       }
       
       .role_organization {
         font-size: 1rem;
-        color: #4a5568;
+        /* Color will be set inline based on theme */
         margin-bottom: 0.3rem;
       }
       
       .role_date {
         font-size: 0.9rem;
-        color: #718096;
+        /* Color will be set inline based on theme */
         margin-bottom: 0.5rem;
       }
       
       .role_description {
         font-size: 1rem;
-        color: #4a5568;
+        /* Color will be set inline based on theme */
         line-height: 1.6;
       }
       
@@ -98,7 +99,7 @@ module Styles = [%css
       
       .role_bullet {
         margin-bottom: 0.5rem;
-        color: #4a5568;
+        /* Color will be set inline based on theme */
         line-height: 1.6;
       }
       
@@ -109,7 +110,7 @@ module Styles = [%css
       }
       
       .skill_category {
-        background: #f7fafc;
+        /* Background will be set inline based on theme */
         padding: 1.5rem;
         border-radius: 8px;
       }
@@ -117,7 +118,7 @@ module Styles = [%css
       .skill_category_title {
         font-size: 1.1rem;
         font-weight: 600;
-        color: #2d3748;
+        /* Color will be set inline based on theme */
         margin-bottom: 0.8rem;
       }
       
@@ -128,7 +129,7 @@ module Styles = [%css
       
       .skill_item {
         padding: 0.3rem 0;
-        color: #4a5568;
+        /* Color will be set inline based on theme */
         font-size: 1rem;
       }
       
@@ -143,32 +144,103 @@ module Styles = [%css
       }
     |}]
 
-let education_section =
-  Bonsai.const (
-    Vdom.Node.div
-      ~attrs:[ Styles.section ]
+let education_section theme =
+  let section_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #2d3748; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);"
+  in
+  let title_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "color: #2d3748; border-bottom: 2px solid #e2e8f0;"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "color: #f7fafc; border-bottom: 2px solid #4a5568;"
+  in
+  let institution_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #2d3748;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
+  let text_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #4a5568;"
+    | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
+  in
+  let details_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #718096;"
+    | Dark -> Vdom.Attr.create "style" "color: #a0aec0;"
+  in
+  Vdom.Node.div
+      ~attrs:[ Styles.section; section_style ]
       [ Vdom.Node.h2
-          ~attrs:[ Styles.section_title ]
+          ~attrs:[ Styles.section_title; title_style ]
           [ Vdom.Node.text "Education" ]
       ; Vdom.Node.div
           ~attrs:[ Styles.education_item ]
           [ Vdom.Node.div
-              ~attrs:[ Styles.institution ]
+              ~attrs:[ Styles.institution; institution_style ]
               [ Vdom.Node.text "Stony Brook University" ]
           ; Vdom.Node.div
-              ~attrs:[ Styles.degree ]
+              ~attrs:[ Styles.degree; text_style ]
               [ Vdom.Node.text "Bachelor of Science with Honors in Computer Science" ]
           ; Vdom.Node.div
-              ~attrs:[ Styles.details ]
+              ~attrs:[ Styles.details; details_style ]
               [ Vdom.Node.text "GPA: 3.79 • August 2023 - May 2027 (expected)" ]
           ; Vdom.Node.div
-              ~attrs:[ Styles.details ]
+              ~attrs:[ Styles.details; details_style ]
               [ Vdom.Node.text "Relevant Coursework: Software Development, Analysis of Algorithms: Honors, Data Structures, Object-Oriented Programming, Systems Fundamentals, Programming Abstractions, Linear Algebra, Probability & Statistics" ]
           ]
       ]
-  )
 
-let experience_section =
+let experience_section theme =
+  let section_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #2d3748; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);"
+  in
+  let title_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "color: #2d3748; border-bottom: 2px solid #e2e8f0;"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "color: #f7fafc; border-bottom: 2px solid #4a5568;"
+  in
+  let role_item_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style" "border-left: 3px solid #667eea;"
+    | Dark -> 
+        Vdom.Attr.create "style" "border-left: 3px solid #9f7aea;"
+  in
+  let role_title_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #2d3748;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
+  let text_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #4a5568;"
+    | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
+  in
+  let date_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #718096;"
+    | Dark -> Vdom.Attr.create "style" "color: #a0aec0;"
+  in
   let roles = [
     ( "Compute Platform Engineering Intern"
     , "GlaxoSmithKline plc - Seattle, WA"
@@ -208,36 +280,71 @@ let experience_section =
     , [ "Tutored & graded homework for programming (Python and Java), honors chemistry, & English & math classes for multiple grades; supervised & helped guide class for programming classes; revised material for multiple classes." ]
     );
   ] in
-  Bonsai.const (
-    Vdom.Node.div
-      ~attrs:[ Styles.section ]
+  Vdom.Node.div
+      ~attrs:[ Styles.section; section_style ]
       [ Vdom.Node.h2
-          ~attrs:[ Styles.section_title ]
+          ~attrs:[ Styles.section_title; title_style ]
           [ Vdom.Node.text "Experience" ]
       ; Vdom.Node.div
           (List.map roles ~f:(fun (title, org, date, bullets) ->
              Vdom.Node.div
-               ~attrs:[ Styles.role_item ]
+               ~attrs:[ Styles.role_item; role_item_style ]
                [ Vdom.Node.div
-                   ~attrs:[ Styles.role_title ]
+                   ~attrs:[ Styles.role_title; role_title_style ]
                    [ Vdom.Node.text title ]
                ; Vdom.Node.div
-                   ~attrs:[ Styles.role_organization ]
+                   ~attrs:[ Styles.role_organization; text_style ]
                    [ Vdom.Node.text org ]
                ; Vdom.Node.div
-                   ~attrs:[ Styles.role_date ]
+                   ~attrs:[ Styles.role_date; date_style ]
                    [ Vdom.Node.text date ]
                ; Vdom.Node.ul
                    ~attrs:[ Styles.role_bullets ]
                    (List.map bullets ~f:(fun bullet ->
                       Vdom.Node.li
-                        ~attrs:[ Styles.role_bullet ]
+                        ~attrs:[ Styles.role_bullet; text_style ]
                         [ Vdom.Node.text bullet ]))
                ]))
       ]
-  )
 
-let skills_section =
+let skills_section theme =
+  let section_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #2d3748; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);"
+  in
+  let title_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "color: #2d3748; border-bottom: 2px solid #e2e8f0;"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "color: #f7fafc; border-bottom: 2px solid #4a5568;"
+  in
+  let category_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #f7fafc;"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #1a202c;"
+  in
+  let category_title_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #2d3748;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
+  let item_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #4a5568;"
+    | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
+  in
   let skills = [
     ( "Languages/Databases"
     , [ "Java"; "Python"; "SQL (PostgreSQL, SQLite)"; "MongoDB"; "Pinecone"; "Bash"; "C"; "OCaml"; "JavaScript"; "PHP"; "Swift" ]
@@ -252,72 +359,106 @@ let skills_section =
     , [ "Git"; "Docker"; "GitHub Actions"; "Ansible"; "Terraform"; "Jira"; "Slurm"; "AWS"; "GCP"; "GKE"; "OpenAI API"; "SonarQube"; "Prisma ORM" ]
     );
   ] in
-  Bonsai.const (
-    Vdom.Node.div
-      ~attrs:[ Styles.section ]
+  Vdom.Node.div
+      ~attrs:[ Styles.section; section_style ]
       [ Vdom.Node.h2
-          ~attrs:[ Styles.section_title ]
+          ~attrs:[ Styles.section_title; title_style ]
           [ Vdom.Node.text "Technical Skills" ]
       ; Vdom.Node.div
           ~attrs:[ Styles.skills_grid ]
           (List.map skills ~f:(fun (category, items) ->
              Vdom.Node.div
-               ~attrs:[ Styles.skill_category ]
+               ~attrs:[ Styles.skill_category; category_style ]
                [ Vdom.Node.div
-                   ~attrs:[ Styles.skill_category_title ]
+                   ~attrs:[ Styles.skill_category_title; category_title_style ]
                    [ Vdom.Node.text category ]
                ; Vdom.Node.ul
                    ~attrs:[ Styles.skill_list ]
                    (List.map items ~f:(fun skill ->
                       Vdom.Node.li
-                        ~attrs:[ Styles.skill_item ]
+                        ~attrs:[ Styles.skill_item; item_style ]
                         [ Vdom.Node.text skill ]))
                ]))
       ]
-  )
 
-let activities_section =
-  Bonsai.const (
-    Vdom.Node.div
-      ~attrs:[ Styles.section ]
+let activities_section theme =
+  let section_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #2d3748; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);"
+  in
+  let title_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "color: #2d3748; border-bottom: 2px solid #e2e8f0;"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "color: #f7fafc; border-bottom: 2px solid #4a5568;"
+  in
+  let role_item_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style" "border-left: 3px solid #667eea;"
+    | Dark -> 
+        Vdom.Attr.create "style" "border-left: 3px solid #9f7aea;"
+  in
+  let role_title_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #2d3748;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
+  let text_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #4a5568;"
+    | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
+  in
+  let date_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #718096;"
+    | Dark -> Vdom.Attr.create "style" "color: #a0aec0;"
+  in
+  Vdom.Node.div
+      ~attrs:[ Styles.section; section_style ]
       [ Vdom.Node.h2
-          ~attrs:[ Styles.section_title ]
+          ~attrs:[ Styles.section_title; title_style ]
           [ Vdom.Node.text "Activities" ]
       ; Vdom.Node.div
-          ~attrs:[ Styles.role_item ]
+          ~attrs:[ Styles.role_item; role_item_style ]
           [ Vdom.Node.div
-              ~attrs:[ Styles.role_title ]
+              ~attrs:[ Styles.role_title; role_title_style ]
               [ Vdom.Node.text "Undergraduate Researcher" ]
           ; Vdom.Node.div
-              ~attrs:[ Styles.role_organization ]
+              ~attrs:[ Styles.role_organization; text_style ]
               [ Vdom.Node.text "Stony Brook University - Stony Brook, NY" ]
           ; Vdom.Node.div
-              ~attrs:[ Styles.role_date ]
+              ~attrs:[ Styles.role_date; date_style ]
               [ Vdom.Node.text "December 2024 - Present" ]
           ; Vdom.Node.div
-              ~attrs:[ Styles.role_description ]
+              ~attrs:[ Styles.role_description; text_style ]
               [ Vdom.Node.text "Investigating and developing foundational ML/NLP tools in OCaml to address ecosystem gaps in tokenization, text processing, and statistical text analysis." ]
           ]
       ]
-  )
 
-let component () =
+let component ?(theme = Bonsai.Value.return Light) () =
   let open Bonsai.Let_syntax in
-  let%sub education = education_section in
-  let%sub experience = experience_section in
-  let%sub skills = skills_section in
-  let%sub activities = activities_section in
-  let%arr education = education
-  and experience = experience
-  and skills = skills
-  and activities = activities in
+  let%arr theme = theme in
+  let title_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #1a202c;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
   Vdom.Node.div
     ~attrs:[ Styles.container ]
     [ Vdom.Node.h1
-        ~attrs:[ Styles.page_title ]
+        ~attrs:[ Styles.page_title; title_style ]
         [ Vdom.Node.text "About Me" ]
-    ; education
-    ; experience
-    ; skills
-    ; activities
+    ; education_section theme
+    ; experience_section theme
+    ; skills_section theme
+    ; activities_section theme
     ]

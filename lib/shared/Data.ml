@@ -47,7 +47,7 @@ let portfolio_projects = [
     tags = ["tool"; "ai"; "web"];
     tech_stack = ["Python"; "Flask"; "JavaScript"; "OpenAI API"; "Wolfram Alpha API"];
     github_url = None;
-    demo_url = Some "https://nutriproof-extension.example.com";
+    demo_url = Some "https://devpost.com/software/nutriproof";
     current = false;
   };
 ]

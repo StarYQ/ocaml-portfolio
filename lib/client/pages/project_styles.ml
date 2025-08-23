@@ -169,6 +169,7 @@ module Styles = [%css stylesheet {|
   /* Project card */
   .project_card {
     background: var(--card-bg);
+    border: 1px solid var(--card-border);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 6px var(--card-shadow);
@@ -201,16 +202,15 @@ module Styles = [%css stylesheet {|
   }
   
   .project_card.current {
-    border: 2px solid transparent;
-    background: linear-gradient(var(--card-bg), var(--card-bg)) padding-box,
-                linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%) border-box;
+    border: 2px solid #8b5cf6;
+    box-shadow: 0 4px 6px var(--card-shadow), 0 0 0 1px rgba(139, 92, 246, 0.1);
   }
   
   .current_badge {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
     color: white;
     padding: 0.375rem 0.875rem;
     border-radius: 20px;

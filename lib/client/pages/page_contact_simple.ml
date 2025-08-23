@@ -1,6 +1,7 @@
 open! Core
 open Bonsai.Let_syntax
 open Virtual_dom
+open Theme
 
 (* Styles module using ppx_css *)
 module Styles = [%css
@@ -16,30 +17,30 @@ module Styles = [%css
         font-size: 3rem;
         font-weight: 700;
         margin-bottom: 1rem;
-        color: #1a202c;
+        /* Color will be set inline based on theme */
         text-align: center;
       }
       
       .page_subtitle {
         font-size: 1.2rem;
-        color: #718096;
+        /* Color will be set inline based on theme */
         text-align: center;
         margin-bottom: 3rem;
         line-height: 1.6;
       }
       
       .form_container {
-        background: white;
+        /* Background will be set inline based on theme */
         border-radius: 12px;
         padding: 2.5rem;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        /* Box-shadow will be set inline based on theme */
       }
       
       .form_title {
         font-size: 1.5rem;
         font-weight: 600;
         margin-bottom: 1.5rem;
-        color: #2d3748;
+        /* Color will be set inline based on theme */
       }
       
       .form_field {
@@ -50,7 +51,7 @@ module Styles = [%css
         display: block;
         font-size: 1rem;
         font-weight: 500;
-        color: #4a5568;
+        /* Color will be set inline based on theme */
         margin-bottom: 0.5rem;
       }
       
@@ -72,9 +73,8 @@ module Styles = [%css
         align-items: center;
         gap: 0.5rem;
         padding: 0.75rem 1.5rem;
-        background: #f7fafc;
+        /* Background and color will be set inline based on theme */
         border-radius: 8px;
-        color: #4a5568;
         text-decoration: none;
         transition: all 0.3s ease;
       }
@@ -116,7 +116,7 @@ module Styles = [%css
       }
     |}]
 
-let contact_form_component =
+let contact_form_component theme =
   let%sub name_form = 
     Bonsai_web_ui_form.Elements.Textbox.string 
       ~placeholder:"John Doe" 
@@ -135,42 +135,88 @@ let contact_form_component =
   
   let%arr name_form = name_form
   and email_form = email_form
-  and message_form = message_form in
+  and message_form = message_form
+  and theme = theme in
+  
+  (* Theme-aware styles *)
+  let title_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #1a202c;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
+  let subtitle_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #718096;"
+    | Dark -> Vdom.Attr.create "style" "color: #a0aec0;"
+  in
+  let form_container_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #ffffff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #2d3748; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);"
+  in
+  let form_title_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #2d3748;"
+    | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
+  in
+  let label_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #4a5568;"
+    | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
+  in
+  let contact_method_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #f7fafc; color: #4a5568;"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #1a202c; color: #cbd5e0;"
+  in
+  let text_style = 
+    match theme with
+    | Light -> Vdom.Attr.create "style" "color: #718096;"
+    | Dark -> Vdom.Attr.create "style" "color: #a0aec0;"
+  in
   
   Vdom.Node.div
     ~attrs:[ Styles.container ]
     [ Vdom.Node.h1 
-        ~attrs:[ Styles.page_title ]
+        ~attrs:[ Styles.page_title; title_style ]
         [ Vdom.Node.text "Get In Touch" ]
     ; Vdom.Node.p 
-        ~attrs:[ Styles.page_subtitle ]
+        ~attrs:[ Styles.page_subtitle; subtitle_style ]
         [ Vdom.Node.text 
             "I'm always interested in new opportunities and collaborations. \
              Whether you have a project in mind, need technical assistance, \
              or just want to connect, I'd love to hear from you." ]
     ; Vdom.Node.div
-        ~attrs:[ Styles.form_container ]
+        ~attrs:[ Styles.form_container; form_container_style ]
         [ Vdom.Node.h3 
-            ~attrs:[ Styles.form_title ]
+            ~attrs:[ Styles.form_title; form_title_style ]
             [ Vdom.Node.text "Send a Message" ]
         ; Vdom.Node.div
             ~attrs:[ Styles.form_field ]
             [ Vdom.Node.label
-                ~attrs:[ Styles.form_label ]
+                ~attrs:[ Styles.form_label; label_style ]
                 [ Vdom.Node.text "Name" ]
             ; Bonsai_web_ui_form.view_as_vdom name_form
             ]
         ; Vdom.Node.div
             ~attrs:[ Styles.form_field ]
             [ Vdom.Node.label
-                ~attrs:[ Styles.form_label ]
+                ~attrs:[ Styles.form_label; label_style ]
                 [ Vdom.Node.text "Email" ]
             ; Bonsai_web_ui_form.view_as_vdom email_form
             ]
         ; Vdom.Node.div
             ~attrs:[ Styles.form_field ]
             [ Vdom.Node.label
-                ~attrs:[ Styles.form_label ]
+                ~attrs:[ Styles.form_label; label_style ]
                 [ Vdom.Node.text "Message" ]
             ; Bonsai_web_ui_form.view_as_vdom message_form
             ]
@@ -181,13 +227,14 @@ let contact_form_component =
     ; Vdom.Node.div
         ~attrs:[ Styles.contact_info ]
         [ Vdom.Node.p
-            ~attrs:[ Vdom.Attr.style (Css_gen.create ~field:"color" ~value:"#718096") ]
+            ~attrs:[ text_style ]
             [ Vdom.Node.text "Or connect with me through:" ]
         ; Vdom.Node.div
             ~attrs:[ Styles.contact_methods ]
             [ Vdom.Node.a
                 ~attrs:[ 
                   Styles.contact_method; 
+                  contact_method_style;
                   Vdom.Attr.href "https://github.com/username";
                   Vdom.Attr.target "_blank"
                 ]
@@ -195,6 +242,7 @@ let contact_form_component =
             ; Vdom.Node.a
                 ~attrs:[ 
                   Styles.contact_method; 
+                  contact_method_style;
                   Vdom.Attr.href "https://linkedin.com/in/username";
                   Vdom.Attr.target "_blank"
                 ]
@@ -202,6 +250,7 @@ let contact_form_component =
             ; Vdom.Node.a
                 ~attrs:[ 
                   Styles.contact_method; 
+                  contact_method_style;
                   Vdom.Attr.href "mailto:email@example.com"
                 ]
                 [ Vdom.Node.text "Email" ]
@@ -209,4 +258,8 @@ let contact_form_component =
         ]
     ]
 
-let component () = contact_form_component
+let component ?(theme = Bonsai.Value.return Light) () = 
+  let open Bonsai.Let_syntax in
+  let%sub form = contact_form_component theme in
+  let%arr form = form in
+  form
