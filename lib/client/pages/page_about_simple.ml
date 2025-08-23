@@ -249,14 +249,41 @@ let skills_section =
       ]
   )
 
+let activities_section =
+  Bonsai.const (
+    Vdom.Node.div
+      ~attrs:[ Styles.section ]
+      [ Vdom.Node.h2
+          ~attrs:[ Styles.section_title ]
+          [ Vdom.Node.text "Activities" ]
+      ; Vdom.Node.div
+          ~attrs:[ Styles.role_item ]
+          [ Vdom.Node.div
+              ~attrs:[ Styles.role_title ]
+              [ Vdom.Node.text "Undergraduate Researcher" ]
+          ; Vdom.Node.div
+              ~attrs:[ Styles.role_organization ]
+              [ Vdom.Node.text "Stony Brook University - Stony Brook, NY" ]
+          ; Vdom.Node.div
+              ~attrs:[ Styles.role_date ]
+              [ Vdom.Node.text "December 2024 - Present" ]
+          ; Vdom.Node.div
+              ~attrs:[ Styles.role_description ]
+              [ Vdom.Node.text "Investigating and developing foundational ML/NLP tools in OCaml to address ecosystem gaps in tokenization, text processing, and statistical text analysis." ]
+          ]
+      ]
+  )
+
 let component () =
   let open Bonsai.Let_syntax in
   let%sub education = education_section in
   let%sub experience = experience_section in
   let%sub skills = skills_section in
+  let%sub activities = activities_section in
   let%arr education = education
   and experience = experience
-  and skills = skills in
+  and skills = skills
+  and activities = activities in
   Vdom.Node.div
     ~attrs:[ Styles.container ]
     [ Vdom.Node.h1
@@ -265,4 +292,5 @@ let component () =
     ; education
     ; experience
     ; skills
+    ; activities
     ]
