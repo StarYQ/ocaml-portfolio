@@ -266,4 +266,42 @@ module Styles = [%css stylesheet {|
     backdrop-filter: blur(15px);
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   }
+  
+  /* Theme toggle button styles */
+  .theme-toggle {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    padding: 0.5rem 1rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin-left: 1rem;
+  }
+  
+  .theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .theme-toggle:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
+  }
+  
+  .theme-icon {
+    font-size: 1.2rem;
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  .theme-toggle:hover .theme-icon {
+    transform: rotate(20deg);
+  }
 |}]

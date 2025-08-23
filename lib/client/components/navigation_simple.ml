@@ -6,7 +6,6 @@ open Shared.Types
 
 (* Import navigation styles *)
 module Styles = Navigation_styles.Styles
-module Theme_styles = Styles.Theme_styles.Styles
 
 let component =
   let%sub menu_open, set_menu_open = Bonsai.state (module Bool) ~default_model:false in
@@ -114,7 +113,7 @@ let component =
                   (* Theme Toggle Button *)
                   Vdom.Node.button
                     ~attrs:[
-                      Theme_styles.theme_toggle;
+                      Styles.theme_toggle;
                       Vdom.Attr.on_click (fun _ ->
                         let new_theme = Theme.toggle theme in
                         Theme.store_theme new_theme;
@@ -130,7 +129,7 @@ let component =
                     ]
                     [
                       Vdom.Node.span
-                        ~attrs:[Theme_styles.theme_icon]
+                        ~attrs:[Styles.theme_icon]
                         [Vdom.Node.text 
                           (match theme with
                            | Theme.Light -> "🌙"
