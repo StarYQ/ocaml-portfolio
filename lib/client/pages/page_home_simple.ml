@@ -226,7 +226,7 @@ let hero_section =
         ~attrs:[ Styles.hero_content ]
         [ Vdom.Node.h1
             ~attrs:[ Styles.hero_title ]
-            [ Vdom.Node.text "Software Engineer" ]
+            [ Vdom.Node.text "Hi, I'm Arnab!" ]
         ; Vdom.Node.p
             ~attrs:[ Styles.hero_subtitle ]
             [ Vdom.Node.text
