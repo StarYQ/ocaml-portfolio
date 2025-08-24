@@ -34,7 +34,7 @@ jobs:
         run: opam install . --deps-only -y
 
       - name: Build (production)
-        run: make build-prod
+        run: opam exec -- make build-prod
 
       # -- Assemble exactly what index.html expects --
       - name: Assemble Pages artifact
