@@ -39,18 +39,31 @@ jobs:
       # -- Assemble exactly what index.html expects --
       - name: Assemble Pages artifact
         run: |
+          echo "=== Creating artifact structure ==="
           mkdir -p _site/_build/default/lib/client_main
-          cp static/index.html _site/index.html
-          # Copy all static files (including resume.pdf)
           mkdir -p _site/static
-          cp -r static/* _site/static/
-          # find the built JS (adjust if your path changes)
+          
+          echo "=== Copying index.html ==="
+          cp static/index.html _site/index.html
+          
+          echo "=== Copying resume.pdf explicitly ==="
+          cp static/resume.pdf _site/static/resume.pdf
+          
+          echo "=== Finding and copying JS bundle ==="
           JS_PATH=$(find _build -type f -path '*/lib/client_main/main.bc.js' | head -n1)
           if [ -z "$JS_PATH" ]; then
             echo "ERROR: main.bc.js not found. Check your dune/js_of_ocaml output path."
             exit 1
           fi
+          echo "Found JS at: $JS_PATH"
           cp "$JS_PATH" _site/_build/default/lib/client_main/main.bc.js
+          
+          echo "=== Final artifact structure ==="
+          find _site -type f -ls
+          echo "=== Verifying critical files ==="
+          test -f _site/index.html && echo "✓ index.html present" || echo "✗ index.html MISSING"
+          test -f _site/static/resume.pdf && echo "✓ resume.pdf present" || echo "✗ resume.pdf MISSING"
+          test -f _site/_build/default/lib/client_main/main.bc.js && echo "✓ main.bc.js present" || echo "✗ main.bc.js MISSING"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
