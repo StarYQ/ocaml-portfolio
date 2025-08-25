@@ -283,7 +283,7 @@ let component ?(theme = Bonsai.Value.return Light) () =
         [
           Vdom.Node.h1
             ~attrs:[Styles.gallery_title]
-            [Vdom.Node.text "Portfolio Projects"];
+            [Vdom.Node.text "Projects"];
           Vdom.Node.p
             ~attrs:[Styles.gallery_subtitle]
             [Vdom.Node.text ""]

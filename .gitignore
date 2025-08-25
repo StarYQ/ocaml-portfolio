@@ -6,6 +6,7 @@ tmp/
 _build
 
 # claude
+.claude/
 CLAUDE.md
 
 # docs
