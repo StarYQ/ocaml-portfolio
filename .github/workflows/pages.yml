@@ -20,6 +20,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Cache opam
+        uses: actions/cache@v4
+        id: opam-cache
+        with:
+          path: ~/.opam
+          key: ${{ runner.os }}-opam-${{ hashFiles('**/*.opam') }}
+          restore-keys: |
+            ${{ runner.os }}-opam-
+
+      - name: Cache dune build
+        uses: actions/cache@v4
+        with:
+          path: _build
+          key: ${{ runner.os }}-dune-${{ hashFiles('**/*.opam', '**/dune', '**/dune-project') }}
+          restore-keys: |
+            ${{ runner.os }}-dune-
+
       - name: Set up OCaml
         uses: ocaml/setup-ocaml@v3
         with:
@@ -31,6 +48,7 @@ jobs:
           sudo apt-get install -y m4 pkg-config libgmp-dev
 
       - name: Install opam deps
+        if: steps.opam-cache.outputs.cache-hit != 'true'
         run: opam install . --deps-only -y
 
       - name: Build (production)
