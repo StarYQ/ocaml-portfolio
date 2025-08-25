@@ -149,7 +149,7 @@ let render_download_button =
   Vdom.Node.a
     ~attrs:[
       Styles.download_button;
-      Vdom.Attr.create "href" "/static/resume.pdf";
+      Vdom.Attr.create "href" "/ocaml-portfolio/static/resume.pdf";
       Vdom.Attr.create "download" "Arnab_Bhowmik_Resume.pdf";
       Vdom.Attr.create "aria-label" "Download Resume PDF"
     ]
@@ -177,7 +177,7 @@ let render_pdf_viewer theme =
         ~attrs:[
           Styles.pdf_viewer;
           border_style;
-          Vdom.Attr.create "src" "/static/resume.pdf";
+          Vdom.Attr.create "src" "/ocaml-portfolio/static/resume.pdf";
           Vdom.Attr.create "title" "Resume PDF Viewer";
           Vdom.Attr.create "loading" "lazy";
           (* Allow fullscreen for better viewing *)
