@@ -235,7 +235,7 @@ let contact_form_component theme =
                 ~attrs:[ 
                   Styles.contact_method; 
                   contact_method_style;
-                  Vdom.Attr.href "https://github.com/username";
+                  Vdom.Attr.href "https://github.com/StarYQ";
                   Vdom.Attr.target "_blank"
                 ]
                 [ Vdom.Node.text "GitHub" ]
@@ -243,7 +243,7 @@ let contact_form_component theme =
                 ~attrs:[ 
                   Styles.contact_method; 
                   contact_method_style;
-                  Vdom.Attr.href "https://linkedin.com/in/username";
+                  Vdom.Attr.href "https://www.linkedin.com/in/arnab-bhowmik-12422426b/";
                   Vdom.Attr.target "_blank"
                 ]
                 [ Vdom.Node.text "LinkedIn" ]
@@ -251,7 +251,7 @@ let contact_form_component theme =
                 ~attrs:[ 
                   Styles.contact_method; 
                   contact_method_style;
-                  Vdom.Attr.href "mailto:email@example.com"
+                  Vdom.Attr.href "mailto:arnab.bhowmik@stonybrook.edu"
                 ]
                 [ Vdom.Node.text "Email" ]
             ]
