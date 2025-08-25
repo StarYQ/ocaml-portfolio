@@ -7,7 +7,7 @@
    page_home_simple
    page_projects_simple
    project_styles
-   page_words_simple
+   page_resume
    page_contact_simple)
  (libraries 
    shared

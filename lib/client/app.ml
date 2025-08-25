@@ -86,7 +86,7 @@ let app_computation =
                 Components.Nav_link.create' ~route:Home ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "Home"];
                 Components.Nav_link.create' ~route:About ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "About"];
                 Components.Nav_link.create' ~route:Projects ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "Projects"];
-                Components.Nav_link.create' ~route:Words ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "Words"];
+                Components.Nav_link.create' ~route:Resume ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "Resume"];
                 Components.Nav_link.create' ~route:Contact ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "Contact"];
                 toggle_button
               ]
@@ -100,7 +100,7 @@ let app_computation =
     | Home -> Pages.Page_home.component ~theme ()
     | About -> Pages.Page_about.component ~theme ()
     | Projects -> Pages.Page_projects.component ~theme ()
-    | Words -> Pages.Page_words.component ()
+    | Resume -> Pages.Page_resume.component ~theme ()
     | Contact -> Pages.Page_contact.component ~theme ()
   in
   

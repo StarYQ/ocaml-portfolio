@@ -43,7 +43,7 @@ type route =
   | Home
   | About
   | Projects
-  | Words
+  | Resume
   | Contact
 [@@deriving sexp, equal, typed_variants]
 
@@ -52,7 +52,7 @@ let route_to_string = function
   | Home -> "/"
   | About -> "/about"
   | Projects -> "/projects"
-  | Words -> "/words"
+  | Resume -> "/resume"
   | Contact -> "/contact"
 
 (** Parse route from URL path *)
@@ -60,7 +60,7 @@ let route_of_string = function
   | "/" -> Some Home
   | "/about" -> Some About
   | "/projects" -> Some Projects
-  | "/words" -> Some Words
+  | "/resume" -> Some Resume
   | "/contact" -> Some Contact
   | _ -> None
 
@@ -69,5 +69,5 @@ let route_to_title = function
   | Home -> "Home"
   | About -> "About"
   | Projects -> "Projects"
-  | Words -> "Words"
+  | Resume -> "Resume"
   | Contact -> "Contact"

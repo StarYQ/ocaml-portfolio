@@ -105,7 +105,7 @@ let component =
                   nav_item Home "Home";
                   nav_item About "About";
                   nav_item Projects "Projects";
-                  nav_item Words "Words";
+                  nav_item Resume "Resume";
                   nav_item Contact "Contact";
                   
                   (* Theme Toggle Button - This doesn't work properly yet *)
@@ -142,7 +142,7 @@ let component =
               mobile_nav_item Home "Home";
               mobile_nav_item About "About";
               mobile_nav_item Projects "Projects";
-              mobile_nav_item Words "Words";
+              mobile_nav_item Resume "Resume";
               mobile_nav_item Contact "Contact";
             ]
         ]
@@ -179,7 +179,7 @@ let render ~current_route =
               nav_item Home "Home";
               nav_item About "About";
               nav_item Projects "Projects";
-              nav_item Words "Words";
+              nav_item Resume "Resume";
               nav_item Contact "Contact";
             ]
         ]
