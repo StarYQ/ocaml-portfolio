@@ -7,6 +7,5 @@
    (flags 
     (:standard 
      --opt=3 
-     --no-source-map 
      --no-inline
      --disable=debugger)))))
