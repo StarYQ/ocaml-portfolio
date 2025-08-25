@@ -40,7 +40,7 @@ jobs:
       - name: Assemble Pages artifact
         run: |
           mkdir -p _site/_build/default/lib/client_main
-          cp index.html _site/index.html
+          cp static/index.html _site/index.html
           # find the built JS (adjust if your path changes)
           JS_PATH=$(find _build -type f -path '*/lib/client_main/main.bc.js' | head -n1)
           if [ -z "$JS_PATH" ]; then
