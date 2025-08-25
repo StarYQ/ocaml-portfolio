@@ -48,7 +48,6 @@ jobs:
           sudo apt-get install -y m4 pkg-config libgmp-dev
 
       - name: Install opam deps
-        if: steps.opam-cache.outputs.cache-hit != 'true'
         run: opam install . --deps-only -y
 
       - name: Build (production)
