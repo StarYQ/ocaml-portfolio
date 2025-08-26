@@ -8,7 +8,7 @@ let get_base_path () =
   let hostname = 
     Js.to_string (Js.Unsafe.get Dom_html.window##.location (Js.string "hostname"))
   in
-  if String.equal hostname "StarYQ.github.io" then
+  if String.equal hostname "staryq.github.io" then
     "/ocaml-portfolio"
   else
     ""
