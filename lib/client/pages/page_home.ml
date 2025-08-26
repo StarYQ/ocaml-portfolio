@@ -107,6 +107,36 @@ module Styles = [%css
         color: #667eea;
       }
       
+      .contact_links {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        margin-top: 2rem;
+        animation: fadeIn 1s ease-out 0.8s both;
+      }
+      
+      .contact_link {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.5rem;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+      
+      .contact_link:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-3px) scale(1.1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      }
+      
       .section {
         padding: 5rem 2rem;
         max-width: 1200px;
@@ -242,10 +272,32 @@ let hero_section theme =
                 ~route:Projects
                 ~attrs:[ Styles.cta_button ]
                 [ Vdom.Node.text "View Projects" ]
-            ; Nav_link.create'
-                ~route:Contact
-                ~attrs:[ Styles.cta_button; Styles.cta_secondary ]
-                [ Vdom.Node.text "Get in Touch" ]
+            ]
+        ; Vdom.Node.div
+            ~attrs:[ Styles.contact_links ]
+            [ Vdom.Node.a
+                ~attrs:[
+                  Styles.contact_link;
+                  Vdom.Attr.href "https://github.com/StarYQ";
+                  Vdom.Attr.target "_blank";
+                  Vdom.Attr.create "aria-label" "GitHub Profile"
+                ]
+                [ Vdom.Node.text "⚡" ]  (* Using code icon for GitHub *)
+            ; Vdom.Node.a
+                ~attrs:[
+                  Styles.contact_link;
+                  Vdom.Attr.href "https://www.linkedin.com/in/arnab-bhowmik-12422426b/";
+                  Vdom.Attr.target "_blank";
+                  Vdom.Attr.create "aria-label" "LinkedIn Profile"
+                ]
+                [ Vdom.Node.text "💼" ]  (* Using briefcase icon for LinkedIn *)
+            ; Vdom.Node.a
+                ~attrs:[
+                  Styles.contact_link;
+                  Vdom.Attr.href "mailto:arnab.bhowmik@stonybrook.edu";
+                  Vdom.Attr.create "aria-label" "Send Email"
+                ]
+                [ Vdom.Node.text "✉️" ]  (* Using envelope icon for Email *)
             ]
         ]
     ]

@@ -44,7 +44,6 @@ type route =
   | About
   | Projects
   | Resume
-  | Contact
 [@@deriving sexp, equal, typed_variants]
 
 (** Convert route to string for URLs *)
@@ -53,7 +52,6 @@ let route_to_string = function
   | About -> "/about"
   | Projects -> "/projects"
   | Resume -> "/resume"
-  | Contact -> "/contact"
 
 (** Parse route from URL path *)
 let route_of_string = function
@@ -61,7 +59,6 @@ let route_of_string = function
   | "/about" -> Some About
   | "/projects" -> Some Projects
   | "/resume" -> Some Resume
-  | "/contact" -> Some Contact
   | _ -> None
 
 (** Get page title for route *)
@@ -70,4 +67,3 @@ let route_to_title = function
   | About -> "About"
   | Projects -> "Projects"
   | Resume -> "Resume"
-  | Contact -> "Contact"

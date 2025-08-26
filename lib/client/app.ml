@@ -87,7 +87,6 @@ let app_computation =
                 Components.Nav_link.create' ~route:About ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "About"];
                 Components.Nav_link.create' ~route:Projects ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "Projects"];
                 Components.Nav_link.create' ~route:Resume ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "Resume"];
-                Components.Nav_link.create' ~route:Contact ~attrs:[Nav_styles.nav_link] [Vdom.Node.text "Contact"];
                 toggle_button
               ]
           ]
@@ -101,7 +100,6 @@ let app_computation =
     | About -> Pages.Page_about.component ~theme ()
     | Projects -> Pages.Page_projects.component ~theme ()
     | Resume -> Pages.Page_resume.component ~theme ()
-    | Contact -> Pages.Page_contact.component ~theme ()
   in
   
   let%arr content = content 
