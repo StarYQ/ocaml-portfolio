@@ -142,7 +142,7 @@ let render_header theme =
         [Vdom.Node.text "Resume"];
       Vdom.Node.p
         ~attrs:[Styles.resume_subtitle; subtitle_style]
-        [Vdom.Node.text "Download my resume or view it below"]
+        [Vdom.Node.text "Download my resume or view it below."]
     ]
 
 let render_download_button =
