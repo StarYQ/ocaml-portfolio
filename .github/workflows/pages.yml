@@ -46,6 +46,9 @@ jobs:
           echo "=== Copying index.html ==="
           cp static/index.html _site/index.html
           
+          echo "=== Copying 404.html for GitHub Pages fallback ==="
+          cp static/404.html _site/404.html
+          
           echo "=== Copying resume.pdf explicitly ==="
           cp static/resume.pdf _site/static/resume.pdf
           
@@ -62,6 +65,7 @@ jobs:
           find _site -type f -ls
           echo "=== Verifying critical files ==="
           test -f _site/index.html && echo "✓ index.html present" || echo "✗ index.html MISSING"
+          test -f _site/404.html && echo "✓ 404.html present" || echo "✗ 404.html MISSING"
           test -f _site/static/resume.pdf && echo "✓ resume.pdf present" || echo "✗ resume.pdf MISSING"
           test -f _site/_build/default/lib/client_main/main.bc.js && echo "✓ main.bc.js present" || echo "✗ main.bc.js MISSING"
 
