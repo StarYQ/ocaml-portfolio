@@ -4,6 +4,17 @@ open Bonsai.Let_syntax
 open Virtual_dom
 open Theme
 
+(* Helper to get the correct base path for the current environment *)
+let get_base_path () =
+  let open Js_of_ocaml in
+  let hostname = 
+    Js.to_string (Js.Unsafe.get Dom_html.window##.location (Js.string "hostname"))
+  in
+  if String.equal hostname "StarYQ.github.io" then
+    "/ocaml-portfolio"
+  else
+    ""
+
 (* Import styles using ppx_css *)
 module Styles = [%css
   stylesheet
@@ -149,7 +160,7 @@ let render_download_button =
   Vdom.Node.a
     ~attrs:[
       Styles.download_button;
-      Vdom.Attr.create "href" "/ocaml-portfolio/static/resume.pdf";
+      Vdom.Attr.create "href" (get_base_path () ^ "/static/resume.pdf");
       Vdom.Attr.create "download" "Arnab_Bhowmik_Resume.pdf";
       Vdom.Attr.create "aria-label" "Download Resume PDF"
     ]
@@ -177,7 +188,7 @@ let render_pdf_viewer theme =
         ~attrs:[
           Styles.pdf_viewer;
           border_style;
-          Vdom.Attr.create "src" "/ocaml-portfolio/static/resume.pdf";
+          Vdom.Attr.create "src" (get_base_path () ^ "/static/resume.pdf");
           Vdom.Attr.create "title" "Resume PDF Viewer";
           Vdom.Attr.create "loading" "lazy";
           (* Allow fullscreen for better viewing *)
