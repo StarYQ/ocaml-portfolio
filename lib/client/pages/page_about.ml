@@ -309,6 +309,25 @@ let education_section theme =
           ]
       ]
 
+(* SVG location icon helper *)
+let location_icon () =
+  let open Vdom in
+  let open Vdom.Attr in
+  Node.create_svg "svg"
+    ~attrs:[
+      create "viewBox" "0 0 24 24";
+      create "width" "14";
+      create "height" "14";
+      create "fill" "currentColor";
+      create "style" "margin-right: 6px; opacity: 0.7; vertical-align: text-bottom;";
+    ]
+    [ Node.create_svg "path"
+        ~attrs:[
+          create "d" "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+        ]
+        []
+    ]
+
 let experience_section theme =
   let section_style = 
     match theme with
@@ -454,7 +473,7 @@ let experience_section theme =
                      ; (* Organization *)
                        Vdom.Node.div
                          ~attrs:[ Styles.timeline_org; org_style ]
-                         [ Vdom.Node.text org ]
+                         [ location_icon (); Vdom.Node.text org ]
                      ; (* Bullets *)
                        Vdom.Node.ul
                          ~attrs:[ Styles.timeline_bullets ]

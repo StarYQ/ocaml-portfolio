@@ -33,7 +33,7 @@ let filter_to_string = function
 (** Blog post data type for articles/words section *)
 type blog_post = {
   title : string;
-  date : string; (* ISO date string *)
+  date : string; 
   excerpt : string;
   url : string;
 }
