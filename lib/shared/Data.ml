@@ -23,7 +23,7 @@ let portfolio_projects = [
     tags = ["web"; "fullstack"; "ai"; "accessibility"];
     tech_stack = ["Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API"];
     github_url = None;
-    demo_url = Some "https://seawolf-accessibility.example.com";
+    demo_url = Some "https://seawolf-accessibility.up.railway.app/";
     current = true;
   };
   

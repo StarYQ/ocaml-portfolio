@@ -192,9 +192,36 @@ module Styles = [%css
         /* Color will be set inline based on theme */
       }
       
+      .feature_subtitle {
+        /* Color will be set inline based on theme */
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+      
       .feature_description {
         /* Color will be set inline based on theme */
         line-height: 1.6;
+      }
+      
+      .feature_bullets {
+        margin-top: 1rem;
+        padding-left: 0;
+        list-style: none;
+      }
+      
+      .feature_bullet {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+      }
+      
+      .feature_bullet:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #667eea;
+        font-weight: bold;
       }
       
       .tech_stack {
@@ -378,13 +405,23 @@ let features_section theme =
   let features =
     [ ( "Education"
       , "Stony Brook University"
-      , "BS Computer Science (Honors) • GPA: 3.79 • Aug 2023 - May 2027" )
+      , [ "BS Computer Science (Honors)"
+        ; "GPA: 3.79"
+        ; "Aug 2023 - May 2027"
+        ]
+      )
     ; ( "Current Roles"
       , "Teaching Assistant & Researcher"
-      , "TA for Programming Abstractions (CSE 216) & Software Development (CSE 316) • Undergraduate Researcher in OCaml/ML" )
+      , [ "TA for Software Development (CSE 316)"
+        ; "Student Software Developer for Healthbyte, under the VIP BEAR team"
+        ]
+      )
     ; ( "Experience"
-      , "Software Development"
-      , "Building full-stack applications with modern frameworks and technologies" )
+      , "Professional Background"
+      , [ "Prev Compute Platform Engineering Intern @ GlaxoSmithKline"
+        ; "Prev Full Stack Developer @ QuattronKids"
+        ]
+      )
     ]
   in
     Vdom.Node.section
@@ -399,16 +436,22 @@ let features_section theme =
         ]
     ; Vdom.Node.div
         ~attrs:[ Styles.features_grid ]
-        (List.map features ~f:(fun (title, subtitle, description) ->
+        (List.map features ~f:(fun (title, subtitle, bullets) ->
            Vdom.Node.div
              ~attrs:[ Styles.feature_card; card_style ]
-             [ Vdom.Node.h3 ~attrs:[ Styles.feature_title; title_style ] [ Vdom.Node.text title ]
+             [ Vdom.Node.h3 
+                 ~attrs:[ Styles.feature_title; title_style ] 
+                 [ Vdom.Node.text title ]
              ; Vdom.Node.p
-                 ~attrs:[ Styles.feature_description; text_style; Vdom.Attr.create "style" "font-weight: bold;" ]
+                 ~attrs:[ Styles.feature_subtitle; text_style ]
                  [ Vdom.Node.text subtitle ]
-             ; Vdom.Node.p
-                 ~attrs:[ Styles.feature_description; text_style ]
-                 [ Vdom.Node.text description ]
+             ; Vdom.Node.ul
+                 ~attrs:[ Styles.feature_bullets; text_style ]
+                 (List.map bullets ~f:(fun bullet ->
+                   Vdom.Node.li
+                     ~attrs:[ Styles.feature_bullet ]
+                     [ Vdom.Node.text bullet ]
+                 ))
              ]))
     ]
 
