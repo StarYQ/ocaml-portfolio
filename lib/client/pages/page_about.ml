@@ -103,6 +103,101 @@ module Styles = [%css
         line-height: 1.6;
       }
       
+      .timeline_container {
+        position: relative;
+        padding: 2rem 0;
+      }
+
+      .timeline_line {
+        position: absolute;
+        left: 30px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        /* Background will be set inline based on theme */
+      }
+
+      .timeline_item {
+        position: relative;
+        padding-left: 70px;
+        margin-bottom: 3rem;
+      }
+
+      .timeline_dot {
+        position: absolute;
+        left: 20px;
+        top: 8px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        /* Background will be set inline based on theme */
+        border: 3px solid;
+        /* Border color will be set inline based on theme */
+        z-index: 1;
+      }
+
+      .timeline_date_badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        /* Background and color will be set inline based on theme */
+      }
+
+      .timeline_content {
+        /* Background will be set inline based on theme */
+        border-radius: 12px;
+        padding: 1.5rem;
+        /* Box shadow will be set inline */
+        transition: all 0.3s ease;
+        position: relative;
+      }
+
+      .timeline_content:hover {
+        transform: translateX(5px);
+        /* Enhanced shadow will be set on hover */
+      }
+
+      .timeline_title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 0.3rem;
+        /* Color will be set inline based on theme */
+      }
+
+      .timeline_org {
+        font-size: 1rem;
+        margin-bottom: 0.8rem;
+        /* Color will be set inline based on theme */
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .timeline_bullets {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 1rem;
+      }
+
+      .timeline_bullet {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.5rem;
+        line-height: 1.6;
+        /* Color will be set inline based on theme */
+      }
+
+      .timeline_bullet:before {
+        content: "▸";
+        position: absolute;
+        left: 0;
+        color: #667eea;
+        font-weight: bold;
+      }
+      
       .skills_grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -136,6 +231,20 @@ module Styles = [%css
       @media (max-width: 768px) {
         .page_title {
           font-size: 2rem;
+        }
+        
+        .timeline_line {
+          left: 15px;
+        }
+        
+        .timeline_item {
+          padding-left: 45px;
+        }
+        
+        .timeline_dot {
+          left: 5px;
+          width: 16px;
+          height: 16px;
         }
         
         .skills_grid {
@@ -219,28 +328,58 @@ let experience_section theme =
         Vdom.Attr.create "style"
           "color: #f7fafc; border-bottom: 2px solid #4a5568;"
   in
-  let role_item_style = 
+  let timeline_line_style = 
     match theme with
     | Light -> 
-        Vdom.Attr.create "style" "border-left: 3px solid #667eea;"
+        Vdom.Attr.create "style"
+          "background: linear-gradient(180deg, #667eea 0%, #9f7aea 100%);"
     | Dark -> 
-        Vdom.Attr.create "style" "border-left: 3px solid #9f7aea;"
+        Vdom.Attr.create "style"
+          "background: linear-gradient(180deg, #9f7aea 0%, #667eea 100%);"
   in
-  let role_title_style = 
+  let timeline_dot_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #ffffff; border-color: #667eea;"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #1a202c; border-color: #9f7aea;"
+  in
+  let date_badge_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #667eea; color: #ffffff;"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #9f7aea; color: #ffffff;"
+  in
+  let content_style = 
+    match theme with
+    | Light -> 
+        Vdom.Attr.create "style"
+          "background-color: #f7fafc; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);"
+    | Dark -> 
+        Vdom.Attr.create "style"
+          "background-color: #1a202c; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);"
+  in
+  let timeline_title_style = 
     match theme with
     | Light -> Vdom.Attr.create "style" "color: #2d3748;"
     | Dark -> Vdom.Attr.create "style" "color: #f7fafc;"
   in
-  let text_style = 
+  let org_style = 
     match theme with
     | Light -> Vdom.Attr.create "style" "color: #4a5568;"
     | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
   in
-  let date_style = 
+  let bullet_style = 
     match theme with
-    | Light -> Vdom.Attr.create "style" "color: #718096;"
-    | Dark -> Vdom.Attr.create "style" "color: #a0aec0;"
+    | Light -> Vdom.Attr.create "style" "color: #4a5568;"
+    | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
   in
+  
   let roles = [
     ( "Compute Platform Engineering Intern"
     , "GlaxoSmithKline plc - Seattle, WA"
@@ -259,7 +398,7 @@ let experience_section theme =
       ]
     );
     ( "Student Software Developer"
-    , "Stony Brook University Vertically Integrated Projects (VIP) Program - Stony Brook, NY"
+    , "Stony Brook University VIP Program - Stony Brook, NY"
     , "September 2024 - Present"
     , [ "Develop a mobile app to help SBU clinicians monitor patients' post-surgery recovery progress by combining Apple Health data and custom forms to analyze their health via the HealthKit and ResearchKit frameworks."
       ; "Lead the HealthByte subteam, creating resources for onboarding new team members, delegating tasks, and organizing meetings."
@@ -280,32 +419,53 @@ let experience_section theme =
     , [ "Tutored & graded homework for programming (Python and Java), honors chemistry, & English & math classes for multiple grades; supervised & helped guide class for programming classes; revised material for multiple classes." ]
     );
   ] in
+  
   Vdom.Node.div
-      ~attrs:[ Styles.section; section_style ]
-      [ Vdom.Node.h2
-          ~attrs:[ Styles.section_title; title_style ]
-          [ Vdom.Node.text "Experience" ]
-      ; Vdom.Node.div
-          (List.map roles ~f:(fun (title, org, date, bullets) ->
-             Vdom.Node.div
-               ~attrs:[ Styles.role_item; role_item_style ]
-               [ Vdom.Node.div
-                   ~attrs:[ Styles.role_title; role_title_style ]
-                   [ Vdom.Node.text title ]
-               ; Vdom.Node.div
-                   ~attrs:[ Styles.role_organization; text_style ]
-                   [ Vdom.Node.text org ]
-               ; Vdom.Node.div
-                   ~attrs:[ Styles.role_date; date_style ]
-                   [ Vdom.Node.text date ]
-               ; Vdom.Node.ul
-                   ~attrs:[ Styles.role_bullets ]
-                   (List.map bullets ~f:(fun bullet ->
-                      Vdom.Node.li
-                        ~attrs:[ Styles.role_bullet; text_style ]
-                        [ Vdom.Node.text bullet ]))
-               ]))
-      ]
+    ~attrs:[ Styles.section; section_style ]
+    [ Vdom.Node.h2
+        ~attrs:[ Styles.section_title; title_style ]
+        [ Vdom.Node.text "Experience" ]
+    ; Vdom.Node.div
+        ~attrs:[ Styles.timeline_container ]
+        [ (* Timeline vertical line *)
+          Vdom.Node.div
+            ~attrs:[ Styles.timeline_line; timeline_line_style ]
+            []
+        ; (* Timeline items *)
+          Vdom.Node.div
+            (List.map roles ~f:(fun (title, org, date, bullets) ->
+               Vdom.Node.div
+                 ~attrs:[ Styles.timeline_item ]
+                 [ (* Timeline dot *)
+                   Vdom.Node.div
+                     ~attrs:[ Styles.timeline_dot; timeline_dot_style ]
+                     []
+                 ; (* Content *)
+                   Vdom.Node.div
+                     ~attrs:[ Styles.timeline_content; content_style ]
+                     [ (* Date badge *)
+                       Vdom.Node.div
+                         ~attrs:[ Styles.timeline_date_badge; date_badge_style ]
+                         [ Vdom.Node.text date ]
+                     ; (* Title *)
+                       Vdom.Node.div
+                         ~attrs:[ Styles.timeline_title; timeline_title_style ]
+                         [ Vdom.Node.text title ]
+                     ; (* Organization *)
+                       Vdom.Node.div
+                         ~attrs:[ Styles.timeline_org; org_style ]
+                         [ Vdom.Node.text ("📍 " ^ org) ]
+                     ; (* Bullets *)
+                       Vdom.Node.ul
+                         ~attrs:[ Styles.timeline_bullets ]
+                         (List.map bullets ~f:(fun bullet ->
+                            Vdom.Node.li
+                              ~attrs:[ Styles.timeline_bullet; bullet_style ]
+                              [ Vdom.Node.text bullet ]))
+                     ]
+                 ]))
+        ]
+    ]
 
 let skills_section theme =
   let section_style = 
