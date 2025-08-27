@@ -8,7 +8,7 @@ let portfolio_projects = [
     title = "TA Tools";
     description = "Full-stack web application to automate teaching assistant logistics tasks";
     long_description = "Developed a full-stack web application to automate logistics tasks for teaching assistants at a previous workplace, improving task efficiency by approximately 200% for those who used it. Built the backend with Python and Flask for seamless web integration, using Jinja and JavaScript for the frontend and SQLite for database management.";
-    tags = ["web"; "backend"; "tool"; "fullstack"];
+    tags = ["web"; "backend"; "fullstack"];
     tech_stack = ["Python"; "Flask"; "Beautiful Soup"; "Selenium WebDriver"; "SQLite"; "JavaScript"];
     github_url = None;
     demo_url = None;
@@ -20,7 +20,7 @@ let portfolio_projects = [
     title = "Seawolf Accessibility";
     description = "Interactive campus navigation web app for accessible route recommendations";
     long_description = "Developing an interactive campus navigation web app to recommend and visualize optimal accessible routes in real time. Built a custom OpenStreetMap parser in C to extract and preprocess map data to use in Dijkstra's algorithm. Mapped building entrances/exits to support indoor traversal, yielding more inclusive routing. Enhanced the route cost function using scikit-learn and NumPy to perform linear regression on aggregated cost data based on stair penalties and slope gradients computed using Google Maps Elevation API data. Using the K-nearest neighbors (KNN) algorithm to recommend alternative routes with similar accessibility characteristics.";
-    tags = ["web"; "fullstack"; "ai"; "accessibility"];
+    tags = ["web"; "fullstack"; "ai";];
     tech_stack = ["Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API"];
     github_url = None;
     demo_url = Some "https://seawolf-accessibility.up.railway.app/";
@@ -44,7 +44,7 @@ let portfolio_projects = [
     title = "NutriProof";
     description = "Chrome extension for health and nutrition claim verification using AI";
     long_description = "Built a Chrome extension that uses a GPT model fine-tuned on self-curated labeled data to analyze user-selected text about health and nutrition, automatically querying Wolfram Alpha's Full Results API for factual validation. Parsed claims, generated optimized Wolfram queries, and re-integrated verified results into GPT for more accurate verdicts. Implemented interactive charts with Chart.js and color-coded verdicts for quick, intuitive accuracy assessments.";
-    tags = ["tool"; "ai"; "web"];
+    tags = ["ai"; "web"];
     tech_stack = ["Python"; "Flask"; "JavaScript"; "OpenAI API"; "Wolfram Alpha API"];
     github_url = None;
     demo_url = Some "https://devpost.com/software/nutriproof";
@@ -66,7 +66,7 @@ let filter_projects_by_tag projects tag =
   | Mobile -> List.filter projects ~f:(fun p -> List.mem p.tags "mobile" ~equal:String.equal)
   | CLI -> List.filter projects ~f:(fun p -> List.mem p.tags "cli" ~equal:String.equal)
   | Backend -> List.filter projects ~f:(fun p -> List.mem p.tags "backend" ~equal:String.equal)
-  | Tool -> List.filter projects ~f:(fun p -> List.mem p.tags "tool" ~equal:String.equal)
+  | AI -> List.filter projects ~f:(fun p -> List.mem p.tags "ai" ~equal:String.equal)
 
 (** Search projects by title or description *)
 let search_projects (projects : project list) query =

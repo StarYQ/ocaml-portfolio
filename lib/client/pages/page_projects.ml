@@ -78,6 +78,36 @@ let external_icon =
         ] []
     ]
 
+(* Helper to create empty state search icon SVG *)
+let empty_search_icon =
+  Vdom.Node.create_svg "svg"
+    ~attrs:[
+      Vdom.Attr.create "width" "48";
+      Vdom.Attr.create "height" "48";
+      Vdom.Attr.create "viewBox" "0 0 24 24";
+      Vdom.Attr.create "fill" "none";
+      Vdom.Attr.create "stroke" "currentColor";
+      Vdom.Attr.create "stroke-width" "1.5";
+      Vdom.Attr.create "stroke-linecap" "round";
+      Vdom.Attr.create "stroke-linejoin" "round";
+      Vdom.Attr.create "opacity" "0.5";
+    ]
+    [
+      Vdom.Node.create_svg "circle"
+        ~attrs:[
+          Vdom.Attr.create "cx" "11";
+          Vdom.Attr.create "cy" "11";
+          Vdom.Attr.create "r" "8";
+        ] [];
+      Vdom.Node.create_svg "line"
+        ~attrs:[
+          Vdom.Attr.create "x1" "21";
+          Vdom.Attr.create "y1" "21";
+          Vdom.Attr.create "x2" "16.65";
+          Vdom.Attr.create "y2" "16.65";
+        ] [];
+    ]
+
 (* Individual accordion component for project details *)
 let project_accordion_component ~project ~theme:_ =
   let%sub accordion_state, set_accordion_state = 
@@ -317,11 +347,11 @@ let component ?(theme = Bonsai.Value.return Light) () =
                 ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"Web" ~filter:Types.Web 
                 ~current_filter ~set_filter ~theme:Light;
+              filter_button ~label:"AI" ~filter:Types.AI 
+                ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"Backend" ~filter:Types.Backend 
                 ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"CLI" ~filter:Types.CLI 
-                ~current_filter ~set_filter ~theme:Light;
-              filter_button ~label:"Tools" ~filter:Types.Tool 
                 ~current_filter ~set_filter ~theme:Light;
             ]
         ];
@@ -342,7 +372,7 @@ let component ?(theme = Bonsai.Value.return Light) () =
           [
             Vdom.Node.div
               ~attrs:[Styles.empty_icon]
-              [Vdom.Node.text "🔍"];
+              [empty_search_icon];
             Vdom.Node.div
               ~attrs:[Styles.empty_title]
               [Vdom.Node.text "No projects found"];

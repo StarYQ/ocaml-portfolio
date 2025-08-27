@@ -5,7 +5,7 @@ type project_filter =
   | Mobile 
   | CLI
   | Backend
-  | Tool
+  | AI
 [@@deriving sexp, equal, compare]
 
 (** Project data type for portfolio projects *)
@@ -28,7 +28,7 @@ let filter_to_string = function
   | Mobile -> "Mobile"
   | CLI -> "CLI"
   | Backend -> "Backend"
-  | Tool -> "Tool"
+  | AI -> "AI"
 
 (** Blog post data type for articles/words section *)
 type blog_post = {
