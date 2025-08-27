@@ -454,7 +454,7 @@ let experience_section theme =
                      ; (* Organization *)
                        Vdom.Node.div
                          ~attrs:[ Styles.timeline_org; org_style ]
-                         [ Vdom.Node.text ("📍 " ^ org) ]
+                         [ Vdom.Node.text org ]
                      ; (* Bullets *)
                        Vdom.Node.ul
                          ~attrs:[ Styles.timeline_bullets ]

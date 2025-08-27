@@ -27,7 +27,7 @@ let portfolio_projects = [
     current = true;
   };
   
-  {
+  (* {
     id = "real-estate-ai-assistant";
     title = "Real Estate Closing AI Assistant";
     description = "AI classification system for real estate deal-closing platform";
@@ -37,7 +37,7 @@ let portfolio_projects = [
     github_url = None;
     demo_url = None;
     current = true;
-  };
+  }; *)
   
   {
     id = "nutriproof";
