@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Router Test</title>
+</head>
+<body>
+    <h1>Router Test Page</h1>
+    <p>Test direct navigation to different routes:</p>
+    <ul>
+        <li><a href="/ocaml-portfolio/">Home</a></li>
+        <li><a href="/ocaml-portfolio/about">About</a></li>
+        <li><a href="/ocaml-portfolio/projects">Projects</a></li>
+        <li><a href="/ocaml-portfolio/resume">Resume</a></li>
+    </ul>
+    
+    <p>Current location:</p>
+    <pre id="location"></pre>
+    
+    <script>
+        // Show current location info
+        const loc = document.getElementById('location');
+        loc.textContent = `
+pathname: ${window.location.pathname}
+hostname: ${window.location.hostname}
+href: ${window.location.href}
+        `;
+        
+        // Simulate GitHub Pages environment
+        if (window.location.pathname.startsWith('/ocaml-portfolio')) {
+            console.log('Simulating GitHub Pages environment');
+        }
+    </script>
+</body>
+</html>

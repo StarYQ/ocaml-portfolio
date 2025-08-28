@@ -20,30 +20,32 @@ module Route_parser = struct
   (** Parse a route from URL components *)
   let parse_exn ({ path; _ } : Bonsai_web_ui_url_var.Components.t) : t =
     let base_path = get_base_path () in
-    (* Remove base path if present *)
+    (* Debug logging *)
+    let () = 
+      let open Js_of_ocaml in
+      Firebug.console##log (Js.string (Printf.sprintf "[Router Debug] Raw path: '%s', Base path: '%s'" path base_path))
+    in
     let clean_path = 
       if not (String.equal base_path "") && String.is_prefix path ~prefix:base_path then
         let without_base = String.drop_prefix path (String.length base_path) in
-        (* Ensure path starts with / after removing base *)
         if String.is_prefix without_base ~prefix:"/" then
           without_base
-        else if String.equal without_base "" then
-          "/"
         else
           "/" ^ without_base
       else
         path
     in
-    (* Ensure clean_path starts with / *)
-    let clean_path = 
-      if String.length clean_path > 0 && not (Char.equal (String.get clean_path 0) '/') then
-        "/" ^ clean_path
-      else if String.length clean_path = 0 then
-        "/"
-      else
-        clean_path
+    let () = 
+      let open Js_of_ocaml in
+      Firebug.console##log (Js.string (Printf.sprintf "[Router Debug] Clean path: '%s'" clean_path))
     in
-    route_of_string clean_path |> Option.value ~default:Home
+    let result = route_of_string clean_path |> Option.value ~default:Home in
+    let () = 
+      let open Js_of_ocaml in
+      let route_name = route_to_title result in
+      Firebug.console##log (Js.string (Printf.sprintf "[Router Debug] Resolved to route: %s" route_name))
+    in
+    result
     
   (** Convert a route to URL components *)
   let unparse (route : t) : Bonsai_web_ui_url_var.Components.t =
@@ -53,7 +55,15 @@ module Route_parser = struct
 end
 
 (** Global Url_var instance for reactive routing *)
-let url_var = lazy (Bonsai_web_ui_url_var.create_exn (module Route_parser) ~fallback:Home)
+let url_var = lazy (
+  let var = Bonsai_web_ui_url_var.create_exn (module Route_parser) ~fallback:Home in
+  (* Force initial URL parsing on page load *)
+  let () = 
+    let open Js_of_ocaml in
+    Firebug.console##log (Js.string "[Router] Initializing URL var with current location")
+  in
+  var
+)
 
 (** Create the route state computation - reactive, no polling *)
 let create_route_state () =
