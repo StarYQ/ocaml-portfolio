@@ -560,7 +560,7 @@ let skills_section theme =
                ]))
       ]
 
-let activities_section theme =
+(* let activities_section theme =
   let section_style = 
     match theme with
     | Light -> 
@@ -621,7 +621,7 @@ let activities_section theme =
               ~attrs:[ Styles.role_description; text_style ]
               [ Vdom.Node.text "Investigating and developing foundational ML/NLP tools in OCaml to address ecosystem gaps in tokenization, text processing, and statistical text analysis." ]
           ]
-      ]
+      ] *)
 
 let component ?(theme = Bonsai.Value.return Light) () =
   let open Bonsai.Let_syntax in
@@ -639,5 +639,5 @@ let component ?(theme = Bonsai.Value.return Light) () =
     ; education_section theme
     ; experience_section theme
     ; skills_section theme
-    ; activities_section theme
+    (* ; activities_section theme *)
     ]

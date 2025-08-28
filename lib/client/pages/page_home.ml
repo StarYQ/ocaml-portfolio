@@ -405,7 +405,7 @@ let features_section theme =
   let features =
     [ ( "Education"
       , "Stony Brook University"
-      , [ "BS Computer Science (Honors)"
+      , [ "BS in Computer Science (Honors)"
         ; "GPA: 3.79"
         ; "Aug 2023 - May 2027"
         ]
