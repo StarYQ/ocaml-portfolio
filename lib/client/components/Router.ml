@@ -22,10 +22,26 @@ module Route_parser = struct
     let base_path = get_base_path () in
     (* Remove base path if present *)
     let clean_path = 
-      if String.is_prefix path ~prefix:base_path then
-        String.drop_prefix path (String.length base_path)
+      if not (String.equal base_path "") && String.is_prefix path ~prefix:base_path then
+        let without_base = String.drop_prefix path (String.length base_path) in
+        (* Ensure path starts with / after removing base *)
+        if String.is_prefix without_base ~prefix:"/" then
+          without_base
+        else if String.equal without_base "" then
+          "/"
+        else
+          "/" ^ without_base
       else
         path
+    in
+    (* Ensure clean_path starts with / *)
+    let clean_path = 
+      if String.length clean_path > 0 && not (Char.equal (String.get clean_path 0) '/') then
+        "/" ^ clean_path
+      else if String.length clean_path = 0 then
+        "/"
+      else
+        clean_path
     in
     route_of_string clean_path |> Option.value ~default:Home
     

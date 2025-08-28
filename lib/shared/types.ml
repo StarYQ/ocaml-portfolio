@@ -55,10 +55,13 @@ let route_to_string = function
 
 (** Parse route from URL path *)
 let route_of_string = function
-  | "/" -> Some Home
+  | "/" | "" -> Some Home
   | "/about" -> Some About
   | "/projects" -> Some Projects
   | "/resume" -> Some Resume
+  | path when String.length path > 6 && String.sub path 0 6 = "/about" -> Some About
+  | path when String.length path > 9 && String.sub path 0 9 = "/projects" -> Some Projects
+  | path when String.length path > 7 && String.sub path 0 7 = "/resume" -> Some Resume
   | _ -> None
 
 (** Get page title for route *)
