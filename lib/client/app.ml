@@ -20,13 +20,13 @@ let app_computation =
   let initial = Theme.initial_theme () in
   (* Apply initial theme to body immediately *)
   apply_theme_to_body initial;
-  let%sub theme, _set_theme = Bonsai.state (module Theme) ~default_model:initial in
+  let%sub theme, set_theme = Bonsai.state (module Theme) ~default_model:initial in
   
   (* Create app with theme-aware navigation *)
   let%sub current_route = Components.Router.create_route_state () in
   
   (* Use the navigation_simple component with mobile support *)
-  let%sub navigation = Components.Navigation.component in
+  let%sub navigation = Components.Navigation.component ~theme ~set_theme in
   
   (* Render page content based on the current route with theme *)
   let%sub content = 

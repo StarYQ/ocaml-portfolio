@@ -7,10 +7,7 @@ open Shared.Types
 (* Import navigation styles *)
 module Styles = Navigation_styles.Styles
 
-let component =
-  (* Initialize theme state *)
-  let initial_theme = Theme.initial_theme () in
-  let%sub theme, set_theme = Bonsai.state (module Theme) ~default_model:initial_theme in
+let component ~theme ~set_theme =
   let%sub menu_open, set_menu_open = Bonsai.state (module Bool) ~default_model:false in
   let%sub current_route = Router.create_route_state () in
   
