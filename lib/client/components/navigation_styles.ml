@@ -104,6 +104,13 @@ module Styles = [%css stylesheet {|
     }
   }
   
+  /* Mobile controls container */
+  .mobile-controls {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
   /* Mobile hamburger button */
   .menu-toggle {
     display: none;
@@ -115,44 +122,29 @@ module Styles = [%css stylesheet {|
     z-index: 1002;
   }
   
-  .hamburger {
-    display: block;
-    width: 24px;
-    height: 2px;
-    background-color: white;
-    position: relative;
-    transition: background-color 0.3s ease;
+  /* SVG Hamburger icon animations */
+  .hamburger-svg {
+    transition: transform 0.3s ease;
   }
   
-  .hamburger::before,
-  .hamburger::after {
-    content: "";
-    position: absolute;
-    width: 24px;
-    height: 2px;
-    background-color: white;
-    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  }
-  
-  .hamburger::before {
-    top: -8px;
-  }
-  
-  .hamburger::after {
-    top: 8px;
+  .hamburger-svg .hamburger-line-top,
+  .hamburger-svg .hamburger-line-middle,
+  .hamburger-svg .hamburger-line-bottom {
+    transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform-origin: center;
   }
   
   /* Hamburger animation when open */
-  .hamburger.is-open {
-    background-color: transparent;
+  .hamburger-svg.is-open .hamburger-line-top {
+    transform: rotate(45deg) translate(6px, 6px);
   }
   
-  .hamburger.is-open::before {
-    transform: rotate(45deg) translate(5px, 5px);
+  .hamburger-svg.is-open .hamburger-line-middle {
+    opacity: 0;
   }
   
-  .hamburger.is-open::after {
-    transform: rotate(-45deg) translate(7px, -8px);
+  .hamburger-svg.is-open .hamburger-line-bottom {
+    transform: rotate(-45deg) translate(6px, -6px);
   }
   
   /* Mobile menu panel */
@@ -163,8 +155,8 @@ module Styles = [%css stylesheet {|
     width: 80%;
     max-width: 300px;
     height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    background: var(--nav-bg);
+    box-shadow: -2px 0 10px var(--card-shadow);
     transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1001;
     overflow-y: auto;
@@ -243,8 +235,20 @@ module Styles = [%css stylesheet {|
       display: none;
     }
     
+    .mobile-controls {
+      display: flex;
+    }
+    
     .menu-toggle {
       display: block;
+    }
+    
+    .theme-toggle-mobile {
+      display: flex !important;
+    }
+    
+    .theme-toggle-desktop {
+      display: none;
     }
     
     .navbar {
@@ -267,7 +271,36 @@ module Styles = [%css stylesheet {|
     box-shadow: 0 4px 20px rgba(0,0,0,0.15);
   }
   
-  /* Sliding theme toggle styles */
+  /* Theme toggle buttons */
+  .theme-toggle-desktop,
+  .theme-toggle-mobile {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+  }
+  
+  .theme-toggle-desktop:hover,
+  .theme-toggle-mobile:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+  }
+  
+  .theme-toggle-mobile {
+    display: none;
+    width: 40px;
+    height: 40px;
+  }
+  
+  /* Sliding theme toggle styles (legacy) */
   .theme-toggle {
     width: 60px;
     height: 30px;
