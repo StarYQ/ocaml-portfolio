@@ -13,9 +13,8 @@ bucket = "./dist"
 command = "npm run build:worker"
 
 [env.production]
-name = "ocaml-portfolio-prod"
 workers_dev = false
-# Routes will be configured in Cloudflare dashboard or via API
+routes = ["arnabb.dev/*", "www.arnabb.dev/*"]
 
 # Preview/staging environment
 [env.preview]
