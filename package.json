@@ -11,6 +11,8 @@
     "deploy:worker:preview": "npm run build:worker && wrangler deploy --env preview",
     "preview:worker": "npm run build:worker && wrangler dev --local"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "wrangler": "^3.100.0"
+  },
   "private": true
 }
