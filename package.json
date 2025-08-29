@@ -1,0 +1,10 @@
+{
+  "name": "ocaml-portfolio",
+  "version": "1.0.0",
+  "description": "OCaml Portfolio Site",
+  "scripts": {
+    "build:cloudflare": "node scripts/prepare-cloudflare.js"
+  },
+  "devDependencies": {},
+  "private": true
+}

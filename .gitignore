@@ -4,6 +4,8 @@
 tmp/
 
 _build
+dist/
+node_modules/
 
 # claude
 .claude/
