@@ -124,21 +124,21 @@ fs.writeFileSync(path.join(distDir, '_headers'), headersContent);
 console.log('✓ Created _headers file for caching');
 
 console.log('\n✅ Cloudflare build preparation complete!');
-console.log(`📁 Output directory: ${distDir}`);
+console.log(` Output directory: ${distDir}`);
 
 // List files in dist
-console.log('\n📋 Files in dist:');
+console.log('\n Files in dist:');
 function listFiles(dir, prefix = '') {
   const files = fs.readdirSync(dir);
   files.forEach(file => {
     const filePath = path.join(dir, file);
     const stat = fs.statSync(filePath);
     if (stat.isDirectory()) {
-      console.log(`${prefix}📁 ${file}/`);
+      console.log(`${prefix} ${file}/`);
       listFiles(filePath, prefix + '  ');
     } else {
       const size = (stat.size / 1024).toFixed(2);
-      console.log(`${prefix}📄 ${file} (${size} KB)`);
+      console.log(`${prefix} ${file} (${size} KB)`);
     }
   });
 }

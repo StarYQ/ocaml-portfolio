@@ -121,18 +121,18 @@ for (const jsPath of jsSourcePaths) {
   if (fs.existsSync(jsPath)) {
     const destPath = path.join(distDir, '_build', 'default', 'lib', 'client_main', 'main.bc.js');
     fs.copyFileSync(jsPath, destPath);
-    
+
     // Get file size
     const stats = fs.statSync(destPath);
     const fileSizeInMB = (stats.size / (1024 * 1024)).toFixed(2);
-    
+
     console.log(`✓ Copied JS bundle (${fileSizeInMB} MB)`);
-    
+
     // Warn if bundle is too large
     if (stats.size > 5 * 1024 * 1024) {
       console.log(`⚠️  Warning: Bundle size is ${fileSizeInMB} MB - consider optimization`);
     }
-    
+
     jsFound = true;
     break;
   }
@@ -152,14 +152,14 @@ const staticAssets = [
 staticAssets.forEach(asset => {
   const srcPath = path.join(__dirname, '..', asset.src);
   const destPath = path.join(distDir, asset.dest);
-  
+
   if (fs.existsSync(srcPath)) {
     // Ensure destination directory exists
     const destDir = path.dirname(destPath);
     if (!fs.existsSync(destDir)) {
       fs.mkdirSync(destDir, { recursive: true });
     }
-    
+
     fs.copyFileSync(srcPath, destPath);
     const stats = fs.statSync(destPath);
     const fileSizeInKB = (stats.size / 1024).toFixed(2);
@@ -181,7 +181,7 @@ function scanDirectory(dir, basePath = '') {
     const filePath = path.join(dir, file);
     const relativePath = path.join(basePath, file);
     const stat = fs.statSync(filePath);
-    
+
     if (stat.isDirectory()) {
       scanDirectory(filePath, relativePath);
     } else {
@@ -202,22 +202,22 @@ fs.writeFileSync(
 
 // Summary
 console.log('\n' + '='.repeat(60));
-console.log('✅ Cloudflare Workers build preparation complete!\n');
-console.log(`📁 Output directory: ${distDir}`);
-console.log(`📦 Total files: ${manifest.files.length}`);
+console.log('Cloudflare Workers build preparation complete!\n');
+console.log(`Output directory: ${distDir}`);
+console.log(`Total files: ${manifest.files.length}`);
 
 const totalSize = manifest.files.reduce((sum, file) => sum + file.size, 0);
-console.log(`💾 Total size: ${(totalSize / (1024 * 1024)).toFixed(2)} MB`);
+console.log(`Total size: ${(totalSize / (1024 * 1024)).toFixed(2)} MB`);
 
-console.log('\n📋 Files prepared for deployment:');
+console.log('\nFiles prepared for deployment:');
 manifest.files.forEach(file => {
-  const sizeStr = file.size > 1024 * 1024 
+  const sizeStr = file.size > 1024 * 1024
     ? `${(file.size / (1024 * 1024)).toFixed(2)} MB`
     : `${(file.size / 1024).toFixed(2)} KB`;
   console.log(`   ${file.path} (${sizeStr})`);
 });
 
-console.log('\n🚀 Next steps:');
+console.log('\nNext steps:');
 console.log('   1. Test locally: npm run dev:worker');
 console.log('   2. Deploy: npm run deploy:worker');
 console.log('='.repeat(60));

@@ -12,7 +12,6 @@ bucket = "./dist"
 [build]
 command = "npm run build:worker"
 
-# Production environment
 [env.production]
 name = "ocaml-portfolio-prod"
 workers_dev = false
