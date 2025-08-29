@@ -27,3 +27,7 @@ workers_dev = true
 [dev]
 port = 8080
 local_protocol = "http"
+
+# wrangler.toml (wrangler v3.88.0^)
+[observability.logs]
+enabled = false
