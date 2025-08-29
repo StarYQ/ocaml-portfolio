@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "OCaml Portfolio Site",
   "scripts": {
-    "build:cloudflare": "node scripts/prepare-cloudflare.js"
+    "build:cloudflare-pages-legacy": "node scripts/prepare-cloudflare-pages-legacy.js",
+    "build:worker": "node scripts/prepare-worker.js",
+    "dev:worker": "npm run build:worker && wrangler dev",
+    "deploy:worker": "npm run build:worker && wrangler deploy",
+    "deploy:worker:production": "npm run build:worker && wrangler deploy --env production",
+    "deploy:worker:preview": "npm run build:worker && wrangler deploy --env preview",
+    "preview:worker": "npm run build:worker && wrangler dev --local"
   },
   "devDependencies": {},
   "private": true

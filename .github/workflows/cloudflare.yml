@@ -1,4 +1,4 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare Workers
 
 on:
   push:
@@ -6,13 +6,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-cloudflare:
+  deploy-worker:
     runs-on: ubuntu-latest
     permissions:
       contents: read
       deployments: write
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -24,26 +25,34 @@ jobs:
         with:
           ocaml-compiler: 5.2.1
 
-      - name: System deps
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y m4 pkg-config libgmp-dev
 
-      - name: Install opam deps
+      - name: Install OCaml dependencies
         run: opam install . --deps-only -y
 
-      - name: Build (production)
+      - name: Build OCaml project (production)
         run: opam exec -- make build-prod
 
-      - name: Prepare for Cloudflare
-        run: node scripts/prepare-cloudflare.js
+      - name: Prepare for Workers deployment
+        run: npm run build:worker
 
-      - name: Deploy to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ocaml-portfolio
-          directory: dist
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: deploy --env production
           wranglerVersion: '3'
+          
+      - name: Deploy comment
+        uses: actions/github-script@v7
+        if: github.event_name == 'push'
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const commit = context.sha.substring(0, 7);
+            const message = `✅ Deployed to Cloudflare Workers (commit: ${commit})`;
+            console.log(message);

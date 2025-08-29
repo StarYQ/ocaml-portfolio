@@ -1,23 +1,29 @@
-# Cloudflare Pages Configuration
+# Cloudflare Workers Configuration
 name = "ocaml-portfolio"
+main = "src/index.ts"
 compatibility_date = "2024-01-01"
+workers_dev = true
 
-# Build configuration
+# Serve static assets from dist directory
+[site]
+bucket = "./dist"
+
+# Build configuration for local development
 [build]
-command = "opam exec -- make build-prod && npm run build:cloudflare"
-publish = "dist"
+command = "npm run build:worker"
 
-# Build environment variables
-[build.environment]
-NODE_VERSION = "20"
-
-# Preview builds
-[preview]
-command = "opam exec -- make build-prod && npm run build:cloudflare"
-
-# Environment variables
+# Production environment
 [env.production]
-vars = { ENVIRONMENT = "production" }
+name = "ocaml-portfolio-prod"
+workers_dev = false
+# Routes will be configured in Cloudflare dashboard or via API
 
+# Preview/staging environment
 [env.preview]
-vars = { ENVIRONMENT = "preview" }
+name = "ocaml-portfolio-preview"
+workers_dev = true
+
+# Development environment configuration
+[dev]
+port = 8080
+local_protocol = "http"
