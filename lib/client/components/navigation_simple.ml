@@ -179,118 +179,35 @@ let component =
                   nav_item Projects "Projects";
                   nav_item Resume "Resume";
                   
-                  (* Desktop Theme Toggle Button *)
-                  Vdom.Node.button
+                  (* Desktop Theme Toggle - Sliding Toggle *)
+                  Vdom.Node.div
                     ~attrs:[
-                      Styles.theme_toggle_desktop;
+                      (match theme with
+                       | Theme.Light -> Styles.theme_toggle
+                       | Theme.Dark -> Vdom.Attr.many [Styles.theme_toggle; Styles.dark]);
                       Vdom.Attr.on_click (fun _ -> toggle_theme ());
+                      Vdom.Attr.create "role" "switch";
+                      Vdom.Attr.create "aria-checked" 
+                        (match theme with
+                         | Theme.Light -> "false"
+                         | Theme.Dark -> "true");
                       Vdom.Attr.create "aria-label" 
                         (match theme with
                          | Theme.Light -> "Switch to dark mode"
                          | Theme.Dark -> "Switch to light mode")
                     ]
                     [
-                      (* SVG icon for theme toggle *)
-                      if Theme.equal theme Theme.Light then
-                        (* Moon icon for light mode *)
-                        Vdom.Node.create_svg "svg"
-                          ~attrs:[
-                            Vdom.Attr.create "width" "20";
-                            Vdom.Attr.create "height" "20";
-                            Vdom.Attr.create "viewBox" "0 0 24 24";
-                            Vdom.Attr.create "fill" "currentColor"
-                          ]
-                          [
-                            Vdom.Node.create_svg "path"
-                              ~attrs:[
-                                Vdom.Attr.create "d" "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                              ]
-                              []
-                          ]
-                      else
-                        (* Sun icon for dark mode *)
-                        Vdom.Node.create_svg "svg"
-                          ~attrs:[
-                            Vdom.Attr.create "width" "20";
-                            Vdom.Attr.create "height" "20";
-                            Vdom.Attr.create "viewBox" "0 0 24 24";
-                            Vdom.Attr.create "fill" "none";
-                            Vdom.Attr.create "stroke" "currentColor";
-                            Vdom.Attr.create "stroke-width" "2"
-                          ]
-                          [
-                            Vdom.Node.create_svg "circle"
-                              ~attrs:[
-                                Vdom.Attr.create "cx" "12";
-                                Vdom.Attr.create "cy" "12";
-                                Vdom.Attr.create "r" "5"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "12";
-                                Vdom.Attr.create "y1" "1";
-                                Vdom.Attr.create "x2" "12";
-                                Vdom.Attr.create "y2" "3"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "12";
-                                Vdom.Attr.create "y1" "21";
-                                Vdom.Attr.create "x2" "12";
-                                Vdom.Attr.create "y2" "23"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "4.22";
-                                Vdom.Attr.create "y1" "4.22";
-                                Vdom.Attr.create "x2" "5.64";
-                                Vdom.Attr.create "y2" "5.64"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "18.36";
-                                Vdom.Attr.create "y1" "18.36";
-                                Vdom.Attr.create "x2" "19.78";
-                                Vdom.Attr.create "y2" "19.78"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "1";
-                                Vdom.Attr.create "y1" "12";
-                                Vdom.Attr.create "x2" "3";
-                                Vdom.Attr.create "y2" "12"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "21";
-                                Vdom.Attr.create "y1" "12";
-                                Vdom.Attr.create "x2" "23";
-                                Vdom.Attr.create "y2" "12"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "4.22";
-                                Vdom.Attr.create "y1" "19.78";
-                                Vdom.Attr.create "x2" "5.64";
-                                Vdom.Attr.create "y2" "18.36"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "18.36";
-                                Vdom.Attr.create "y1" "5.64";
-                                Vdom.Attr.create "x2" "19.78";
-                                Vdom.Attr.create "y2" "4.22"
-                              ]
-                              []
-                          ]
+                      (* Sliding knob with icon *)
+                      Vdom.Node.div
+                        ~attrs:[Styles.theme_slider]
+                        [
+                          Vdom.Node.span
+                            ~attrs:[Styles.theme_icon]
+                            [Vdom.Node.text 
+                              (match theme with
+                               | Theme.Light -> "☀"   (* SUN for light mode *)
+                               | Theme.Dark -> "🌙")]  (* MOON for dark mode *)
+                        ]
                     ]
                 ];
               
@@ -298,118 +215,35 @@ let component =
               Vdom.Node.div
                 ~attrs:[Styles.mobile_controls]
                 [
-                  (* Mobile Theme Toggle Button *)
-                  Vdom.Node.button
+                  (* Mobile Theme Toggle - Sliding Toggle *)
+                  Vdom.Node.div
                     ~attrs:[
-                      Styles.theme_toggle_mobile;
+                      (match theme with
+                       | Theme.Light -> Styles.theme_toggle
+                       | Theme.Dark -> Vdom.Attr.many [Styles.theme_toggle; Styles.dark]);
                       Vdom.Attr.on_click (fun _ -> toggle_theme ());
+                      Vdom.Attr.create "role" "switch";
+                      Vdom.Attr.create "aria-checked" 
+                        (match theme with
+                         | Theme.Light -> "false"
+                         | Theme.Dark -> "true");
                       Vdom.Attr.create "aria-label" 
                         (match theme with
                          | Theme.Light -> "Switch to dark mode"
                          | Theme.Dark -> "Switch to light mode")
                     ]
                     [
-                      (* Same SVG icons as desktop *)
-                      if Theme.equal theme Theme.Light then
-                        (* Moon icon for light mode *)
-                        Vdom.Node.create_svg "svg"
-                          ~attrs:[
-                            Vdom.Attr.create "width" "20";
-                            Vdom.Attr.create "height" "20";
-                            Vdom.Attr.create "viewBox" "0 0 24 24";
-                            Vdom.Attr.create "fill" "currentColor"
-                          ]
-                          [
-                            Vdom.Node.create_svg "path"
-                              ~attrs:[
-                                Vdom.Attr.create "d" "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                              ]
-                              []
-                          ]
-                      else
-                        (* Sun icon for dark mode *)
-                        Vdom.Node.create_svg "svg"
-                          ~attrs:[
-                            Vdom.Attr.create "width" "20";
-                            Vdom.Attr.create "height" "20";
-                            Vdom.Attr.create "viewBox" "0 0 24 24";
-                            Vdom.Attr.create "fill" "none";
-                            Vdom.Attr.create "stroke" "currentColor";
-                            Vdom.Attr.create "stroke-width" "2"
-                          ]
-                          [
-                            Vdom.Node.create_svg "circle"
-                              ~attrs:[
-                                Vdom.Attr.create "cx" "12";
-                                Vdom.Attr.create "cy" "12";
-                                Vdom.Attr.create "r" "5"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "12";
-                                Vdom.Attr.create "y1" "1";
-                                Vdom.Attr.create "x2" "12";
-                                Vdom.Attr.create "y2" "3"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "12";
-                                Vdom.Attr.create "y1" "21";
-                                Vdom.Attr.create "x2" "12";
-                                Vdom.Attr.create "y2" "23"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "4.22";
-                                Vdom.Attr.create "y1" "4.22";
-                                Vdom.Attr.create "x2" "5.64";
-                                Vdom.Attr.create "y2" "5.64"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "18.36";
-                                Vdom.Attr.create "y1" "18.36";
-                                Vdom.Attr.create "x2" "19.78";
-                                Vdom.Attr.create "y2" "19.78"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "1";
-                                Vdom.Attr.create "y1" "12";
-                                Vdom.Attr.create "x2" "3";
-                                Vdom.Attr.create "y2" "12"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "21";
-                                Vdom.Attr.create "y1" "12";
-                                Vdom.Attr.create "x2" "23";
-                                Vdom.Attr.create "y2" "12"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "4.22";
-                                Vdom.Attr.create "y1" "19.78";
-                                Vdom.Attr.create "x2" "5.64";
-                                Vdom.Attr.create "y2" "18.36"
-                              ]
-                              [];
-                            Vdom.Node.create_svg "line"
-                              ~attrs:[
-                                Vdom.Attr.create "x1" "18.36";
-                                Vdom.Attr.create "y1" "5.64";
-                                Vdom.Attr.create "x2" "19.78";
-                                Vdom.Attr.create "y2" "4.22"
-                              ]
-                              []
-                          ]
+                      (* Sliding knob with icon *)
+                      Vdom.Node.div
+                        ~attrs:[Styles.theme_slider]
+                        [
+                          Vdom.Node.span
+                            ~attrs:[Styles.theme_icon]
+                            [Vdom.Node.text 
+                              (match theme with
+                               | Theme.Light -> "☀"   (* SUN for light mode *)
+                               | Theme.Dark -> "🌙")]  (* MOON for dark mode *)
+                        ]
                     ];
                   
                   (* Mobile Menu Toggle *)
