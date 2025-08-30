@@ -12,7 +12,8 @@ not_found_handling = "single-page-application"
 
 [env.production]
 name = "ocaml-portfolio"
-workers_dev = true  # Enable workers.dev subdomain for testing
+# Enable workers.dev subdomain for testing
+workers_dev = false
 routes = ["arnabb.dev/*", "www.arnabb.dev/*"]
 
 # Assets configuration for production
