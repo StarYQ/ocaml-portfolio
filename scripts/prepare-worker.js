@@ -139,8 +139,20 @@ for (const jsPath of jsSourcePaths) {
 }
 
 if (!jsFound) {
-  console.error('✗ Could not find main.bc.js bundle');
-  console.error('  Please run "make build-prod" first');
+  console.error('\n' + '='.repeat(60));
+  console.error('❌ ERROR: Could not find main.bc.js bundle');
+  console.error('='.repeat(60));
+  console.error('\nThe OCaml JavaScript bundle was not found at any of these locations:');
+  jsSourcePaths.forEach(path => {
+    console.error(`  - ${path}`);
+  });
+  console.error('\nThis usually means the OCaml build has not been run.');
+  console.error('\nTo fix this issue:');
+  console.error('  1. Run "make build-prod" to build the OCaml code');
+  console.error('  2. Or use "npm run build:worker" which runs both steps');
+  console.error('\nNote: The build:worker script should automatically run "make build-prod"');
+  console.error('If you\'re seeing this in CI/CD, ensure OCaml/opam dependencies are installed.');
+  console.error('='.repeat(60) + '\n');
   process.exit(1);
 }
 
