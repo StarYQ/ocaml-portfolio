@@ -200,10 +200,12 @@ let component ~theme ~set_theme =
                         [
                           Vdom.Node.span
                             ~attrs:[Styles.theme_icon]
-                            [Vdom.Node.text 
-                              (match theme with
-                               | Theme.Light -> "☀"   (* SUN for light mode *)
-                               | Theme.Dark -> "🌙")]  (* MOON for dark mode *)
+                            [(match theme with
+                               | Theme.Light -> 
+                                 Vdom.Node.span 
+                                   ~attrs:[Vdom.Attr.style (Css_gen.color (`Name "gold"))]
+                                   [Vdom.Node.text "☀"]   (* SUN for light mode *)
+                               | Theme.Dark -> Vdom.Node.text "⏾")]  (* MOON for dark mode *)
                         ]
                     ]
                 ];
@@ -236,10 +238,12 @@ let component ~theme ~set_theme =
                         [
                           Vdom.Node.span
                             ~attrs:[Styles.theme_icon]
-                            [Vdom.Node.text 
-                              (match theme with
-                               | Theme.Light -> "☀"   (* SUN for light mode *)
-                               | Theme.Dark -> "🌙")]  (* MOON for dark mode *)
+                            [(match theme with
+                               | Theme.Light -> 
+                                 Vdom.Node.span 
+                                   ~attrs:[Vdom.Attr.style (Css_gen.color (`Name "gold"))]
+                                   [Vdom.Node.text "☀"]   (* SUN for light mode *)
+                               | Theme.Dark -> Vdom.Node.text "⏾")]  (* MOON for dark mode *)
                         ]
                     ];
                   
