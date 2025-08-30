@@ -27,3 +27,4 @@ resume.txt
 .playwright-mcp/
 DEPLOYMENT.md
 .serena
+.mcp.json

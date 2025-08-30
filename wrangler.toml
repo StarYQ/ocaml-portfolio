@@ -10,10 +10,6 @@ directory = "./dist"
 binding = "ASSETS"
 not_found_handling = "single-page-application"
 
-# Build configuration for local development
-[build]
-command = "npm run build:worker"
-
 [env.production]
 name = "ocaml-portfolio"
 workers_dev = true  # Enable workers.dev subdomain for testing
@@ -35,6 +31,6 @@ workers_dev = true
 port = 8080
 local_protocol = "http"
 
-# wrangler.toml (wrangler v3.88.0^)
+# wrangler.toml (wrangler v4.0.0^)
 [observability.logs]
 enabled = false

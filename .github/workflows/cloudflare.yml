@@ -61,7 +61,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy --env production
-          wranglerVersion: '3'
+          wranglerVersion: '4'
           workingDirectory: '.'
           
       - name: Deploy comment
