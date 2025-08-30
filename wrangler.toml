@@ -34,4 +34,4 @@ local_protocol = "http"
 
 # wrangler.toml (wrangler v4.0.0^)
 [observability.logs]
-enabled = false
+enabled = true
