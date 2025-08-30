@@ -4,7 +4,8 @@
   "description": "OCaml Portfolio Site",
   "scripts": {
     "build:cloudflare-pages-legacy": "node scripts/prepare-cloudflare-pages-legacy.js",
-    "build:worker": "make build-prod && node scripts/prepare-worker.js",
+    "build:worker": "node scripts/prepare-worker.js",
+    "build:local": "make build-prod",
     "dev:worker": "npm run build:worker && wrangler dev",
     "deploy:worker": "npm run build:worker && wrangler deploy",
     "deploy:worker:production": "npm run build:worker && wrangler deploy --env production",

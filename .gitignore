@@ -4,6 +4,7 @@
 tmp/
 
 _build
+!_build/default/lib/client_main/main.bc.js
 dist/
 node_modules/
 
