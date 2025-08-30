@@ -38,21 +38,29 @@ jobs:
 
       - name: Prepare for Workers deployment
         run: |
-          # Ensure dest tree exists and is writable
-          mkdir -p dist/_build/default/lib/client_main
-          chmod -R u+rwX dist
-          # (optional) check source file exists & is readable
-          ls -l _build/default/lib/client_main || true
-          chmod -R u+rwX _build || true
+          # First verify the OCaml build output exists
+          echo "=== Checking OCaml build output ==="
+          ls -la _build/default/lib/client_main/ || echo "ERROR: OCaml build output not found!"
+          
+          # Install npm dependencies
           npm ci
+          
+          # Run the build:worker script which will copy files to dist
+          echo "=== Running build:worker script ==="
           npm run build:worker
+          
+          # Verify dist directory was created properly
+          echo "=== Verifying dist directory ==="
+          ls -la dist/
+          echo "=== Checking dist/_build structure ==="
+          find dist -type f -name "*.js" -o -name "*.html" -o -name "*.pdf" | head -20
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy --env production --compatibility-date 2024-01-01
+          command: deploy --env production
           wranglerVersion: '3'
           workingDirectory: '.'
           

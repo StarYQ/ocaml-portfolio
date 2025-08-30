@@ -15,8 +15,15 @@ not_found_handling = "single-page-application"
 command = "npm run build:worker"
 
 [env.production]
-workers_dev = false
+name = "ocaml-portfolio"
+workers_dev = true  # Enable workers.dev subdomain for testing
 routes = ["arnabb.dev/*", "www.arnabb.dev/*"]
+
+# Assets configuration for production
+[env.production.assets]
+directory = "./dist"
+binding = "ASSETS"
+not_found_handling = "single-page-application"
 
 # Preview/staging environment
 [env.preview]

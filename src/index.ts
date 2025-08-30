@@ -15,8 +15,26 @@ export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url);
     
-    // Log the request for debugging (remove in production if needed)
+    // Debug logging to understand what's happening
     console.log(`Request: ${request.method} ${url.pathname}`);
+    console.log(`env.ASSETS available: ${!!env.ASSETS}`);
+    console.log(`env.ASSETS type: ${typeof env.ASSETS}`);
+    
+    // Check if ASSETS binding is available
+    if (!env.ASSETS) {
+      return new Response(
+        `ASSETS binding not available. Debug info:
+- URL: ${url.href}
+- Path: ${url.pathname}
+- env keys: ${Object.keys(env).join(', ')}
+- env.ASSETS: ${env.ASSETS}
+Please check wrangler.toml configuration and deployment.`,
+        {
+          status: 500,
+          headers: { 'Content-Type': 'text/plain' }
+        }
+      );
+    }
     
     try {
       // Try to serve the requested asset directly
@@ -83,15 +101,25 @@ export default {
       });
       
     } catch (error) {
-      // Log error and return 500
+      // Log error and return detailed error for debugging
       console.error('Worker error:', error);
-      return new Response('Internal Server Error', {
-        status: 500,
-        headers: {
-          'Content-Type': 'text/plain',
-          'Cache-Control': 'no-cache'
+      const errorMessage = error instanceof Error ? error.message : String(error);
+      const errorStack = error instanceof Error ? error.stack : '';
+      
+      return new Response(
+        `Worker Error:
+Message: ${errorMessage}
+Stack: ${errorStack}
+URL: ${url.href}
+Path: ${url.pathname}`,
+        {
+          status: 500,
+          headers: {
+            'Content-Type': 'text/plain',
+            'Cache-Control': 'no-cache'
+          }
         }
-      });
+      );
     }
   }
 };
