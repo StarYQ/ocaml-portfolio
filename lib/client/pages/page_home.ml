@@ -250,6 +250,38 @@ module Styles = [%css
         /* Hover styles will be handled via inline styles */
       }
       
+      .ocaml_badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        padding: 0.5rem 1rem;
+        background: rgba(236, 104, 19, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(236, 104, 19, 0.3);
+        border-radius: 20px;
+        color: white;
+        font-size: 0.875rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        z-index: 10;
+        animation: fadeIn 1s ease-out 1s both;
+        transition: all 0.3s ease;
+      }
+      
+      .ocaml_badge:hover {
+        background: rgba(236, 104, 19, 0.25);
+        border-color: rgba(236, 104, 19, 0.5);
+        transform: translateY(-2px);
+      }
+      
+      .ocaml_badge_icon {
+        width: 18px;
+        height: 18px;
+        fill: currentColor;
+      }
+      
       @media (max-width: 768px) {
         .hero_title {
           font-size: 2.5rem;
@@ -268,10 +300,38 @@ module Styles = [%css
           width: 200px;
           text-align: center;
         }
+        
+        .ocaml_badge {
+          top: 10px;
+          left: 10px;
+          font-size: 0.75rem;
+          padding: 0.375rem 0.75rem;
+        }
+        
+        .ocaml_badge_icon {
+          width: 14px;
+          height: 14px;
+        }
       }
     |}]
 
 (* SVG Icon helpers *)
+let ocaml_icon () =
+  let open Vdom in
+  let open Vdom.Attr in
+  Node.create_svg "svg"
+    ~attrs:[
+      Styles.ocaml_badge_icon;
+      create "viewBox" "0 0 24 24";
+      create "fill" "currentColor";
+    ]
+    [ Node.create_svg "path"
+        ~attrs:[
+          create "d" "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-13c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm4 0c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+        ]
+        []
+    ]
+
 let github_icon () =
   let open Vdom in
   let open Vdom.Attr in
@@ -335,7 +395,13 @@ let hero_section theme =
   in
     Vdom.Node.section
     ~attrs:[ Styles.hero; gradient_style ]
-    [ Vdom.Node.div
+    [ (* OCaml Badge *)
+      Vdom.Node.div
+        ~attrs:[ Styles.ocaml_badge ]
+        [ ocaml_icon ()
+        ; Vdom.Node.text "100% OCaml"
+        ]
+    ; Vdom.Node.div
         ~attrs:[ Styles.hero_content ]
         [ Vdom.Node.h1
             ~attrs:[ Styles.hero_title ]
