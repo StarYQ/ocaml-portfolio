@@ -8,7 +8,7 @@ open Shared.Types
 module Styles = Navigation_styles.Styles
 
 let component ~theme ~set_theme =
-  let%sub menu_open, set_menu_open = Bonsai.state ~default_model:false (module Bool) in
+  let%sub menu_open, set_menu_open = Bonsai.state (module Bool) ~default_model:false in
   let%sub current_route = Router.create_route_state () in
   
   let%arr menu_open = menu_open
