@@ -252,8 +252,8 @@ module Styles = [%css
       
       .ocaml_tag {
         position: absolute;
-        top: 16px;
-        left: 16px;
+        top: 20px;
+        right: 20px;
         padding: 0.25rem 0.625rem;
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(8px);
@@ -290,7 +290,7 @@ module Styles = [%css
       .popover {
         position: absolute;
         top: calc(100% + 8px);
-        left: 0;
+        right: 0;
         background: rgba(20, 20, 30, 0.98);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -325,7 +325,6 @@ module Styles = [%css
       .ocaml_logo {
         width: 32px;
         height: 32px;
-        fill: #ec6813;
       }
       
       .popover_title {
@@ -379,7 +378,7 @@ module Styles = [%css
         
         .ocaml_tag {
           top: 10px;
-          left: 10px;
+          right: 10px;
           font-size: 0.7rem;
           padding: 0.2rem 0.5rem;
         }
@@ -391,6 +390,8 @@ module Styles = [%css
         
         .popover {
           min-width: 240px;
+          right: 0;
+          left: auto;
         }
       }
     |}]
@@ -429,19 +430,13 @@ let info_icon () =
 let ocaml_logo () =
   let open Vdom in
   let open Vdom.Attr in
-  Node.create_svg "svg"
+  Node.create "img"
     ~attrs:[
       Styles.ocaml_logo;
-      create "viewBox" "0 0 128 128";
-      create "fill" "currentColor";
+      src "/static/ocaml-logo.svg";
+      alt "OCaml Logo";
     ]
-    [ Node.create_svg "path"
-        ~attrs:[
-          create "d" "M64 12.5c-28.4 0-51.5 23.1-51.5 51.5s23.1 51.5 51.5 51.5 51.5-23.1 51.5-51.5-23.1-51.5-51.5-51.5zm-18.3 73.9c-7.6 0-13.8-6.2-13.8-13.8s6.2-13.8 13.8-13.8 13.8 6.2 13.8 13.8-6.2 13.8-13.8 13.8zm36.6 0c-7.6 0-13.8-6.2-13.8-13.8s6.2-13.8 13.8-13.8 13.8 6.2 13.8 13.8-6.2 13.8-13.8 13.8z";
-          create "fill" "#ec6813";
-        ]
-        []
-    ]
+    []
 
 let github_icon () =
   let open Vdom in
@@ -508,11 +503,8 @@ let hero_section theme popover_visible set_popover_visible =
     ~attrs:[ Styles.hero; gradient_style ]
     [ (* OCaml Tag with Popover *)
       Vdom.Node.div
-        ~attrs:[ 
-          Styles.ocaml_tag;
-          Vdom.Attr.style (Css_gen.position `Relative)
-        ]
-        [ Vdom.Node.text "Crafted in pure OCaml"
+        ~attrs:[ Styles.ocaml_tag ]
+        [ Vdom.Node.text "Written 100% in OCaml"
         ; Vdom.Node.span
             ~attrs:[
               Vdom.Attr.on_click (fun _ -> set_popover_visible (not popover_visible));
