@@ -1,0 +1,217 @@
+# Deploy OCaml Portfolio to Cloudflare Workers
+# This workflow builds the OCaml project and deploys it to Cloudflare Workers
+# replacing the previous Cloudflare Git integration
+
+name: Deploy to Cloudflare Workers
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'production'
+        type: choice
+        options:
+          - production
+          - preview
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: "cloudflare-deployment"
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy to Cloudflare Workers
+    
+    steps:
+      # Step 1: Checkout repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up OCaml environment
+      - name: Set up OCaml 5.1.x
+        uses: ocaml/setup-ocaml@v3
+        with:
+          ocaml-compiler: 5.1.x
+          cache-prefix: ocaml-5.1
+
+      # Step 3: Install system dependencies
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y m4 pkg-config libgmp-dev
+
+      # Step 4: Install OCaml dependencies
+      - name: Install OCaml dependencies
+        run: |
+          opam install . --deps-only -y --with-test
+
+      # Step 5: Build production bundle with dead code elimination
+      - name: Build production bundle
+        run: |
+          echo "🔨 Building OCaml project with production optimizations..."
+          opam exec -- make build-prod
+          
+          # Verify the build output
+          if [ ! -f "_build/default/lib/client_main/main.bc.js" ]; then
+            echo "❌ Build failed: main.bc.js not found"
+            find _build -name "*.bc.js" -type f 2>/dev/null || echo "No .bc.js files found"
+            exit 1
+          fi
+          
+          # Check bundle size
+          BUNDLE_SIZE=$(stat -c%s "_build/default/lib/client_main/main.bc.js")
+          BUNDLE_SIZE_MB=$(echo "scale=2; $BUNDLE_SIZE / 1048576" | bc)
+          echo "✅ Bundle built successfully: ${BUNDLE_SIZE_MB} MB"
+          
+          # Warn if bundle is too large (>5MB)
+          if [ "$BUNDLE_SIZE" -gt 5242880 ]; then
+            echo "⚠️ Warning: Bundle size exceeds 5MB - consider optimization"
+          fi
+
+      # Step 6: Setup Node.js for Worker preparation
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Step 7: Install Node dependencies
+      - name: Install Node dependencies
+        run: |
+          npm ci --include=dev
+
+      # Step 8: Prepare Worker deployment files
+      - name: Prepare Worker deployment
+        run: |
+          echo "📦 Preparing deployment files for Cloudflare Workers..."
+          npm run build:worker
+          
+          # Verify deployment files
+          echo "📋 Verifying deployment artifacts..."
+          if [ ! -f "dist/index.html" ]; then
+            echo "❌ dist/index.html not found"
+            exit 1
+          fi
+          if [ ! -f "dist/_build/default/lib/client_main/main.bc.js" ]; then
+            echo "❌ dist/_build/default/lib/client_main/main.bc.js not found"
+            exit 1
+          fi
+          if [ ! -f "dist/static/resume.pdf" ]; then
+            echo "⚠️ Warning: dist/static/resume.pdf not found (optional)"
+          fi
+          
+          echo "✅ All required deployment files prepared"
+          echo "📁 Deployment directory contents:"
+          find dist -type f -exec echo "  - {}" \; | head -20
+
+      # Step 9: Deploy to Cloudflare Workers
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: '4'
+          command: deploy --env ${{ github.event.inputs.environment || 'production' }}
+        env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      # Step 10: Verify deployment
+      - name: Verify deployment
+        run: |
+          echo "🚀 Deployment complete!"
+          echo ""
+          echo "📍 Deployment URLs:"
+          if [ "${{ github.event.inputs.environment || 'production' }}" = "production" ]; then
+            echo "  Production: https://arnabb.dev"
+            echo "  Alternative: https://www.arnabb.dev"
+          else
+            echo "  Preview: https://ocaml-portfolio-preview.workers.dev"
+          fi
+          echo ""
+          echo "📊 Deployment Details:"
+          echo "  Environment: ${{ github.event.inputs.environment || 'production' }}"
+          echo "  Branch: ${{ github.ref_name }}"
+          echo "  Commit: ${{ github.sha }}"
+          echo "  Triggered by: ${{ github.actor }}"
+          echo "  Time: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+
+      # Step 11: Create deployment status (optional)
+      - name: Create GitHub deployment
+        uses: actions/github-script@v7
+        if: success()
+        with:
+          script: |
+            const environment = '${{ github.event.inputs.environment || 'production' }}';
+            const url = environment === 'production' 
+              ? 'https://arnabb.dev' 
+              : 'https://ocaml-portfolio-preview.workers.dev';
+            
+            // Create deployment
+            const deployment = await github.rest.repos.createDeployment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.sha,
+              environment: environment,
+              description: 'Cloudflare Workers deployment',
+              auto_merge: false,
+              required_contexts: [],
+              production_environment: environment === 'production'
+            });
+            
+            // Create deployment status
+            await github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: deployment.data.id,
+              state: 'success',
+              environment_url: url,
+              description: 'Deployment successful'
+            });
+
+      # Step 12: Cleanup (optional)
+      - name: Cleanup build artifacts
+        if: always()
+        run: |
+          echo "🧹 Cleaning up build artifacts..."
+          # Remove large build files to save space
+          rm -rf _build/
+          rm -rf dist/
+          echo "✅ Cleanup complete"
+
+      # Step 13: Summary
+      - name: Job Summary
+        if: always()
+        run: |
+          echo "## 📊 Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Item | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Environment | \`${{ github.event.inputs.environment || 'production' }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Triggered by | @${{ github.actor }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| Workflow | ${{ github.workflow }} |" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "### ✅ Deployment Successful" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            if [ "${{ github.event.inputs.environment || 'production' }}" = "production" ]; then
+              echo "🌐 **Live at:** [arnabb.dev](https://arnabb.dev)" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "🔍 **Preview at:** [ocaml-portfolio-preview.workers.dev](https://ocaml-portfolio-preview.workers.dev)" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "### ❌ Deployment Failed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "Please check the workflow logs for details." >> $GITHUB_STEP_SUMMARY
+          fi
