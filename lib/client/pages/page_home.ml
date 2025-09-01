@@ -250,36 +250,112 @@ module Styles = [%css
         /* Hover styles will be handled via inline styles */
       }
       
-      .ocaml_badge {
+      .ocaml_tag {
         position: absolute;
-        top: 20px;
-        left: 20px;
-        padding: 0.5rem 1rem;
-        background: rgba(236, 104, 19, 0.15);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(236, 104, 19, 0.3);
-        border-radius: 20px;
-        color: white;
-        font-size: 0.875rem;
-        font-weight: 600;
+        top: 16px;
+        left: 16px;
+        padding: 0.25rem 0.625rem;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.75rem;
+        font-weight: 500;
         display: flex;
         align-items: center;
-        gap: 0.5rem;
-        z-index: 10;
+        gap: 0.375rem;
+        z-index: 20;
         animation: fadeIn 1s ease-out 1s both;
-        transition: all 0.3s ease;
+        transition: all 0.2s ease;
       }
       
-      .ocaml_badge:hover {
-        background: rgba(236, 104, 19, 0.25);
-        border-color: rgba(236, 104, 19, 0.5);
-        transform: translateY(-2px);
+      .ocaml_tag:hover {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.85);
       }
       
-      .ocaml_badge_icon {
-        width: 18px;
-        height: 18px;
-        fill: currentColor;
+      .info_icon {
+        width: 14px;
+        height: 14px;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+      }
+      
+      .info_icon:hover {
+        opacity: 1;
+      }
+      
+      .popover {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 0;
+        background: rgba(20, 20, 30, 0.98);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1rem;
+        min-width: 280px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        opacity: 0;
+        transform: translateY(-8px) scale(0.95);
+        pointer-events: none;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      
+      .popover.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+      
+      .popover_content {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
+      .popover_header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+      
+      .ocaml_logo {
+        width: 32px;
+        height: 32px;
+        fill: #ec6813;
+      }
+      
+      .popover_title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: white;
+        margin: 0;
+      }
+      
+      .popover_description {
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.7);
+        margin: 0;
+      }
+      
+      .popover_link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: #ec6813;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.2s ease;
+      }
+      
+      .popover_link:hover {
+        color: #ff8030;
+        transform: translateX(2px);
       }
       
       @media (max-width: 768px) {
@@ -301,33 +377,68 @@ module Styles = [%css
           text-align: center;
         }
         
-        .ocaml_badge {
+        .ocaml_tag {
           top: 10px;
           left: 10px;
-          font-size: 0.75rem;
-          padding: 0.375rem 0.75rem;
+          font-size: 0.7rem;
+          padding: 0.2rem 0.5rem;
         }
         
-        .ocaml_badge_icon {
-          width: 14px;
-          height: 14px;
+        .info_icon {
+          width: 12px;
+          height: 12px;
+        }
+        
+        .popover {
+          min-width: 240px;
         }
       }
     |}]
 
 (* SVG Icon helpers *)
-let ocaml_icon () =
+let info_icon () =
   let open Vdom in
   let open Vdom.Attr in
   Node.create_svg "svg"
     ~attrs:[
-      Styles.ocaml_badge_icon;
+      Styles.info_icon;
       create "viewBox" "0 0 24 24";
+      create "fill" "currentColor";
+    ]
+    [ Node.create_svg "circle"
+        ~attrs:[
+          create "cx" "12";
+          create "cy" "12";
+          create "r" "10";
+          create "stroke" "currentColor";
+          create "stroke-width" "2";
+          create "fill" "none";
+        ]
+        []
+    ; Node.create_svg "path"
+        ~attrs:[
+          create "d" "M12 16v-4m0-4h.01";
+          create "stroke" "currentColor";
+          create "stroke-width" "2";
+          create "stroke-linecap" "round";
+          create "stroke-linejoin" "round";
+        ]
+        []
+    ]
+
+let ocaml_logo () =
+  let open Vdom in
+  let open Vdom.Attr in
+  Node.create_svg "svg"
+    ~attrs:[
+      Styles.ocaml_logo;
+      create "viewBox" "0 0 128 128";
       create "fill" "currentColor";
     ]
     [ Node.create_svg "path"
         ~attrs:[
-          create "d" "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-13c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3zm4 0c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"
+          create "d" "M64 12.5c-28.4 0-51.5 23.1-51.5 51.5s23.1 51.5 51.5 51.5 51.5-23.1 51.5-51.5-23.1-51.5-51.5-51.5zm-18.3 73.9c-7.6 0-13.8-6.2-13.8-13.8s6.2-13.8 13.8-13.8 13.8 6.2 13.8 13.8-6.2 13.8-13.8 13.8zm36.6 0c-7.6 0-13.8-6.2-13.8-13.8s6.2-13.8 13.8-13.8 13.8 6.2 13.8 13.8-6.2 13.8-13.8 13.8z";
+          create "fill" "#ec6813";
         ]
         []
     ]
@@ -383,7 +494,7 @@ let email_icon () =
         []
     ]
 
-let hero_section theme =
+let hero_section theme popover_visible set_popover_visible =
   let gradient_style = 
     match theme with
     | Light -> 
@@ -395,11 +506,50 @@ let hero_section theme =
   in
     Vdom.Node.section
     ~attrs:[ Styles.hero; gradient_style ]
-    [ (* OCaml Badge *)
+    [ (* OCaml Tag with Popover *)
       Vdom.Node.div
-        ~attrs:[ Styles.ocaml_badge ]
-        [ ocaml_icon ()
-        ; Vdom.Node.text "100% OCaml"
+        ~attrs:[ 
+          Styles.ocaml_tag;
+          Vdom.Attr.style (Css_gen.position `Relative)
+        ]
+        [ Vdom.Node.text "Crafted in pure OCaml"
+        ; Vdom.Node.span
+            ~attrs:[
+              Vdom.Attr.on_click (fun _ -> set_popover_visible (not popover_visible));
+              Vdom.Attr.style (Css_gen.create ~field:"cursor" ~value:"pointer")
+            ]
+            [ info_icon () ]
+        ; (* Popover *)
+          Vdom.Node.div
+            ~attrs:[
+              Styles.popover;
+              (if popover_visible then
+                Styles.visible
+              else
+                Vdom.Attr.empty)
+            ]
+            [ Vdom.Node.div
+                ~attrs:[ Styles.popover_content ]
+                [ Vdom.Node.div
+                    ~attrs:[ Styles.popover_header ]
+                    [ ocaml_logo ()
+                    ; Vdom.Node.h3
+                        ~attrs:[ Styles.popover_title ]
+                        [ Vdom.Node.text "Built with OCaml" ]
+                    ]
+                ; Vdom.Node.p
+                    ~attrs:[ Styles.popover_description ]
+                    [ Vdom.Node.text "This portfolio was built entirely in OCaml, a powerful functional programming language known for type safety and expressiveness." ]
+                ; Vdom.Node.a
+                    ~attrs:[
+                      Styles.popover_link;
+                      Vdom.Attr.href "https://ocaml.org";
+                      Vdom.Attr.create "target" "_blank";
+                      Vdom.Attr.create "rel" "noopener noreferrer"
+                    ]
+                    [ Vdom.Node.text "Learn more about OCaml →" ]
+                ]
+            ]
         ]
     ; Vdom.Node.div
         ~attrs:[ Styles.hero_content ]
@@ -591,9 +741,11 @@ let tech_stack_section theme =
 
 let component ?(theme = Bonsai.Value.return Light) () =
   let open Bonsai.Let_syntax in
-  let%arr theme = theme in
+  let%sub popover_visible = Bonsai.state (module Bool) ~default_model:false in
+  let%arr theme = theme
+  and popover_visible, set_popover_visible = popover_visible in
   Vdom.Node.div [ 
-    hero_section theme; 
+    hero_section theme popover_visible set_popover_visible; 
     features_section theme; 
     tech_stack_section theme 
   ]
