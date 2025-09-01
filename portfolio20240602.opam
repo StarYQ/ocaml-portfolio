@@ -15,8 +15,8 @@ depends: [
   "dune" {>= "3.15"}
   "dream"
   "lwt_ppx"
-  "bonsai" {= "v0.16.0"}
-  "virtual_dom" {= "v0.16.0"}
+  "bonsai" {>= "v0.16"}
+  "virtual_dom" {>= "v0.16"}
   "js_of_ocaml" {>= "5.0"}
   "js_of_ocaml-ppx" {>= "5.0"}
   "ppx_jane"
