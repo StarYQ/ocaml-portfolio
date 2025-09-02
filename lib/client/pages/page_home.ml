@@ -253,7 +253,7 @@ module Styles = [%css
       .ocaml_tag {
         position: absolute;
         top: 20px;
-        right: 20px;
+        left: 20px;
         padding: 0.25rem 0.625rem;
         background: rgba(255, 255, 255, 0.08);
         backdrop-filter: blur(8px);
@@ -290,7 +290,7 @@ module Styles = [%css
       .popover {
         position: absolute;
         top: calc(100% + 8px);
-        right: 0;
+        left: 0;
         background: rgba(20, 20, 30, 0.98);
         backdrop-filter: blur(20px);
         border: 1px solid rgba(255, 255, 255, 0.1);
@@ -378,7 +378,7 @@ module Styles = [%css
         
         .ocaml_tag {
           top: 10px;
-          right: 10px;
+          left: 10px;
           font-size: 0.7rem;
           padding: 0.2rem 0.5rem;
         }
