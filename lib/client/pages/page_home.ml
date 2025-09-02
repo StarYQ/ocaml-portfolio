@@ -390,8 +390,14 @@ module Styles = [%css
         
         .popover {
           min-width: 240px;
-          right: 0;
-          left: auto;
+          max-width: calc(100vw - 40px);
+          left: 10px;
+          right: auto;
+          transform-origin: top left;
+        }
+        
+        .popover.visible {
+          transform: translateY(0) scale(1);
         }
       }
     |}]
