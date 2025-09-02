@@ -503,7 +503,10 @@ let hero_section theme popover_visible set_popover_visible =
     ~attrs:[ Styles.hero; gradient_style ]
     [ (* OCaml Tag with Popover *)
       Vdom.Node.div
-        ~attrs:[ Styles.ocaml_tag ]
+        ~attrs:[ 
+          Styles.ocaml_tag;
+          Vdom.Attr.id "ocaml-tag-container"
+        ]
         [ Vdom.Node.text "Written 100% in OCaml"
         ; Vdom.Node.span
             ~attrs:[
@@ -518,7 +521,8 @@ let hero_section theme popover_visible set_popover_visible =
               (if popover_visible then
                 Styles.visible
               else
-                Vdom.Attr.empty)
+                Vdom.Attr.empty);
+              Vdom.Attr.id "ocaml-popover"
             ]
             [ Vdom.Node.div
                 ~attrs:[ Styles.popover_content ]
@@ -734,10 +738,47 @@ let tech_stack_section theme =
 let component ?(theme = Bonsai.Value.return Light) () =
   let open Bonsai.Let_syntax in
   let%sub popover_visible = Bonsai.state (module Bool) ~default_model:false in
+  
+  (* Add click-outside handler *)
+  let%sub () =
+    let%arr popover_visible, set_popover_visible = popover_visible in
+    if popover_visible then
+      Vdom.Attr.on_click (fun evt ->
+        (* Check if click target is outside the popover and tag *)
+        let target = Js.Opt.to_option evt##.target in
+        match target with
+        | None -> Vdom.Effect.Ignore
+        | Some target_element ->
+          let rec is_inside_popover_or_tag element =
+            let element_id = 
+              Js.Opt.case element##.id
+                (fun () -> "")
+                (fun id -> Js.to_string id)
+            in
+            if String.equal element_id "ocaml-tag-container" || 
+               String.equal element_id "ocaml-popover" then
+              true
+            else
+              Js.Opt.case element##.parentElement
+                (fun () -> false)
+                (fun parent -> is_inside_popover_or_tag parent)
+          in
+          if not (is_inside_popover_or_tag target_element) then
+            set_popover_visible false
+          else
+            Vdom.Effect.Ignore
+      )
+    else
+      Vdom.Attr.empty
+  in
+  
   let%arr theme = theme
-  and popover_visible, set_popover_visible = popover_visible in
-  Vdom.Node.div [ 
-    hero_section theme popover_visible set_popover_visible; 
-    features_section theme; 
-    tech_stack_section theme 
-  ]
+  and popover_visible, set_popover_visible = popover_visible
+  and click_outside_handler = () in
+  Vdom.Node.div 
+    ~attrs:[ click_outside_handler ]
+    [ 
+      hero_section theme popover_visible set_popover_visible; 
+      features_section theme; 
+      tech_stack_section theme 
+    ]
