@@ -159,6 +159,7 @@ if (!jsFound) {
 // Copy static assets (resume.pdf, etc.)
 const staticAssets = [
   { src: 'static/resume.pdf', dest: 'static/resume.pdf' }
+  { src: 'static/ocaml-logo.svg', dest: 'static/ocaml-logo.svg' }
 ];
 
 staticAssets.forEach(asset => {
