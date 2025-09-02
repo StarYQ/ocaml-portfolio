@@ -740,28 +740,35 @@ let component ?(theme = Bonsai.Value.return Light) () =
   let%sub popover_visible = Bonsai.state (module Bool) ~default_model:false in
   
   (* Add click-outside handler *)
-  let%sub () =
+  let%sub click_outside_handler =
     let%arr popover_visible, set_popover_visible = popover_visible in
     if popover_visible then
       Vdom.Attr.on_click (fun evt ->
+        let open Js_of_ocaml in
         (* Check if click target is outside the popover and tag *)
-        let target = Js.Opt.to_option evt##.target in
+        let target = Js.Opt.to_option (evt##.target) in
         match target with
         | None -> Vdom.Effect.Ignore
-        | Some target_element ->
+        | Some target_node ->
+          (* Coerce to element for easier access to id and parentNode *)
+          let target_element = Js.Unsafe.coerce target_node in
           let rec is_inside_popover_or_tag element =
+            (* Safely get the element id, defaulting to empty string if undefined *)
             let element_id = 
-              Js.Opt.case element##.id
-                (fun () -> "")
-                (fun id -> Js.to_string id)
+              try Js.to_string (element##.id) 
+              with _ -> ""
             in
             if String.equal element_id "ocaml-tag-container" || 
                String.equal element_id "ocaml-popover" then
               true
             else
-              Js.Opt.case element##.parentElement
-                (fun () -> false)
-                (fun parent -> is_inside_popover_or_tag parent)
+              let parent_opt = Js.Opt.to_option (element##.parentNode) in
+              match parent_opt with
+              | None -> false
+              | Some parent ->
+                (* Cast parent to element for recursion *)
+                let parent_element = Js.Unsafe.coerce parent in
+                is_inside_popover_or_tag parent_element
           in
           if not (is_inside_popover_or_tag target_element) then
             set_popover_visible false
@@ -774,7 +781,7 @@ let component ?(theme = Bonsai.Value.return Light) () =
   
   let%arr theme = theme
   and popover_visible, set_popover_visible = popover_visible
-  and click_outside_handler = () in
+  and click_outside_handler = click_outside_handler in
   Vdom.Node.div 
     ~attrs:[ click_outside_handler ]
     [ 
