@@ -26,9 +26,9 @@
   dream
   lwt_ppx
   (bonsai
-   (>= v0.16))
+   (= v0.16.0))
   (virtual_dom
-   (>= v0.16))
+   (= v0.16.0))
   (js_of_ocaml
    (>= 5.0))
   (js_of_ocaml-ppx
