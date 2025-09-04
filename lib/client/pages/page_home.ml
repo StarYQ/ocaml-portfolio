@@ -541,7 +541,7 @@ let hero_section theme popover_visible set_popover_visible =
                     ]
                 ; Vdom.Node.p
                     ~attrs:[ Styles.popover_description ]
-                    [ Vdom.Node.text "This portfolio was built entirely in OCaml, a powerful functional programming language known for type safety and expressiveness." ]
+                    [ Vdom.Node.text "This portfolio was built entirely in OCaml." ]
                 ; Vdom.Node.a
                     ~attrs:[
                       Styles.popover_link;
