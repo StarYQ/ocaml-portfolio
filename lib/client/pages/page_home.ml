@@ -629,7 +629,8 @@ let features_section theme =
         ]
       )
     ; ( "Current Roles"
-      , "Teaching Assistant & Researcher"
+      (* , "Teaching Assistant & Researcher" *)
+      , ""
       , [ "TA for Software Development (CSE 316)"
         ; "Student Software Developer for Regio Vinco, under the VIP BEAR team"
         ]
