@@ -17,9 +17,9 @@
 
 (package
  (name portfolio20240602)
- (synopsis "Pure OCaml Portfolio Website")
+ (synopsis "OCaml Portfolio Website")
  (description
-  "A modern portfolio website built entirely in OCaml using Dream backend and Bonsai Web frontend")
+  "A portfolio website built entirely in OCaml using Dream backend and Bonsai Web frontend")
  (depends
   ocaml
   dune

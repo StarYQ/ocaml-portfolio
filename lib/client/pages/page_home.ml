@@ -513,7 +513,7 @@ let hero_section theme popover_visible set_popover_visible =
           Styles.ocaml_tag;
           Vdom.Attr.id "ocaml-tag-container"
         ]
-        [ Vdom.Node.text "Written 100% in OCaml"
+        [ Vdom.Node.text "Written in OCaml"
         ; Vdom.Node.span
             ~attrs:[
               Vdom.Attr.on_click (fun _ -> set_popover_visible (not popover_visible));
@@ -541,7 +541,7 @@ let hero_section theme popover_visible set_popover_visible =
                     ]
                 ; Vdom.Node.p
                     ~attrs:[ Styles.popover_description ]
-                    [ Vdom.Node.text "This portfolio was written entirely in OCaml." ]
+                    [ Vdom.Node.text "This website was written 100% in OCaml." ]
                 ; Vdom.Node.a
                     ~attrs:[
                       Styles.popover_link;
