@@ -14,6 +14,18 @@ let portfolio_projects = [
     demo_url = None;
     current = false;
   };
+
+  {
+    id = "portfolio";
+    title = "Portfolio Website";
+    description = "";
+    long_description = "My personal portfolio website, written entirely in OCaml.";
+    tags = ["web"; "ocaml"; "fullstack"];
+    tech_stack = ["OCaml"; "Js_of_ocaml"; "Bonsai"; "Dream"; "Dune"];
+    github_url = Some "https://github.com/StarYQ/ocaml-portfolio";
+    demo_url = Some "https://arnabb.dev/";
+    current = false;
+  };
   
   {
     id = "seawolf-accessibility";
@@ -22,7 +34,7 @@ let portfolio_projects = [
     long_description = "Developing an interactive campus navigation web app to recommend and visualize optimal accessible routes in real time. Built a custom OpenStreetMap parser in C to extract and preprocess map data to use in Dijkstra's algorithm. Mapped building entrances/exits to support indoor traversal, yielding more inclusive routing. Enhanced the route cost function using scikit-learn and NumPy to perform linear regression on aggregated cost data based on stair penalties and slope gradients computed using Google Maps Elevation API data. Using the K-nearest neighbors (KNN) algorithm to recommend alternative routes with similar accessibility characteristics.";
     tags = ["web"; "fullstack"; "ai";];
     tech_stack = ["Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API"];
-    github_url = None;
+    github_url = Some "https://github.com/tarunvaid05/Seawolf-Accessibility";
     demo_url = Some "https://seawolf-accessibility.up.railway.app/";
     current = true;
   };
@@ -64,7 +76,6 @@ let filter_projects_by_tag projects tag =
   | All -> projects
   | Web -> List.filter projects ~f:(fun p -> List.mem p.tags "web" ~equal:String.equal)
   | Mobile -> List.filter projects ~f:(fun p -> List.mem p.tags "mobile" ~equal:String.equal)
-  | CLI -> List.filter projects ~f:(fun p -> List.mem p.tags "cli" ~equal:String.equal)
   | Backend -> List.filter projects ~f:(fun p -> List.mem p.tags "backend" ~equal:String.equal)
   | AI -> List.filter projects ~f:(fun p -> List.mem p.tags "ai" ~equal:String.equal)
 

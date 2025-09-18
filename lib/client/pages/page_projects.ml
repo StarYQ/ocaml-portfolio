@@ -351,8 +351,6 @@ let component ?(theme = Bonsai.Value.return Light) () =
                 ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"Backend" ~filter:Types.Backend 
                 ~current_filter ~set_filter ~theme:Light;
-              filter_button ~label:"CLI" ~filter:Types.CLI 
-                ~current_filter ~set_filter ~theme:Light;
             ]
         ];
       

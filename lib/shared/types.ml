@@ -3,7 +3,6 @@ type project_filter =
   | All 
   | Web 
   | Mobile 
-  | CLI
   | Backend
   | AI
 [@@deriving sexp, equal, compare]
@@ -26,7 +25,6 @@ let filter_to_string = function
   | All -> "All"
   | Web -> "Web"
   | Mobile -> "Mobile"
-  | CLI -> "CLI"
   | Backend -> "Backend"
   | AI -> "AI"
 
