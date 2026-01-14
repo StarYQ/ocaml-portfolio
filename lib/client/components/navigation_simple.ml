@@ -165,7 +165,7 @@ let component ~theme ~set_theme =
               Nav_link.create' 
                 ~route:Home 
                 ~attrs:[Styles.nav_brand]
-                [Vdom.Node.text "Portfolio"];
+                [Vdom.Node.text "arnabb.dev"];
               
               (* Desktop Navigation *)
               Vdom.Node.div
@@ -302,7 +302,7 @@ let render ~current_route =
           Nav_link.create' 
             ~route:Home 
             ~attrs:[Styles.nav_brand]
-            [Vdom.Node.text "Portfolio"];
+            [Vdom.Node.text "arnabb.dev"];
           
           Vdom.Node.div
             ~attrs:[Styles.nav_menu]
