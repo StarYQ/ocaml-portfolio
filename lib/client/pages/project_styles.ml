@@ -234,7 +234,19 @@ module Styles = [%css stylesheet {|
     color: var(--text-secondary);
     line-height: 1.6;
   }
-  
+
+  .description_link {
+    color: #8b5cf6;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+
+  .description_link:hover {
+    text-decoration: underline;
+    color: #7c3aed;
+  }
+
   /* Card tags */
   .card_tags {
     padding: 0 1.5rem;

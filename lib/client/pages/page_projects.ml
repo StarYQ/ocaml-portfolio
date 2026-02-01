@@ -198,7 +198,20 @@ let project_card_component ~project ~theme =
             [Vdom.Node.text project.title];
           Vdom.Node.p
             ~attrs:[Styles.card_description]
-            [Vdom.Node.text project.description];
+            (match project.description_link with
+             | None -> [Vdom.Node.text project.description]
+             | Some (link_text, url) ->
+               [
+                 Vdom.Node.text (project.description ^ " ");
+                 Vdom.Node.a
+                   ~attrs:[
+                     Vdom.Attr.href url;
+                     Vdom.Attr.create "target" "_blank";
+                     Vdom.Attr.create "rel" "noopener noreferrer";
+                     Styles.description_link;
+                   ]
+                   [Vdom.Node.text link_text]
+               ]);
         ];
       
       (* Tags *)
@@ -343,13 +356,15 @@ let component ?(theme = Bonsai.Value.return Light) () =
           Vdom.Node.div
             ~attrs:[Styles.filter_bar]
             [
-              filter_button ~label:"All" ~filter:Types.All 
+              filter_button ~label:"All" ~filter:Types.All
                 ~current_filter ~set_filter ~theme:Light;
-              filter_button ~label:"Web" ~filter:Types.Web 
+              filter_button ~label:"Web" ~filter:Types.Web
                 ~current_filter ~set_filter ~theme:Light;
-              filter_button ~label:"AI" ~filter:Types.AI 
+              filter_button ~label:"AI" ~filter:Types.AI
                 ~current_filter ~set_filter ~theme:Light;
-              filter_button ~label:"Backend" ~filter:Types.Backend 
+              filter_button ~label:"Backend" ~filter:Types.Backend
+                ~current_filter ~set_filter ~theme:Light;
+              filter_button ~label:"Quant" ~filter:Types.Quant
                 ~current_filter ~set_filter ~theme:Light;
             ]
         ];

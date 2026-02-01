@@ -4,6 +4,18 @@ open Types
 (** Actual portfolio projects from resume *)
 let portfolio_projects = [
   {
+    id = "prediction-market-bot";
+    title = "Prediction Market Maker Bot";
+    description = "Developing a market-making system for prediction markets on Polymarket (US exchange currently in closed beta). Stats will be regularly updated";
+    long_description = "Developing a market-making system for prediction markets on Polymarket, a US-based prediction market exchange currently in closed beta. The system implements automated market-making strategies to provide liquidity and capture spreads.";
+    tags = ["quant"];
+    tech_stack = ["Python"; "Redis"; "PM2"; "AWS EC2"];
+    github_url = None;
+    demo_url = None;
+    current = true;
+    description_link = Some ("here", "https://lbtradingllc.com");
+  };
+  {
     id = "ta-tools";
     title = "TA Tools";
     description = "Full-stack web application to automate teaching assistant logistics tasks";
@@ -13,6 +25,7 @@ let portfolio_projects = [
     github_url = None;
     demo_url = None;
     current = false;
+    description_link = None;
   };
 
   {
@@ -25,6 +38,7 @@ let portfolio_projects = [
     github_url = Some "https://github.com/StarYQ/ocaml-portfolio";
     demo_url = Some "https://arnabb.dev/";
     current = false;
+    description_link = None;
   };
   
   {
@@ -37,6 +51,7 @@ let portfolio_projects = [
     github_url = Some "https://github.com/tarunvaid05/Seawolf-Accessibility";
     demo_url = Some "https://seawolf-accessibility.up.railway.app/";
     current = true;
+    description_link = None;
   };
   
   (* {
@@ -61,6 +76,7 @@ let portfolio_projects = [
     github_url = None;
     demo_url = Some "https://devpost.com/software/nutriproof";
     current = false;
+    description_link = None;
   };
 ]
 
@@ -78,6 +94,7 @@ let filter_projects_by_tag projects tag =
   | Mobile -> List.filter projects ~f:(fun p -> List.mem p.tags "mobile" ~equal:String.equal)
   | Backend -> List.filter projects ~f:(fun p -> List.mem p.tags "backend" ~equal:String.equal)
   | AI -> List.filter projects ~f:(fun p -> List.mem p.tags "ai" ~equal:String.equal)
+  | Quant -> List.filter projects ~f:(fun p -> List.mem p.tags "quant" ~equal:String.equal)
 
 (** Search projects by title or description *)
 let search_projects (projects : project list) query =

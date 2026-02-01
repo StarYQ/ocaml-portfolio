@@ -1,10 +1,11 @@
 (** Project filter types *)
-type project_filter = 
-  | All 
-  | Web 
-  | Mobile 
+type project_filter =
+  | All
+  | Web
+  | Mobile
   | Backend
   | AI
+  | Quant
 [@@deriving sexp, equal, compare]
 
 (** Project data type for portfolio projects *)
@@ -18,6 +19,7 @@ type project = {
   github_url : string option;
   demo_url : string option;
   current : bool;
+  description_link : (string * string) option; (** Optional (link_text, url) for inline links in description *)
 }
 
 (** Convert filter to display string *)
@@ -27,6 +29,7 @@ let filter_to_string = function
   | Mobile -> "Mobile"
   | Backend -> "Backend"
   | AI -> "AI"
+  | Quant -> "Quant"
 
 (** Blog post data type for articles/words section *)
 type blog_post = {
