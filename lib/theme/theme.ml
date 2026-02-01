@@ -5,10 +5,10 @@ open Bonsai_web
 type t = Light | Dark [@@deriving sexp, equal]
 
 (* Create Dynamic_scope variable for global theme state *)
-let variable = 
-  Bonsai.Dynamic_scope.create 
-    ~name:"theme" 
-    ~fallback:Light 
+let variable =
+  Bonsai.Dynamic_scope.create
+    ~name:"theme"
+    ~fallback:Dark
     ()
 
 (* Get current theme from Dynamic_scope *)
@@ -61,4 +61,4 @@ let store_theme theme =
 let initial_theme () =
   match get_stored_theme () with
   | Some theme -> theme
-  | None -> Light
+  | None -> Dark
