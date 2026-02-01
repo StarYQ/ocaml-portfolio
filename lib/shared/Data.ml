@@ -8,7 +8,7 @@ let portfolio_projects = [
     title = "Prediction Market Maker Bot";
     description = "Developing a market-making system for prediction markets on Polymarket (US exchange currently in closed beta). Stats will be regularly updated";
     long_description = "Developing a market-making system for prediction markets on Polymarket, a US-based prediction market exchange currently in closed beta. The system implements automated market-making strategies to provide liquidity and capture spreads.";
-    tags = ["quant"];
+    tags = ["trading"];
     tech_stack = ["Python"; "Redis"; "PM2"; "AWS EC2"];
     github_url = None;
     demo_url = None;
@@ -94,7 +94,7 @@ let filter_projects_by_tag projects tag =
   | Mobile -> List.filter projects ~f:(fun p -> List.mem p.tags "mobile" ~equal:String.equal)
   | Backend -> List.filter projects ~f:(fun p -> List.mem p.tags "backend" ~equal:String.equal)
   | AI -> List.filter projects ~f:(fun p -> List.mem p.tags "ai" ~equal:String.equal)
-  | Quant -> List.filter projects ~f:(fun p -> List.mem p.tags "quant" ~equal:String.equal)
+  | Trading -> List.filter projects ~f:(fun p -> List.mem p.tags "trading" ~equal:String.equal)
 
 (** Search projects by title or description *)
 let search_projects (projects : project list) query =

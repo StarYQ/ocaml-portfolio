@@ -624,15 +624,15 @@ let features_section theme =
     [ ( "Education"
       , "Stony Brook University"
       , [ "BS in Computer Science (Honors)"
-        ; "GPA: 3.79"
+        ; "GPA: 3.83"
         ; "Aug 2023 - May 2027"
         ]
       )
     ; ( "Current Roles"
       (* , "Teaching Assistant & Researcher" *)
       , ""
-      , [ "TA for Software Development (CSE 316)"
-        ; "Student Software Developer for Regio Vinco, under the VIP BEAR team"
+      (* , [ "TA for Software Development (CSE 316)" *)
+      , [ "Student Software Developer for Regio Vinco, under the VIP BEAR team"
         ]
       )
     ; ( "Experience"
@@ -702,25 +702,34 @@ let tech_stack_section theme =
   let technologies =
     [ "Java"
     ; "Python"
-    ; "SQL"
-    ; "MongoDB"
-    ; "Pinecone"
     ; "Bash"
+    ; "SQL"
     ; "C"
     ; "OCaml"
     ; "JavaScript"
+    ; "TypeScript"
     ; "PHP"
     ; "Swift"
+    ; "PostgreSQL"
+    ; "MongoDB"
+    ; "Redis"
+    ; "Pinecone"
+    ; "MySQL"
+    ; "SQLite"
     ; "Next.js"
+    ; "React.js"
+    ; "Vue.js"
     ; "Express.js"
     ; "Node.js"
-    ; "Playwright"
+    ; "FastAPI"
     ; "Flask"
-    ; "Tailwind CSS"
+    ; "LangChain"
+    ; "Playwright"
     ; "Docker"
     ; "AWS"
+    ; "GCP"
     ; "Git"
-    ; "PostgreSQL"
+    ; "GitHub Actions"
     ]
   in
     Vdom.Node.section
@@ -733,7 +742,7 @@ let tech_stack_section theme =
         ; Vdom.Node.p
             ~attrs:[ Styles.section_subtitle; text_style ]
             [ Vdom.Node.text
-                "Languages, frameworks, and tools I use to build software"
+                "Languages, frameworks, and tools I've used to build software"
             ]
         ; Vdom.Node.div
             ~attrs:[ Styles.tech_list ]

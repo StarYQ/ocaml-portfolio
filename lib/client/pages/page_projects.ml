@@ -364,7 +364,7 @@ let component ?(theme = Bonsai.Value.return Light) () =
                 ~current_filter ~set_filter ~theme:Light;
               filter_button ~label:"Backend" ~filter:Types.Backend
                 ~current_filter ~set_filter ~theme:Light;
-              filter_button ~label:"Quant" ~filter:Types.Quant
+              filter_button ~label:"Trading" ~filter:Types.Trading
                 ~current_filter ~set_filter ~theme:Light;
             ]
         ];

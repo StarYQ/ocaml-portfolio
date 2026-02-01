@@ -302,10 +302,10 @@ let education_section theme =
               [ Vdom.Node.text "Bachelor of Science with Honors in Computer Science" ]
           ; Vdom.Node.div
               ~attrs:[ Styles.details; details_style ]
-              [ Vdom.Node.text "GPA: 3.79 • August 2023 - May 2027 (expected)" ]
+              [ Vdom.Node.text "GPA: 3.83 • August 2023 - May 2027 (expected)" ]
           ; Vdom.Node.div
               ~attrs:[ Styles.details; details_style ]
-              [ Vdom.Node.text "Relevant Coursework: Software Development, Analysis of Algorithms: Honors, Data Structures, Object-Oriented Programming, Systems Fundamentals, Programming Abstractions, Linear Algebra, Probability & Statistics" ]
+              [ Vdom.Node.text "Relevant Coursework: Software Development, Software Engineering, Theory of Computation: Honors, Analysis of Algorithms: Honors, Data Structures, Object-Oriented Programming, Systems Fundamentals, Programming Abstractions, Machine Learning, Linear Algebra, Finite Mathematical Structures" ]
           ]
       ]
 
@@ -403,7 +403,7 @@ let experience_section theme =
     ( "Compute Platform Engineering Intern"
     , "GlaxoSmithKline plc - Seattle, WA"
     , "May 2025 - August 2025"
-    , [ "Developed an interactive Python CLI that uses workload diagnosis to auto-select optimal HPC environments and optimize resource specifications when applicable, with two submission modes (automatic job script generation and direct environment access), reducing compute costs by ~7%."
+    , [ "Developed an interactive Python CLI that uses workload diagnosis to auto-select optimal HPC environments across Slurm and Google Batch and optimize resource specifications when applicable, with two submission modes (automatic job script generation and direct environment access), reducing compute costs by ~10%."
       ; "Containerized and deployed the CLI using both Docker and Apptainer for cross-platform compatibility on Windows, Linux, and Unix systems, with planned rollout to 3,000+ computational scientists company-wide."
       ; "Built proof of concept demonstrating architectural optimizations for AI/ML team's prototype agentic system's tool orchestration layer, achieving ~35% reduction in context consumption while improving performance."
       ]
@@ -411,25 +411,25 @@ let experience_section theme =
     ( "Teaching Assistant"
     , "Stony Brook University - Stony Brook, NY"
     , "January 2025 - December 2025"
-    , [ "Programming Abstractions (CSE 216): Led weekly recitations, exam review sessions, and office hours for a class of 100+ students, covering functional programming, object-orientation, type systems, memory management, program and data abstractions, parameter passing, modularity, version control, and parallel programming."
-      ; "Software Development (CSE 316): Incoming teaching assistant for fall 2025."
-      ; "Helped develop course materials, graded assignments/exams, and proctored exams to ensure smooth course operations."
+    , [ "Programming Abstractions (CSE 216): Led weekly recitations, exam review sessions, and office hours for a class of 125+ students, covering functional programming, type systems, memory management, modularity, version control, and parallel programming."
+      ; "Software Development (CSE 316): Led office hours and exam review sessions for a class of 125+ students, covering systematic design, development and testing of software systems, Web programming, databases, secure computing, and version control for large, robust programs."
+      ; "Helped revise course materials, graded assignments/exams, and proctored exams to ensure smooth course operations."
       ]
     );
     ( "Student Software Developer"
     , "Stony Brook University VIP Program - Stony Brook, NY"
     , "September 2024 - Present"
-    , [ "Develop a mobile app to help SBU clinicians monitor patients' post-surgery recovery progress by combining Apple Health data and custom forms to analyze their health via the HealthKit and ResearchKit frameworks."
-      ; "Lead the HealthByte subteam, creating resources for onboarding new team members, delegating tasks, and organizing meetings."
-      ; "Develop a full-stack Next.js web application for clinicians to interact with patient data gathered via the mobile app, with centralized authentication and database management for both applications."
+    , [ "Led the HealthByte subteam and its development, delegating tasks, onboarding new members, and organizing meetings."
+      ; "Developed prototype patient-facing iOS and clinician-facing full-stack web applications for monitoring post-surgery recovery using Apple Health data and custom forms, with a centralized database and auth across both platforms."
+      ; "Developing Regio Vinco, an interactive web-based geography educational game helping elementary and middle school students better understand world geography."
       ]
     );
     ( "Full Stack Developer"
     , "QuattronKids - Remote"
     , "July 2024 - May 2025"
     , [ "Led full-stack development of PenguinLearn, a RESTful educational platform using Next.js, React, Supabase, and Prisma ORM, enabling migration from third-party hosting and reducing operational costs by ∼20%."
-      ; "Implemented a real-time messaging system within the platform for direct communication between parents and teachers."
-      ; "Developed comprehensive test suites using Jest for unit testing and Playwright for end-to-end testing, ensuring platform reliability."
+      ; "Implemented an on-site real-time messaging system for direct communication between parents and teachers, integrated Stripe payment processing, and automated class meeting scheduling via the Zoom API."
+      ; "Built test suites with Jest and Playwright and set up a CI/CD pipeline, ensuring reliability and streamlined deployments."
       ]
     );
     ( "Teaching Assistant"
@@ -525,17 +525,17 @@ let skills_section theme =
     | Dark -> Vdom.Attr.create "style" "color: #cbd5e0;"
   in
   let skills = [
-    ( "Languages/Databases"
-    , [ "Java"; "Python"; "SQL (PostgreSQL, SQLite)"; "MongoDB"; "Pinecone"; "Bash"; "C"; "OCaml"; "JavaScript"; "PHP"; "Swift" ]
+    ( "Languages"
+    , [ "Java"; "Python"; "Bash"; "SQL"; "C"; "OCaml"; "JavaScript"; "TypeScript"; "PHP"; "Swift" ]
     );
-    ( "Frameworks/Runtimes"
-    , [ "Next.js"; "Express.js"; "Node.js"; "Playwright"; "Flask"; "Tailwind CSS" ]
+    ( "Frameworks"
+    , [ "Next.js"; "Express.js"; "React.js"; "Vue.js"; "Node.js"; "FastAPI"; "Flask"; "PyTorch"; "Hugging Face"; "scikit-learn"; "pytest"; "Playwright"; "Jest" ]
     );
-    ( "Libraries"
-    , [ "NumPy"; "scikit-learn"; "pandas"; "Beautiful Soup"; "Selenium WebDriver"; "React"; "jQuery"; "pytest"; "Jest" ]
+    ( "Tools"
+    , [ "PostgreSQL"; "MySQL"; "SQLite"; "MongoDB"; "Redis"; "Pinecone"; "Git"; "Docker"; "Kubernetes"; "Slurm"; "GitHub Actions"; "Ansible"; "Terraform"; "Google Cloud Platform (GCP)"; "Amazon Web Services (AWS)"; "Beautiful Soup"; "Selenium WebDriver"; "jQuery"; "Prisma ORM" ]
     );
-    ( "Developer/DevOps Tools"
-    , [ "Git"; "Docker"; "GitHub Actions"; "Ansible"; "Terraform"; "Jira"; "Slurm"; "AWS"; "GCP"; "GKE"; "OpenAI API"; "Prisma ORM" ]
+    ( "Concepts"
+    , [ "RESTful APIs"; "Agile Development"; "Machine Learning"; "Natural Language Processing (NLP)"; "High Performance Computing (HPC)"; "Linux"; "Unix"; "LLMs"; "MCP (Model Context Protocol)" ]
     );
   ] in
   Vdom.Node.div

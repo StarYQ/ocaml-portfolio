@@ -5,7 +5,7 @@ type project_filter =
   | Mobile
   | Backend
   | AI
-  | Quant
+  | Trading
 [@@deriving sexp, equal, compare]
 
 (** Project data type for portfolio projects *)
@@ -29,7 +29,7 @@ let filter_to_string = function
   | Mobile -> "Mobile"
   | Backend -> "Backend"
   | AI -> "AI"
-  | Quant -> "Quant"
+  | Trading -> "Trading"
 
 (** Blog post data type for articles/words section *)
 type blog_post = {
