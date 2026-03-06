@@ -6,14 +6,14 @@ let portfolio_projects = [
   {
     id = "prediction-market-bot";
     title = "Prediction Market Maker Bot";
-    description = "Developing a market-making system for prediction markets on Polymarket (US exchange currently in closed beta). Stats will be regularly updated";
+    description = "Market-making system for prediction markets on Polymarket (US exchange currently in closed beta). Stats will be regularly updated";
     long_description = "Developing a market-making system for prediction markets on Polymarket, a US-based prediction market exchange currently in closed beta. The system implements automated market-making strategies to provide liquidity and capture spreads.";
     tags = ["trading"];
     tech_stack = ["Python"; "Redis"; "PM2"; "AWS EC2"];
     github_url = None;
-    demo_url = None;
+    demo_url = Some "https://lbtradingllc.com/polymarket";
     current = true;
-    description_link = Some ("here", "https://lbtradingllc.com");
+    description_link = Some ("here", "https://lbtradingllc.com/polymarket");
   };
   {
     id = "ta-tools";
@@ -34,7 +34,7 @@ let portfolio_projects = [
     description = "";
     long_description = "My personal portfolio website, written entirely in OCaml.";
     tags = ["web"; "ocaml"; "fullstack"];
-    tech_stack = ["OCaml"; "Js_of_ocaml"; "Bonsai"; "Dream"; "Dune"];
+    tech_stack = ["OCaml"; "Js_of_ocaml"; "Bonsai"; "Dream"; "Dune"; "Cloudflare"; "GitHub Actions"];
     github_url = Some "https://github.com/StarYQ/ocaml-portfolio";
     demo_url = Some "https://arnabb.dev/";
     current = false;
@@ -73,7 +73,7 @@ let portfolio_projects = [
     long_description = "Built a Chrome extension that uses a GPT model fine-tuned on self-curated labeled data to analyze user-selected text about health and nutrition, automatically querying Wolfram Alpha's Full Results API for factual validation. Parsed claims, generated optimized Wolfram queries, and re-integrated verified results into GPT for more accurate verdicts. Implemented interactive charts with Chart.js and color-coded verdicts for quick, intuitive accuracy assessments.";
     tags = ["ai"; "web"];
     tech_stack = ["Python"; "Flask"; "JavaScript"; "OpenAI API"; "Wolfram Alpha API"];
-    github_url = None;
+    github_url = Some "https://github.com/TheGordon/NutriProof";
     demo_url = Some "https://devpost.com/software/nutriproof";
     current = false;
     description_link = None;

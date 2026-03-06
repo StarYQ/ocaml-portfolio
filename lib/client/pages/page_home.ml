@@ -637,7 +637,8 @@ let features_section theme =
       )
     ; ( "Experience"
       , "Professional Background"
-      , [ "Prev Compute Platform Engineering Intern @ GlaxoSmithKline"
+      , [ "Incoming Software Engineering Intern @ CoreWeave"
+        ; "Prev Compute Platform Engineering Intern @ GlaxoSmithKline"
         ; "Prev Full Stack Developer @ QuattronKids"
         ]
       )
