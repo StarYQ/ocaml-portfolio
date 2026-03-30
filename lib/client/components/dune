@@ -1,5 +1,5 @@
 (library
- (public_name portfolio20240602.client.components)
+ (public_name ocaml_portfolio.client.components)
  (name components)
  (modules
    components

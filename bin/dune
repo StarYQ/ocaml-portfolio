@@ -1,5 +1,5 @@
 (executable
- (public_name portfolio20240602)
+ (public_name ocaml_portfolio)
  (name main)
  (libraries server)
 )

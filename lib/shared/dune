@@ -1,5 +1,5 @@
 (library
- (public_name portfolio20240602.shared)
+ (public_name ocaml_portfolio.shared)
  (name shared)
  (modules Types Data)
  (libraries core ppx_typed_fields.typed_variants_lib str)

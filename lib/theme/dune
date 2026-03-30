@@ -1,5 +1,5 @@
 (library
- (public_name portfolio20240602.theme)
+ (public_name ocaml_portfolio.theme)
  (name theme)
  (modules theme)
  (libraries 

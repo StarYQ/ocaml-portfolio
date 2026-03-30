@@ -1,5 +1,5 @@
 (library
- (public_name portfolio20240602.lib)
+ (public_name ocaml_portfolio.lib)
  (name lib)
  (modules)
  (libraries 

@@ -1,11 +1,11 @@
 (lang dune 3.15)
 
-(name portfolio20240602)
+(name ocaml_portfolio)
 
 (generate_opam_files true)
 
 (source
- (github username/reponame))
+ (github StarYQ/ocaml-portfolio))
 
 (authors "Arnab Bhowmik")
 
@@ -13,10 +13,8 @@
 
 (license LICENSE)
 
-(documentation https://url/to/documentation)
-
 (package
- (name portfolio20240602)
+ (name ocaml_portfolio)
  (synopsis "OCaml Portfolio Website")
  (description
   "A portfolio website built entirely in OCaml using Dream backend and Bonsai Web frontend")

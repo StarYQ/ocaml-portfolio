@@ -1,5 +1,5 @@
 (library
- (public_name portfolio20240602.client.pages)
+ (public_name ocaml_portfolio.client.pages)
  (name pages)
  (modules
   pages

@@ -1,5 +1,5 @@
 (library
- (public_name portfolio20240602.server)
+ (public_name ocaml_portfolio.server)
  (name server)
  (modules
   router
