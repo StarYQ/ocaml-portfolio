@@ -152,11 +152,13 @@ let component ~theme ~set_theme =
   in
   
   Vdom.Node.div
-    ~attrs:[]
+    ~attrs:[Vdom.Attr.style (Css_gen.create ~field:"display" ~value:"contents")]
     [
       (* Main Navigation Bar *)
       Vdom.Node.create "nav"
-        ~attrs:[Styles.navbar]
+        ~attrs:[
+          Styles.navbar;
+        ]
         [
           Vdom.Node.div
             ~attrs:[Styles.nav_container]

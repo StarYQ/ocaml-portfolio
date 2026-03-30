@@ -75,33 +75,34 @@ module Styles = [%css stylesheet {|
     background: var(--nav-link-bg-hover);
   }
   
-  /* Active link with animated underline */
+  /* Underline pseudo-element for all nav links (hidden by default) */
+  .nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 1rem;
+    right: 1rem;
+    height: 2px;
+    background: currentColor;
+    border-radius: 1px;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.3s ease;
+  }
+
+  /* Slide underline in on hover */
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Active link with persistent underline */
   .nav-link.active {
     color: var(--nav-text-hover);
     font-weight: 600;
   }
-  
+
   .nav-link.active::after {
-    content: "";
-    position: absolute;
-    bottom: -2px;
-    left: 1rem;
-    right: 1rem;
-    height: 2px;
-    background: var(--nav-text-hover);
-    animation: slideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    border-radius: 1px;
-  }
-  
-  @keyframes slideIn {
-    from {
-      transform: scaleX(0);
-      opacity: 0;
-    }
-    to {
-      transform: scaleX(1);
-      opacity: 1;
-    }
+    transform: scaleX(1);
   }
   
   /* Mobile controls container */
