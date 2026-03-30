@@ -37,7 +37,7 @@ let portfolio_projects = [
     tech_stack = ["OCaml"; "Js_of_ocaml"; "Bonsai"; "Dream"; "Dune"; "Cloudflare"; "GitHub Actions"];
     github_url = Some "https://github.com/StarYQ/ocaml-portfolio";
     demo_url = Some "https://arnabb.dev/";
-    current = false;
+    current = true;
     description_link = None;
   };
   
@@ -50,7 +50,7 @@ let portfolio_projects = [
     tech_stack = ["Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API"];
     github_url = Some "https://github.com/tarunvaid05/Seawolf-Accessibility";
     demo_url = Some "https://seawolf-accessibility.up.railway.app/";
-    current = true;
+    current = false;
     description_link = None;
   };
   
