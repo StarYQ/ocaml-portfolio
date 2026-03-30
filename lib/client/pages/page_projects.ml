@@ -173,14 +173,20 @@ let project_card_component ~project ~theme =
   let%sub accordion = project_accordion_component ~project ~theme in
   
   let%arr accordion = accordion
-  and project = project in
-  
-  
+  and project = project
+  and theme = theme in
+
+
+  let card_border_style =
+    match theme with
+    | Light -> Vdom.Attr.create "style" "border: 1px solid #e2e8f0"
+    | Dark -> Vdom.Attr.create "style" "border: 1px solid #4a5568"
+  in
   Vdom.Node.div
     ~attrs:(if project.Types.current then
       [Styles.project_card; Styles.current]
     else
-      [Styles.project_card])
+      [Styles.project_card; card_border_style])
     [
       (* Current badge if applicable *)
       (if project.current then
@@ -313,11 +319,17 @@ let component ?(theme = Bonsai.Value.return Light) () =
   and search_query = search_query
   and set_search = set_search
   and filtered_projects = filtered_projects
-  and project_cards = project_cards in
+  and project_cards = project_cards
+  and theme = theme in
   
   let project_count = List.length filtered_projects in
-  
-  
+  let search_border_style =
+    match theme with
+    | Light -> Vdom.Attr.create "style" "border: 1px solid #cbd5e0"
+    | Dark -> Vdom.Attr.create "style" "border: 1px solid #4a5568"
+  in
+
+
   Vdom.Node.div
     ~attrs:[Styles.gallery]
     [
@@ -332,7 +344,7 @@ let component ?(theme = Bonsai.Value.return Light) () =
             ~attrs:[Styles.gallery_subtitle]
             [Vdom.Node.text ""]
         ];
-      
+
       (* Controls section *)
       Vdom.Node.div
         ~attrs:[Styles.controls_section]
@@ -345,6 +357,7 @@ let component ?(theme = Bonsai.Value.return Light) () =
               Vdom.Node.input
                 ~attrs:[
                   Styles.search_input;
+                  search_border_style;
                   Vdom.Attr.type_ "text";
                   Vdom.Attr.placeholder "Search projects, technologies...";
                   Vdom.Attr.value search_query;

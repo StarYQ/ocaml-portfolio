@@ -60,7 +60,6 @@ module Styles = [%css stylesheet {|
   .search_input {
     width: 100%;
     padding: 0.875rem 1.25rem 0.875rem 3rem;
-    border: 1px solid var(--input-border) !important;
     border-radius: 50px;
     font-size: 1rem;
     transition: all 0.3s ease;
@@ -160,7 +159,6 @@ module Styles = [%css stylesheet {|
   /* Project card */
   .project_card {
     background: var(--card-bg);
-    border: 1px solid var(--card-border) !important;
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 4px 6px var(--card-shadow);
