@@ -380,6 +380,7 @@ module Styles = [%css stylesheet {|
     transition: all 0.3s ease;
     padding: 0.5rem 1rem;
     border-radius: 8px;
+    border: 1px solid rgba(102, 126, 234, 0.3);
   }
   
   .card_link:hover {
