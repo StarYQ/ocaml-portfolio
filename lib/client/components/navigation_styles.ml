@@ -301,12 +301,12 @@ module Styles = [%css stylesheet {|
     height: 40px;
   }
   
-  /* Sliding theme toggle styles (legacy) */
+  /* Sliding theme toggle styles */
   .theme-toggle {
     width: 60px;
     height: 30px;
-    background: rgba(255, 255, 255, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #e2e8f0;
+    border: 1px solid #cbd5e0;
     border-radius: 15px;
     position: relative;
     cursor: pointer;
@@ -316,17 +316,17 @@ module Styles = [%css stylesheet {|
     align-items: center;
     padding: 0;
   }
-  
+
   .theme-toggle:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: #cbd5e0;
+    border-color: #a0aec0;
   }
-  
+
   .theme-toggle:focus-visible {
-    outline: 2px solid white;
+    outline: 2px solid #667eea;
     outline-offset: 2px;
   }
-  
+
   /* Dark mode toggle background */
   .theme-toggle.dark {
     background: rgba(0, 0, 0, 0.3);
@@ -341,7 +341,7 @@ module Styles = [%css stylesheet {|
     background: white;
     border-radius: 50%;
     top: 1px;
-    left: 2px;
+    left: 1px;
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     align-items: center;
