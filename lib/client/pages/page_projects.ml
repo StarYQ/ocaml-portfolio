@@ -13,6 +13,7 @@ module Styles = Project_styles.Styles
 let search_icon =
   Vdom.Node.create_svg "svg"
     ~attrs:[
+      Styles.search_icon;
       Vdom.Attr.create "width" "20";
       Vdom.Attr.create "height" "20";
       Vdom.Attr.create "viewBox" "0 0 24 24";
