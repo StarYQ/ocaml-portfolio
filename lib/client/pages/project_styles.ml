@@ -191,25 +191,39 @@ module Styles = [%css stylesheet {|
   }
   
   .project_card.current {
-    border: 2px solid #8b5cf6 !important;
-    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1), 0 4px 12px rgba(139, 92, 246, 0.2);
-    background: var(--card-bg);
+    /* Current cards use the same subtle border as non-current (applied inline) */
   }
-  
-  .current_badge {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    /* Match tech_item badge styling */
+
+  .gradient_bar {
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #8b5cf6, #764ba2);
+    border-radius: 16px 16px 0 0;
+  }
+
+  .current_pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
     background: rgba(139, 92, 246, 0.1);
     color: #8b5cf6;
-    border: 1px solid #8b5cf6;
-    padding: 0.25rem 0.5rem;
-    border-radius: 0.375rem;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    padding: 0.15rem 0.5rem;
+    border-radius: 50px;
+  }
+
+  .pulse_dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #8b5cf6;
+    display: inline-block;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
   }
   
   /* Card header */

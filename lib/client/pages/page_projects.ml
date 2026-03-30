@@ -184,15 +184,15 @@ let project_card_component ~project ~theme =
   in
   Vdom.Node.div
     ~attrs:(if project.Types.current then
-      [Styles.project_card; Styles.current]
+      [Styles.project_card; Styles.current; card_border_style]
     else
       [Styles.project_card; card_border_style])
     [
-      (* Current badge if applicable *)
+      (* Gradient accent bar for current projects *)
       (if project.current then
         Vdom.Node.div
-          ~attrs:[Styles.current_badge]
-          [Vdom.Node.text "Current"]
+          ~attrs:[Styles.gradient_bar]
+          []
       else
         Vdom.Node.none);
       
@@ -202,7 +202,14 @@ let project_card_component ~project ~theme =
         [
           Vdom.Node.h3
             ~attrs:[Styles.card_title]
-            [Vdom.Node.text project.title];
+            (if project.current then
+              [Vdom.Node.text project.title;
+               Vdom.Node.span
+                 ~attrs:[Styles.current_pill]
+                 [Vdom.Node.span ~attrs:[Styles.pulse_dot] [];
+                  Vdom.Node.text "CURRENT"]]
+            else
+              [Vdom.Node.text project.title]);
           Vdom.Node.p
             ~attrs:[Styles.card_description]
             (match project.description_link with
