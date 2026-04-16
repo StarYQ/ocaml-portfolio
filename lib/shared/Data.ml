@@ -11,9 +11,9 @@ let portfolio_projects = [
     tags = ["trading"];
     tech_stack = ["Python"; "Redis"; "PM2"; "AWS EC2"];
     github_url = None;
-    demo_url = Some "https://lbtradingllc.com/polymarket";
+    demo_url = Some "https://lbtradingllc.com/polymarket-us";
     current = true;
-    description_link = Some ("here", "https://lbtradingllc.com/polymarket");
+    description_link = Some ("here", "https://lbtradingllc.com/polymarket-us");
   };
   {
     id = "ta-tools";
