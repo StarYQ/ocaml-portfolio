@@ -27,6 +27,36 @@ module Styles = [%css
         gap: 0.75rem;
       }
 
+      .detail_stats_board {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+        border-top: 1px solid var(--border-color);
+        border-left: 1px solid var(--border-color);
+      }
+
+      .detail_stat_cell {
+        padding: 1.25rem;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .detail_stat_value {
+        margin: 0;
+        font-size: clamp(1.85rem, 3.4vw, 2.25rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+        font-weight: 500;
+        white-space: nowrap;
+      }
+
+      .detail_stat_label {
+        margin: 0.45rem 0 0;
+        color: var(--text-tertiary);
+        font-size: 0.72rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+      }
+
       .not_found {
         padding: 4rem 0;
       }
@@ -82,12 +112,12 @@ let project_view (project : project) =
          Vdom.Node.section
            ~attrs:[ Ui.section ]
            [ Vdom.Node.div
-               ~attrs:[ Ui.container; Ui.stats_board ]
+               ~attrs:[ Ui.container; Styles.detail_stats_board ]
                (List.map project.stats ~f:(fun stat ->
                     Vdom.Node.div
-                      ~attrs:[ Ui.stat_cell ]
-                      [ Vdom.Node.p ~attrs:[ Ui.stat_value ] [ Vdom.Node.text stat.value ]
-                      ; Vdom.Node.p ~attrs:[ Ui.stat_label ] [ Vdom.Node.text stat.label ]
+                      ~attrs:[ Styles.detail_stat_cell ]
+                      [ Vdom.Node.p ~attrs:[ Styles.detail_stat_value ] [ Vdom.Node.text stat.value ]
+                      ; Vdom.Node.p ~attrs:[ Styles.detail_stat_label ] [ Vdom.Node.text stat.label ]
                       ]))
            ])
     ; Vdom.Node.section

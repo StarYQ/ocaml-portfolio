@@ -16,7 +16,7 @@ module Styles = [%css
       }
 
       .featured_card {
-        padding: 3rem 0;
+        padding: 3rem 1.5rem;
       }
 
       .featured_row {
@@ -146,7 +146,7 @@ module Styles = [%css
 
       @media (min-width: 768px) {
         .featured_card {
-          padding: 5rem 0;
+          padding: 5rem 2rem;
         }
 
         .featured_row {
