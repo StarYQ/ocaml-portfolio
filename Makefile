@@ -32,5 +32,5 @@ clean:
 # Check bundle size
 check-size:
 	@echo "Bundle sizes:"
-	@ls -lh _build/default/lib/client_main/main.bc.js 2>/dev/null || echo "Development build not found"
-	@ls -lh _build/release/lib/client_main/main.bc.js 2>/dev/null || echo "Production build not found"
+	@ls -lh _build/default/lib/client_main/main.bc.js 2>/dev/null || echo "Current bundle not found"
+	@echo "Dune writes release-profile JS to the same _build/default path; run 'make build-prod' before this target to inspect the optimized size."

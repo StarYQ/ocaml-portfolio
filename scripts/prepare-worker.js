@@ -12,9 +12,8 @@ console.log('🚀 Preparing Cloudflare Workers deployment...\n');
 
 // Create dist directory if it doesn't exist
 const distDir = path.join(__dirname, '..', 'dist');
-if (!fs.existsSync(distDir)) {
-  fs.mkdirSync(distDir, { recursive: true });
-}
+fs.rmSync(distDir, { recursive: true, force: true });
+fs.mkdirSync(distDir, { recursive: true });
 
 // Create necessary subdirectories
 const dirs = [
@@ -156,31 +155,40 @@ if (!jsFound) {
   process.exit(1);
 }
 
-// Copy static assets (resume.pdf, etc.)
-const staticAssets = [
-  { src: 'static/resume.pdf', dest: 'static/resume.pdf' },
-  { src: 'static/ocaml-logo.svg', dest: 'static/ocaml-logo.svg' }
-];
+// Copy all static assets used by the app.
+const staticSourceDir = path.join(__dirname, '..', 'static');
+const staticDestDir = path.join(distDir, 'static');
 
-staticAssets.forEach(asset => {
-  const srcPath = path.join(__dirname, '..', asset.src);
-  const destPath = path.join(distDir, asset.dest);
+function copyStaticAssets(sourceDir, destDir, relativeDir = '') {
+  if (!fs.existsSync(sourceDir)) {
+    console.log('⚠️  Skipping static assets (static/ directory not found)');
+    return;
+  }
 
-  if (fs.existsSync(srcPath)) {
-    // Ensure destination directory exists
-    const destDir = path.dirname(destPath);
-    if (!fs.existsSync(destDir)) {
-      fs.mkdirSync(destDir, { recursive: true });
+  const entries = fs.readdirSync(sourceDir, { withFileTypes: true });
+
+  entries.forEach(entry => {
+    const relativePath = path.join(relativeDir, entry.name);
+    const srcPath = path.join(sourceDir, entry.name);
+    const destPath = path.join(destDir, entry.name);
+
+    if (entry.isDirectory()) {
+      fs.mkdirSync(destPath, { recursive: true });
+      copyStaticAssets(srcPath, destPath, relativePath);
+      return;
     }
 
+    fs.mkdirSync(path.dirname(destPath), { recursive: true });
     fs.copyFileSync(srcPath, destPath);
+
     const stats = fs.statSync(destPath);
     const fileSizeInKB = (stats.size / 1024).toFixed(2);
-    console.log(`✓ Copied ${asset.src} (${fileSizeInKB} KB)`);
-  } else {
-    console.log(`⚠️  Skipping ${asset.src} (not found)`);
-  }
-});
+    const displayPath = path.posix.join('static', relativePath.replace(/\\/g, '/'));
+    console.log(`✓ Copied ${displayPath} (${fileSizeInKB} KB)`);
+  });
+}
+
+copyStaticAssets(staticSourceDir, staticDestDir);
 
 // Create a manifest file for debugging
 const manifest = {
