@@ -36,7 +36,43 @@ const indexContent = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio Website created using functional web development with Bonsai and Dream">
     <title>arnab bhowmik</title>
+    <script>
+        (function() {
+            var theme = 'dark';
+            try {
+                var storedTheme = window.localStorage && window.localStorage.getItem('theme');
+                if (storedTheme === 'light' || storedTheme === 'dark') {
+                    theme = storedTheme;
+                }
+            } catch (_) {}
+            document.documentElement.classList.add(theme + '-theme');
+        })();
+    </script>
     <style>
+        @font-face {
+            font-family: 'JetBrains Mono';
+            font-style: normal;
+            font-weight: 100 800;
+            font-display: swap;
+            src: url('/static/fonts-jetbrains-mono-latin.woff2') format('woff2');
+        }
+
+        :root, .light-theme {
+            --bg-primary: #f5f2ea;
+            --text-primary: #111111;
+            --text-secondary: rgba(17, 17, 17, 0.76);
+            --border-strong: rgba(17, 17, 17, 0.72);
+            --spinner-track: rgba(17, 17, 17, 0.1);
+        }
+
+        .dark-theme {
+            --bg-primary: #0f0f10;
+            --text-primary: #f4f1ea;
+            --text-secondary: rgba(244, 241, 234, 0.8);
+            --border-strong: rgba(244, 241, 234, 0.8);
+            --spinner-track: rgba(255, 255, 255, 0.1);
+        }
+
         /* Base styles */
         * {
             margin: 0;
@@ -45,9 +81,10 @@ const indexContent = `<!DOCTYPE html>
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: 'JetBrains Mono', monospace;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             min-height: 100vh;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
@@ -62,19 +99,21 @@ const indexContent = `<!DOCTYPE html>
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            font-size: 1.2rem;
-            color: #666;
+            gap: 1rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--text-primary);
         }
         
         /* Loading spinner */
         .spinner {
-            border: 3px solid rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--spinner-track);
             border-radius: 50%;
-            border-top: 3px solid #333;
+            border-top: 3px solid var(--border-strong);
             width: 40px;
             height: 40px;
             animation: spin 1s linear infinite;
-            margin-right: 1rem;
         }
         
         @keyframes spin {
@@ -82,18 +121,9 @@ const indexContent = `<!DOCTYPE html>
             100% { transform: rotate(360deg); }
         }
         
-        /* Dark mode loading */
-        body.dark-theme .loading {
-            color: #ccc;
-        }
-        
-        body.dark-theme .spinner {
-            border-color: rgba(255, 255, 255, 0.1);
-            border-top-color: #fff;
-        }
     </style>
 </head>
-<body class="light-theme">
+<body>
     <div id="app">
         <div class="loading">
             <div class="spinner"></div>
