@@ -27,6 +27,24 @@ module Styles = [%css
         gap: 0.75rem;
       }
 
+      .project_subtitle {
+        margin: 1rem 0 0;
+        max-width: 42rem;
+        color: inherit;
+        opacity: 0.7;
+        font-size: clamp(0.95rem, 1.2vw, 1.125rem);
+        line-height: 1.55;
+      }
+
+      .project_year {
+        margin: 1.5rem 0 0;
+        color: inherit;
+        opacity: 0.5;
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+
       .detail_stats_board {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
@@ -102,8 +120,8 @@ let project_view (project : project) =
             ~attrs:[ Ui.container ]
             [ Vdom.Node.p ~attrs:[ Ui.eyebrow ] [ Vdom.Node.text project.id ]
             ; Vdom.Node.h1 ~attrs:[ Ui.page_title ] [ Vdom.Node.text project.title ]
-            ; Vdom.Node.p ~attrs:[ Ui.body_text ] [ Vdom.Node.text project.subtitle ]
-            ; Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text project.year ]
+            ; Vdom.Node.p ~attrs:[ Styles.project_subtitle ] [ Vdom.Node.text project.subtitle ]
+            ; Vdom.Node.p ~attrs:[ Styles.project_year ] [ Vdom.Node.text project.year ]
             ]
         ]
     ; (if List.is_empty project.stats
