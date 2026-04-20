@@ -169,6 +169,7 @@ let portfolio_projects =
 let work_experiences =
   [ { id = "001"
     ; company = "COREWEAVE"
+    ; logo_file = Some "coreweave_logo.jpg"
     ; role = "Software Engineering Intern"
     ; team = "Cloud Platform API / IAM"
     ; location = "New York, NY"
@@ -178,6 +179,7 @@ let work_experiences =
     }
   ; { id = "002"
     ; company = "GLAXOSMITHKLINE"
+    ; logo_file = Some "gsk-logo.png"
     ; role = "Compute Platform Engineering Intern"
     ; team = "HPC & Cloud Infrastructure"
     ; location = "Seattle, WA"
@@ -191,6 +193,7 @@ let work_experiences =
     }
   ; { id = "003"
     ; company = "STONY BROOK UNIVERSITY"
+    ; logo_file = Some "sbu-logo.png"
     ; role = "Teaching Assistant"
     ; team = "CSE 216 & CSE 316"
     ; location = "Stony Brook, NY"
@@ -204,6 +207,7 @@ let work_experiences =
     }
   ; { id = "004"
     ; company = "STONY BROOK VIP PROGRAM"
+    ; logo_file = Some "sbu-logo.png"
     ; role = "Student Software Developer"
     ; team = "HealthByte & Regio Vinco"
     ; location = "Stony Brook, NY"
@@ -217,6 +221,7 @@ let work_experiences =
     }
   ; { id = "005"
     ; company = "QUATTRONKIDS / PENGUINLEARN"
+    ; logo_file = Some "penguinlearn-logo.png"
     ; role = "Full Stack Developer"
     ; team = "Core Platform"
     ; location = "Remote"
@@ -230,6 +235,7 @@ let work_experiences =
     }
   ; { id = "006"
     ; company = "ABCMATH"
+    ; logo_file = Some "abcmath-logo.jpeg"
     ; role = "Teaching Assistant"
     ; team = "Programming, math, and science instruction"
     ; location = "Queens, NY"

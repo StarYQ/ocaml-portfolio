@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-04-20 - Work Page Experience Logos
+- Added optional `logo_file` support for work experiences so logos can be configured from shared data by filename only
+- Rendered company logos beside work entries with a responsive framed layout that tolerates different aspect ratios
+- Wired the current work experiences to use logo assets from `static/`
+
 ## 2026-04-20 - Default Dark Theme Shell
 - Made dark mode the immediate default on initial page load when no theme preference is stored
 - Updated the static app shell and generated Worker shell to apply the saved theme before the OCaml app mounts

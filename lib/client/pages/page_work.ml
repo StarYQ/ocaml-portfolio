@@ -25,6 +25,40 @@ module Styles = [%css
         gap: 0.4rem;
       }
 
+      .company_row {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .logo_frame {
+        width: clamp(5.5rem, 11vw, 7rem);
+        min-width: clamp(5.5rem, 11vw, 7rem);
+        height: clamp(3.5rem, 7vw, 4.5rem);
+        padding: 0.7rem 0.85rem;
+        border: 1px solid var(--border-color);
+        background: var(--surface-elevated);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .logo {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      .company_block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        min-width: min(100%, 16rem);
+        flex: 1;
+      }
+
       .company {
         margin: 0;
         font-size: clamp(1.35rem, 3vw, 2rem);
@@ -62,6 +96,19 @@ module Styles = [%css
       .bullet_marker {
         color: var(--text-tertiary);
       }
+
+      @media (max-width: 640px) {
+        .company_row {
+          gap: 0.85rem;
+        }
+
+        .logo_frame {
+          width: 5rem;
+          min-width: 5rem;
+          height: 3.25rem;
+          padding: 0.55rem 0.7rem;
+        }
+      }
     |}]
 
 let footer () =
@@ -82,6 +129,24 @@ let footer () =
         ]
     ]
 
+let logo_node (entry : experience) =
+  match entry.logo_file with
+  | None -> Vdom.Node.none
+  | Some filename ->
+    let logo_src = Components.Router.get_base_path () ^ "/static/" ^ filename in
+    Vdom.Node.div
+      ~attrs:[ Styles.logo_frame ]
+      [ Vdom.Node.create "img"
+          ~attrs:
+            [ Styles.logo
+            ; Vdom.Attr.src logo_src
+            ; Vdom.Attr.alt (entry.company ^ " logo")
+            ; Vdom.Attr.create "loading" "lazy"
+            ; Vdom.Attr.create "decoding" "async"
+            ]
+          []
+      ]
+
 let experience_entry (entry : experience) =
   let status_attrs =
     if String.equal entry.status "INCOMING"
@@ -97,9 +162,18 @@ let experience_entry (entry : experience) =
             [ Vdom.Node.p ~attrs:[ Ui.section_label ] [ Vdom.Node.text entry.id ]
             ; Vdom.Node.div
                 ~attrs:[ Styles.experience_header ]
-                [ Vdom.Node.h2 ~attrs:[ Styles.company ] [ Vdom.Node.text entry.company ]
-                ; Vdom.Node.p ~attrs:[ Styles.role ] [ Vdom.Node.text entry.role ]
-                ; Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text entry.team ]
+                [ Vdom.Node.div
+                    ~attrs:[ Styles.company_row ]
+                    [ logo_node entry
+                    ; Vdom.Node.div
+                        ~attrs:[ Styles.company_block ]
+                        [ Vdom.Node.h2
+                            ~attrs:[ Styles.company ]
+                            [ Vdom.Node.text entry.company ]
+                        ; Vdom.Node.p ~attrs:[ Styles.role ] [ Vdom.Node.text entry.role ]
+                        ; Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text entry.team ]
+                        ]
+                    ]
                 ]
             ]
         ; Vdom.Node.div

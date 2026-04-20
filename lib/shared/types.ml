@@ -40,6 +40,7 @@ type project =
 type experience =
   { id : string
   ; company : string
+  ; logo_file : string option
   ; role : string
   ; team : string
   ; location : string
