@@ -3,6 +3,7 @@ open Bonsai_web
 open Bonsai.Let_syntax
 open Virtual_dom
 open Components
+open Shared.Data
 
 module Ui = Styles.Editorial_styles.Styles
 
@@ -123,6 +124,16 @@ let footer () =
 let component ?(theme = Bonsai.Value.return Theme.Light) () =
   let%arr _theme = theme in
   let profile_path = Router.get_base_path () ^ "/static/profile.png" in
+  let home_stats =
+    [ Int.to_string (List.length portfolio_projects), "PROJECTS"
+    ; Int.to_string
+        (List.count work_experiences ~f:(fun experience ->
+             String.is_substring experience.role ~substring:"Intern"))
+      , "INTERNSHIPS"
+    ; "3.83", "GPA"
+    ; "2027", "GRADUATING"
+    ]
+  in
   Vdom.Node.div
     ~attrs:[ Ui.page; Styles.page_shell ]
     [ Vdom.Node.section
@@ -190,27 +201,12 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
         ~attrs:[ Ui.section ]
         [ Vdom.Node.div
             ~attrs:[ Ui.container; Ui.stats_board ]
-            [ Vdom.Node.div
-                ~attrs:[ Ui.stat_cell ]
-                [ Vdom.Node.p ~attrs:[ Ui.stat_value ] [ Vdom.Node.text "$100K+" ]
-                ; Vdom.Node.p ~attrs:[ Ui.stat_label ] [ Vdom.Node.text "TRADING PROFIT" ]
-                ]
-            ; Vdom.Node.div
-                ~attrs:[ Ui.stat_cell ]
-                [ Vdom.Node.p ~attrs:[ Ui.stat_value ] [ Vdom.Node.text "3.83" ]
-                ; Vdom.Node.p ~attrs:[ Ui.stat_label ] [ Vdom.Node.text "GPA" ]
-                ]
-            ; Vdom.Node.div
-                ~attrs:[ Ui.stat_cell ]
-                [ Vdom.Node.p ~attrs:[ Ui.stat_value ] [ Vdom.Node.text "8.5M+" ]
-                ; Vdom.Node.p ~attrs:[ Ui.stat_label ] [ Vdom.Node.text "CONTRACTS TRADED" ]
-                ]
-            ; Vdom.Node.div
-                ~attrs:[ Ui.stat_cell ]
-                [ Vdom.Node.p ~attrs:[ Ui.stat_value ] [ Vdom.Node.text "2027" ]
-                ; Vdom.Node.p ~attrs:[ Ui.stat_label ] [ Vdom.Node.text "GRADUATING" ]
-                ]
-            ]
+            (List.map home_stats ~f:(fun (value, label) ->
+                 Vdom.Node.div
+                   ~attrs:[ Ui.stat_cell ]
+                   [ Vdom.Node.p ~attrs:[ Ui.stat_value ] [ Vdom.Node.text value ]
+                   ; Vdom.Node.p ~attrs:[ Ui.stat_label ] [ Vdom.Node.text label ]
+                   ]))
         ]
     ; footer ()
     ]
