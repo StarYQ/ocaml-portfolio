@@ -8,7 +8,7 @@ open Shared.Types
 module Ui = Styles.Editorial_styles.Styles
 
 module Styles = [%css
-  stylesheet
+  stylesheet ~dont_hash_prefixes:[ "--" ]
     {|
       .experience_list {
         display: flex;

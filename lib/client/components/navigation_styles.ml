@@ -1,7 +1,7 @@
 open! Core
 
 module Styles = [%css
-  stylesheet
+  stylesheet ~dont_hash_prefixes:[ "--" ]
     {|
       .navbar {
         position: fixed;
@@ -9,8 +9,7 @@ module Styles = [%css
         left: 0;
         right: 0;
         z-index: 1000;
-        background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
-        backdrop-filter: blur(10px);
+        background: var(--bg-primary);
         border-bottom: 1px solid var(--border-color);
       }
 
@@ -27,7 +26,7 @@ module Styles = [%css
         color: var(--text-primary);
         text-decoration: none;
         font-size: 0.78rem;
-        font-weight: 700;
+        font-weight: 500;
         letter-spacing: 0.22em;
         text-transform: uppercase;
       }

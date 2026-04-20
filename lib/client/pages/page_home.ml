@@ -7,7 +7,7 @@ open Components
 module Ui = Styles.Editorial_styles.Styles
 
 module Styles = [%css
-  stylesheet
+  stylesheet ~dont_hash_prefixes:[ "--" ]
     {|
       .hero {
         min-height: calc(100vh - 4.4rem);
@@ -29,6 +29,15 @@ module Styles = [%css
         gap: 1.25rem;
       }
 
+      .desktop_photo {
+        display: none;
+      }
+
+      .mobile_photo {
+        display: block;
+        margin-top: 1.75rem;
+      }
+
       .hero_body {
         margin-top: 2rem;
         display: grid;
@@ -48,9 +57,17 @@ module Styles = [%css
           padding: 3.5rem 2rem 3rem;
         }
 
+        .desktop_photo {
+          display: block;
+        }
+
         .hero_body {
           grid-template-columns: minmax(0, 1fr) auto;
           align-items: end;
+        }
+
+        .mobile_photo {
+          display: none;
         }
       }
     |}]
@@ -106,7 +123,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                     ~attrs:[ Ui.eyebrow ]
                     [ Vdom.Node.text "001 — SOFTWARE ENGINEER" ]
                 ; Vdom.Node.div
-                    ~attrs:[ Ui.photo_frame ]
+                    ~attrs:[ Styles.desktop_photo; Ui.photo_frame ]
                     [ Vdom.Node.create "img"
                         ~attrs:
                           [ Ui.photo_image
@@ -121,6 +138,16 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.text "ARNAB"
                 ; Vdom.Node.create "br" []
                 ; Vdom.Node.text "BHOWMIK"
+                ]
+            ; Vdom.Node.div
+                ~attrs:[ Styles.mobile_photo; Ui.photo_frame ]
+                [ Vdom.Node.create "img"
+                    ~attrs:
+                      [ Ui.photo_image
+                      ; Vdom.Attr.src profile_path
+                      ; Vdom.Attr.alt "Arnab Bhowmik portrait"
+                      ]
+                    []
                 ]
             ; Vdom.Node.div
                 ~attrs:[ Styles.hero_body ]

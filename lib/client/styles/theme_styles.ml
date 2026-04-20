@@ -1,7 +1,7 @@
 open! Core
 
 module Styles = [%css
-  stylesheet
+  stylesheet ~dont_hash_prefixes:[ "--" ]
     {|
       :root, .light-theme {
         --bg-primary: #f5f2ea;
@@ -15,7 +15,7 @@ module Styles = [%css
         --border-strong: rgba(17, 17, 17, 0.72);
         --focus-ring: rgba(17, 17, 17, 0.35);
         --shadow-soft: 0 12px 40px rgba(17, 17, 17, 0.08);
-        --font-family-mono: "JetBrains Mono", "IBM Plex Mono", "Space Mono", "SFMono-Regular", "SF Mono", Consolas, monospace;
+        --font-family-mono: "JetBrains Mono", monospace;
       }
 
       .dark-theme {
@@ -30,7 +30,7 @@ module Styles = [%css
         --border-strong: rgba(244, 241, 234, 0.8);
         --focus-ring: rgba(244, 241, 234, 0.4);
         --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.3);
-        --font-family-mono: "JetBrains Mono", "IBM Plex Mono", "Space Mono", "SFMono-Regular", "SF Mono", Consolas, monospace;
+        --font-family-mono: "JetBrains Mono", monospace;
       }
 
       body {

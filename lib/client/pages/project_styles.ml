@@ -1,7 +1,7 @@
 (* Project Gallery Styles with ppx_css *)
 open! Core
 
-module Styles = [%css stylesheet {|
+module Styles = [%css stylesheet ~dont_hash_prefixes:[ "--" ] {|
   /* Main gallery container */
   .gallery {
     padding: 4rem 2rem;

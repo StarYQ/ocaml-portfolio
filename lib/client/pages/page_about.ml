@@ -23,6 +23,11 @@ module Styles = [%css
         text-decoration: none;
       }
 
+      .contact_link {
+        display: inline-block;
+        width: fit-content;
+      }
+
       .coursework,
       .skills_row {
         display: flex;

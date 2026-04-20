@@ -1,9 +1,29 @@
 open! Js_of_ocaml
 
+let get_base_path () =
+  let hostname =
+    Js.to_string (Js.Unsafe.get Dom_html.window##.location (Js.string "hostname"))
+  in
+  if String.equal hostname "staryq.github.io"
+  then "/ocaml-portfolio"
+  else ""
+
 let inject_styles () =
   let open Js_of_ocaml.Dom_html in
   let style_element = createStyle document in
-  style_element##.innerHTML := Js.string {|
+  let base_path = get_base_path () in
+  let font_path = base_path ^ "/static/fonts-jetbrains-mono-latin.woff2" in
+  style_element##.innerHTML := Js.string ({|
+    @font-face {
+      font-family: "JetBrains Mono";
+      font-style: normal;
+      font-weight: 100 800;
+      font-display: swap;
+      src: url("|}
+    ^ font_path
+    ^ {|") format("woff2");
+    }
+
     :root, .light-theme {
       --bg-primary: #f5f2ea;
       --bg-secondary: #ece7dc;
@@ -16,7 +36,7 @@ let inject_styles () =
       --border-strong: rgba(17, 17, 17, 0.72);
       --focus-ring: rgba(17, 17, 17, 0.35);
       --shadow-soft: 0 12px 40px rgba(17, 17, 17, 0.08);
-      --font-family-mono: "JetBrains Mono", "IBM Plex Mono", "Space Mono", "SFMono-Regular", "SF Mono", Consolas, monospace;
+      --font-family-mono: "JetBrains Mono", monospace;
     }
 
     .dark-theme {
@@ -31,7 +51,7 @@ let inject_styles () =
       --border-strong: rgba(244, 241, 234, 0.8);
       --focus-ring: rgba(244, 241, 234, 0.4);
       --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.3);
-      --font-family-mono: "JetBrains Mono", "IBM Plex Mono", "Space Mono", "SFMono-Regular", "SF Mono", Consolas, monospace;
+      --font-family-mono: "JetBrains Mono", monospace;
     }
 
     body {
@@ -66,7 +86,7 @@ let inject_styles () =
       background: var(--text-primary);
       color: var(--bg-primary);
     }
-  |};
+  |});
   let head = document##.head in
   Dom.appendChild head style_element
 

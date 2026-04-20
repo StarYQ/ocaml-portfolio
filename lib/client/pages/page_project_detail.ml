@@ -9,7 +9,7 @@ open Components
 module Ui = Styles.Editorial_styles.Styles
 
 module Styles = [%css
-  stylesheet
+  stylesheet ~dont_hash_prefixes:[ "--" ]
     {|
       .top_bar {
         padding: 1rem 1.5rem;

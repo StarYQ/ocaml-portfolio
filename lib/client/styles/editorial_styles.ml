@@ -1,7 +1,7 @@
 open! Core
 
 module Styles = [%css
-  stylesheet
+  stylesheet ~dont_hash_prefixes:[ "--" ]
     {|
       .page {
         min-height: 100vh;
@@ -37,7 +37,7 @@ module Styles = [%css
         font-size: clamp(4rem, 13vw, 8.75rem);
         line-height: 0.86;
         letter-spacing: -0.075em;
-        font-weight: 700;
+        font-weight: 500;
         text-transform: uppercase;
       }
 
@@ -46,7 +46,7 @@ module Styles = [%css
         font-size: clamp(3rem, 9vw, 5.5rem);
         line-height: 0.9;
         letter-spacing: -0.06em;
-        font-weight: 700;
+        font-weight: 500;
         text-transform: uppercase;
       }
 
@@ -179,7 +179,7 @@ module Styles = [%css
         font-size: clamp(2rem, 6vw, 3.5rem);
         line-height: 0.95;
         letter-spacing: -0.05em;
-        font-weight: 700;
+        font-weight: 500;
       }
 
       .stat_label {

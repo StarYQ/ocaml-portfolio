@@ -7,7 +7,7 @@ open Components
 module Ui = Styles.Editorial_styles.Styles
 
 module Styles = [%css
-  stylesheet
+  stylesheet ~dont_hash_prefixes:[ "--" ]
     {|
       .viewer {
         width: 100%;
