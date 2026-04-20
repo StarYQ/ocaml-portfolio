@@ -149,7 +149,7 @@ let logo_node (entry : experience) =
 
 let experience_entry (entry : experience) =
   let status_attrs =
-    if String.equal entry.status "INCOMING"
+    if List.mem [ "INCOMING"; "ACTIVE" ] entry.status ~equal:String.equal
     then [ Ui.badge; Ui.badge_strong ]
     else [ Ui.badge ]
   in
