@@ -3,7 +3,6 @@ open Bonsai_web
 open Bonsai.Let_syntax
 open Virtual_dom
 open Components
-open Shared.Data
 
 module Ui = Styles.Editorial_styles.Styles
 
@@ -125,11 +124,8 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
   let%arr _theme = theme in
   let profile_path = Router.get_base_path () ^ "/static/profile.png" in
   let home_stats =
-    [ Int.to_string (List.length portfolio_projects), "PROJECTS"
-    ; Int.to_string
-        (List.count work_experiences ~f:(fun experience ->
-             String.is_substring experience.role ~substring:"Intern"))
-      , "INTERNSHIPS"
+    [ "250+", "STUDENTS"
+    ; "3,000+", "SCIENTISTS"
     ; "3.83", "GPA"
     ; "2027", "GRADUATING"
     ]
