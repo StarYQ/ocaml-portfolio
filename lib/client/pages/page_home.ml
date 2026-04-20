@@ -9,8 +9,14 @@ module Ui = Styles.Editorial_styles.Styles
 module Styles = [%css
   stylesheet ~dont_hash_prefixes:[ "--" ]
     {|
-      .hero {
+      .page_shell {
+        display: flex;
+        flex-direction: column;
         min-height: calc(100vh - 4.4rem);
+      }
+
+      .hero {
+        flex: 1 1 auto;
         display: flex;
         align-items: center;
         padding: 3rem 1.5rem 2.5rem;
@@ -70,6 +76,12 @@ module Styles = [%css
           display: none;
         }
       }
+
+      @media (max-width: 767px) {
+        .page_shell {
+          min-height: calc(100vh - 7rem);
+        }
+      }
     |}]
 
 let footer () =
@@ -112,7 +124,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
   let%arr _theme = theme in
   let profile_path = Router.get_base_path () ^ "/static/profile.png" in
   Vdom.Node.div
-    ~attrs:[ Ui.page ]
+    ~attrs:[ Ui.page; Styles.page_shell ]
     [ Vdom.Node.section
         ~attrs:[ Styles.hero ]
         [ Vdom.Node.div
