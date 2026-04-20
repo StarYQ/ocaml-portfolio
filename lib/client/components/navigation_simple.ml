@@ -53,6 +53,55 @@ let moon_icon attrs =
         []
     ]
 
+let info_icon attrs =
+  Vdom.Node.create_svg
+    "svg"
+    ~attrs:
+      (attrs
+       @ [ Vdom.Attr.create "viewBox" "0 0 24 24"
+         ; Vdom.Attr.create "fill" "none"
+         ; Vdom.Attr.create "stroke" "currentColor"
+         ; Vdom.Attr.create "stroke-width" "1.5"
+         ; Vdom.Attr.create "aria-hidden" "true"
+         ])
+    [ Vdom.Node.create_svg
+        "circle"
+        ~attrs:
+          [ Vdom.Attr.create "cx" "12"
+          ; Vdom.Attr.create "cy" "12"
+          ; Vdom.Attr.create "r" "9"
+          ]
+        []
+    ; Vdom.Node.create_svg
+        "path"
+        ~attrs:
+          [ Vdom.Attr.create "d" "M12 16v-4M12 8h.01"
+          ; Vdom.Attr.create "stroke-linecap" "round"
+          ]
+        []
+    ]
+
+let arrow_icon attrs =
+  Vdom.Node.create_svg
+    "svg"
+    ~attrs:
+      (attrs
+       @ [ Vdom.Attr.create "viewBox" "0 0 24 24"
+         ; Vdom.Attr.create "fill" "none"
+         ; Vdom.Attr.create "stroke" "currentColor"
+         ; Vdom.Attr.create "stroke-width" "1.5"
+         ; Vdom.Attr.create "aria-hidden" "true"
+         ])
+    [ Vdom.Node.create_svg
+        "path"
+        ~attrs:
+          [ Vdom.Attr.create "d" "M5 12h14m-4-4l4 4-4 4"
+          ; Vdom.Attr.create "stroke-linecap" "round"
+          ; Vdom.Attr.create "stroke-linejoin" "round"
+          ]
+        []
+    ]
+
 let toggle_theme ~theme ~set_theme =
   let new_theme = Theme.toggle theme in
   let open Js_of_ocaml in
@@ -76,6 +125,7 @@ let component ~theme ~set_theme =
     | Theme.Dark ->
       Styles.theme_slider_dark, Styles.theme_icon_default, Styles.theme_icon_inverted
   in
+  let logo_src = Router.get_base_path () ^ "/static/ocaml-logo.svg" in
   let nav_item attr route label =
     let attrs =
       if route_matches_nav current_route route
@@ -88,10 +138,52 @@ let component ~theme ~set_theme =
     ~attrs:[ Styles.navbar ]
     [ Vdom.Node.div
         ~attrs:[ Styles.nav_container ]
-        [ Nav_link.create'
-            ~route:Home
-            ~attrs:[ Styles.nav_brand ]
-            [ Vdom.Node.text "ARNAB BHOWMIK" ]
+        [ Vdom.Node.div
+            ~attrs:[ Styles.nav_left ]
+            [ Nav_link.create'
+                ~route:Home
+                ~attrs:[ Styles.nav_brand ]
+                [ Vdom.Node.text "ARNAB BHOWMIK" ]
+            ; Vdom.Node.div
+                ~attrs:[ Styles.ocaml_badge_group ]
+                [ Vdom.Node.div
+                    ~attrs:
+                      [ Styles.ocaml_badge_trigger
+                      ; Vdom.Attr.create "role" "note"
+                      ; Vdom.Attr.create "aria-label" "This site was written entirely in OCaml."
+                      ]
+                    [ info_icon [ Styles.ocaml_badge_icon ] ]
+                ; Vdom.Node.div
+                    ~attrs:[ Styles.ocaml_popover_shell ]
+                    [ Vdom.Node.div
+                        ~attrs:[ Styles.ocaml_popover ]
+                        [ Vdom.Node.div
+                            ~attrs:[ Styles.ocaml_popover_row ]
+                            [ Vdom.Node.create "img"
+                                ~attrs:
+                                  [ Styles.ocaml_logo
+                                  ; Vdom.Attr.src logo_src
+                                  ; Vdom.Attr.alt "OCaml"
+                                  ]
+                                []
+                            ; Vdom.Node.p
+                                ~attrs:[ Styles.ocaml_popover_text ]
+                                [ Vdom.Node.text "This site was written entirely in OCaml." ]
+                            ]
+                        ; Vdom.Node.a
+                            ~attrs:
+                              [ Styles.ocaml_link
+                              ; Vdom.Attr.href "https://ocaml.org"
+                              ; Vdom.Attr.target "_blank"
+                              ; Vdom.Attr.create "rel" "noopener noreferrer"
+                              ]
+                            [ Vdom.Node.text "Learn more about OCaml"
+                            ; arrow_icon [ Styles.ocaml_link_arrow ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
         ; Vdom.Node.div
             ~attrs:[ Styles.nav_actions ]
             [ Vdom.Node.div

@@ -35,7 +35,7 @@ const indexContent = `<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio Website created using functional web development with Bonsai and Dream">
-    <title>OCaml Portfolio</title>
+    <title>arnab bhowmik</title>
     <style>
         /* Base styles */
         * {
@@ -97,7 +97,7 @@ const indexContent = `<!DOCTYPE html>
     <div id="app">
         <div class="loading">
             <div class="spinner"></div>
-            <span>Loading portfolio...</span>
+            <span>Loading arnab bhowmik...</span>
         </div>
     </div>
     <!-- Load the OCaml compiled JavaScript -->

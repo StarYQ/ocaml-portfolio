@@ -22,6 +22,12 @@ module Styles = [%css
         padding: 0.85rem 1.5rem;
       }
 
+      .nav_left {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
       .nav_brand {
         color: var(--text-primary);
         text-decoration: none;
@@ -29,6 +35,100 @@ module Styles = [%css
         font-weight: 500;
         letter-spacing: 0.22em;
         text-transform: uppercase;
+      }
+
+      .ocaml_badge_group {
+        position: relative;
+      }
+
+      .ocaml_badge_trigger {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.25rem;
+        height: 1.25rem;
+        border: 1px solid var(--border-color);
+        color: var(--text-primary);
+        opacity: 0.4;
+        cursor: help;
+        transition: opacity 0.2s ease;
+      }
+
+      .ocaml_badge_group:hover .ocaml_badge_trigger {
+        opacity: 1;
+      }
+
+      .ocaml_badge_icon,
+      .ocaml_link_arrow {
+        width: 0.75rem;
+        height: 0.75rem;
+      }
+
+      .ocaml_popover_shell {
+        position: absolute;
+        left: 0;
+        top: 100%;
+        padding-top: 0.5rem;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        transition-delay: 100ms;
+        z-index: 30;
+      }
+
+      .ocaml_badge_group:hover .ocaml_popover_shell {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .ocaml_popover {
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        background: var(--bg-primary);
+        white-space: nowrap;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+      }
+
+      .ocaml_popover_row {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+      }
+
+      .ocaml_logo {
+        width: 1.25rem;
+        height: 1.25rem;
+        flex-shrink: 0;
+      }
+
+      .ocaml_popover_text {
+        margin: 0;
+        color: var(--text-primary);
+        letter-spacing: normal;
+      }
+
+      .ocaml_link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        margin-top: 0.5rem;
+        color: inherit;
+        text-decoration: none;
+        opacity: 0.5;
+        transition: opacity 0.2s ease;
+      }
+
+      .ocaml_link:hover {
+        opacity: 1;
+      }
+
+      .ocaml_link:hover .ocaml_link_arrow {
+        transform: translateX(0.25rem);
+      }
+
+      .ocaml_link_arrow {
+        transition: transform 0.3s ease;
       }
 
       .nav_actions {
@@ -164,6 +264,10 @@ module Styles = [%css
         .nav_brand {
           font-size: 0.72rem;
           letter-spacing: 0.18em;
+        }
+
+        .nav_left {
+          gap: 0.5rem;
         }
 
         .nav_menu {
