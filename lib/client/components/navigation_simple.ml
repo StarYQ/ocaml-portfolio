@@ -6,6 +6,53 @@ open Shared.Types
 
 module Styles = Navigation_styles.Styles
 
+let sun_icon attrs =
+  Vdom.Node.create_svg
+    "svg"
+    ~attrs:
+      (attrs
+       @ [ Vdom.Attr.create "viewBox" "0 0 24 24"
+         ; Vdom.Attr.create "fill" "none"
+         ; Vdom.Attr.create "stroke" "currentColor"
+         ; Vdom.Attr.create "stroke-width" "1.5"
+         ; Vdom.Attr.create "aria-hidden" "true"
+         ])
+    [ Vdom.Node.create_svg
+        "circle"
+        ~attrs:
+          [ Vdom.Attr.create "cx" "12"
+          ; Vdom.Attr.create "cy" "12"
+          ; Vdom.Attr.create "r" "4"
+          ]
+        []
+    ; Vdom.Node.create_svg
+        "path"
+        ~attrs:
+          [ Vdom.Attr.create
+              "d"
+              "M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
+          ]
+        []
+    ]
+
+let moon_icon attrs =
+  Vdom.Node.create_svg
+    "svg"
+    ~attrs:
+      (attrs
+       @ [ Vdom.Attr.create "viewBox" "0 0 24 24"
+         ; Vdom.Attr.create "fill" "none"
+         ; Vdom.Attr.create "stroke" "currentColor"
+         ; Vdom.Attr.create "stroke-width" "1.5"
+         ; Vdom.Attr.create "aria-hidden" "true"
+         ])
+    [ Vdom.Node.create_svg
+        "path"
+        ~attrs:
+          [ Vdom.Attr.create "d" "M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" ]
+        []
+    ]
+
 let toggle_theme ~theme ~set_theme =
   let new_theme = Theme.toggle theme in
   let open Js_of_ocaml in
@@ -22,6 +69,13 @@ let component ~theme ~set_theme =
   let%arr theme = theme
   and set_theme = set_theme
   and current_route = current_route in
+  let slider_class, left_foreground_class, right_foreground_class =
+    match theme with
+    | Theme.Light ->
+      Styles.theme_slider_light, Styles.theme_icon_inverted, Styles.theme_icon_default
+    | Theme.Dark ->
+      Styles.theme_slider_dark, Styles.theme_icon_default, Styles.theme_icon_inverted
+  in
   let nav_item attr route label =
     let attrs =
       if route_matches_nav current_route route
@@ -52,15 +106,23 @@ let component ~theme ~set_theme =
                   [ Styles.theme_toggle
                   ; Vdom.Attr.on_click (fun _ -> toggle_theme ~theme ~set_theme)
                   ; Vdom.Attr.create "type" "button"
-                  ; Vdom.Attr.create "aria-label"
-                      (match theme with
-                       | Theme.Light -> "Switch to dark mode"
-                       | Theme.Dark -> "Switch to light mode")
+                  ; Vdom.Attr.create "aria-label" "Toggle theme"
+                  ; Vdom.Attr.create "aria-pressed"
+                      (if Theme.equal theme Theme.Dark then "true" else "false")
                   ]
-                [ Vdom.Node.text
-                    (match theme with
-                     | Theme.Light -> "DARK"
-                     | Theme.Dark -> "LIGHT")
+                [ sun_icon [ Styles.theme_icon_background; Styles.theme_icon_left ]
+                ; moon_icon [ Styles.theme_icon_background; Styles.theme_icon_right ]
+                ; Vdom.Node.div ~attrs:[ Styles.theme_slider; slider_class ] []
+                ; sun_icon
+                    [ Styles.theme_icon_foreground
+                    ; Styles.theme_icon_left
+                    ; left_foreground_class
+                    ]
+                ; moon_icon
+                    [ Styles.theme_icon_foreground
+                    ; Styles.theme_icon_right
+                    ; right_foreground_class
+                    ]
                 ]
             ]
         ]

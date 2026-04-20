@@ -61,20 +61,77 @@ module Styles = [%css
       }
 
       .theme_toggle {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 3.5rem;
+        height: 1.5rem;
+        padding: 0;
         border: 1px solid var(--border-strong);
         background: transparent;
         color: var(--text-primary);
-        padding: 0.55rem 0.75rem;
         cursor: pointer;
-        font-size: 0.72rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
         font-family: inherit;
-        transition: background-color 0.2s ease, color 0.2s ease;
+        opacity: 0.6;
+        overflow: hidden;
+        transition: opacity 0.2s ease;
       }
 
       .theme_toggle:hover {
+        opacity: 1;
+      }
+
+      .theme_icon_background,
+      .theme_icon_foreground {
+        position: absolute;
+        top: 50%;
+        width: 0.75rem;
+        height: 0.75rem;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      .theme_icon_left {
+        left: 0.375rem;
+      }
+
+      .theme_icon_right {
+        right: 0.375rem;
+      }
+
+      .theme_icon_background {
+        z-index: 10;
+      }
+
+      .theme_slider {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 50%;
         background: var(--text-primary);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        transition-delay: 75ms;
+      }
+
+      .theme_slider_light {
+        transform: translateX(0);
+      }
+
+      .theme_slider_dark {
+        transform: translateX(100%);
+      }
+
+      .theme_icon_foreground {
+        z-index: 20;
+        transition: color 0.5s ease;
+        transition-delay: 75ms;
+      }
+
+      .theme_icon_default {
+        color: var(--text-primary);
+      }
+
+      .theme_icon_inverted {
         color: var(--bg-primary);
       }
 
