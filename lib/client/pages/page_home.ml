@@ -58,6 +58,43 @@ module Styles = [%css
         line-height: 1.8;
       }
 
+      .trading_panel {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .trading_links {
+        display: grid;
+        grid-template-columns: 1fr;
+        border-top: 1px solid var(--border-color);
+        border-left: 1px solid var(--border-color);
+      }
+
+      .trading_link {
+        display: block;
+        padding: 1.25rem;
+        border-right: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        color: inherit;
+        text-decoration: none;
+        transition: background-color 0.2s ease, color 0.2s ease;
+      }
+
+      .trading_link:hover {
+        background: var(--text-primary);
+        color: var(--bg-primary);
+      }
+
+      .trading_value {
+        margin: 0;
+        font-size: clamp(1.2rem, 2vw, 1.75rem);
+        line-height: 1.15;
+        letter-spacing: -0.03em;
+        font-weight: 500;
+        word-break: break-word;
+      }
+
       @media (min-width: 768px) {
         .hero {
           padding: 3.5rem 2rem 3rem;
@@ -70,6 +107,10 @@ module Styles = [%css
         .hero_body {
           grid-template-columns: minmax(0, 1fr) auto;
           align-items: end;
+        }
+
+        .trading_links {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
         .mobile_photo {
@@ -123,13 +164,6 @@ let footer () =
 let component ?(theme = Bonsai.Value.return Theme.Light) () =
   let%arr _theme = theme in
   let profile_path = Router.get_base_path () ^ "/static/profile.png" in
-  let home_stats =
-    [ "250+", "STUDENTS"
-    ; "3,000+", "SCIENTISTS"
-    ; "3.83", "GPA"
-    ; "2027", "GRADUATING"
-    ]
-  in
   Vdom.Node.div
     ~attrs:[ Ui.page; Styles.page_shell ]
     [ Vdom.Node.section
@@ -196,13 +230,29 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
     ; Vdom.Node.section
         ~attrs:[ Ui.section ]
         [ Vdom.Node.div
-            ~attrs:[ Ui.container; Ui.stats_board ]
-            (List.map home_stats ~f:(fun (value, label) ->
-                 Vdom.Node.div
-                   ~attrs:[ Ui.stat_cell ]
-                   [ Vdom.Node.p ~attrs:[ Ui.stat_value ] [ Vdom.Node.text value ]
-                   ; Vdom.Node.p ~attrs:[ Ui.stat_label ] [ Vdom.Node.text label ]
-                   ]))
+            ~attrs:[ Ui.container; Styles.trading_panel ]
+            [ Vdom.Node.p ~attrs:[ Ui.eyebrow ] [ Vdom.Node.text "LB TRADING:" ]
+            ; Vdom.Node.div
+                ~attrs:[ Styles.trading_links ]
+                [ Vdom.Node.a
+                    ~attrs:
+                      [ Styles.trading_link
+                      ; Vdom.Attr.href "https://lbtrading.com"
+                      ; Vdom.Attr.target "_blank"
+                      ; Vdom.Attr.create "rel" "noopener noreferrer"
+                      ]
+                    [ Vdom.Node.p ~attrs:[ Styles.trading_value ] [ Vdom.Node.text "lbtrading.com" ] ]
+                ; Vdom.Node.a
+                    ~attrs:
+                      [ Styles.trading_link
+                      ; Vdom.Attr.href "mailto:arnab@lbtrading.com"
+                      ]
+                    [ Vdom.Node.p
+                        ~attrs:[ Styles.trading_value ]
+                        [ Vdom.Node.text "arnab@lbtrading.com" ]
+                    ]
+                ]
+            ]
         ]
     ; footer ()
     ]
