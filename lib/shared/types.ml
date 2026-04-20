@@ -1,3 +1,5 @@
+open! Core
+
 (** Project filter types *)
 type project_filter =
   | All
@@ -8,19 +10,44 @@ type project_filter =
   | Trading
 [@@deriving sexp, equal, compare]
 
-(** Project data type for portfolio projects *)
-type project = {
-  id : string;
-  title : string;
-  description : string;
-  long_description : string;
-  tags : string list;
-  tech_stack : string list;
-  github_url : string option;
-  demo_url : string option;
-  current : bool;
-  description_link : (string * string) option; (** Optional (link_text, url) for inline links in description *)
-}
+(** Small stat block used on project listings/detail pages *)
+type project_stat =
+  { label : string
+  ; value : string
+  }
+[@@deriving sexp, equal]
+
+(** Project data used across listing and detail pages *)
+type project =
+  { id : string
+  ; slug : string
+  ; title : string
+  ; subtitle : string
+  ; year : string
+  ; summary : string
+  ; overview : string list
+  ; tags : string list
+  ; tech_stack : string list
+  ; stats : project_stat list
+  ; github_url : string option
+  ; demo_url : string option
+  ; current : bool
+  ; featured : bool
+  }
+[@@deriving sexp, equal]
+
+(** Work/experience entry for the dedicated Work page *)
+type experience =
+  { id : string
+  ; company : string
+  ; role : string
+  ; team : string
+  ; location : string
+  ; period : string
+  ; status : string
+  ; bullets : string list
+  }
+[@@deriving sexp, equal]
 
 (** Convert filter to display string *)
 let filter_to_string = function
@@ -32,42 +59,69 @@ let filter_to_string = function
   | Trading -> "Trading"
 
 (** Blog post data type for articles/words section *)
-type blog_post = {
-  title : string;
-  date : string; 
-  excerpt : string;
-  url : string;
-}
+type blog_post =
+  { title : string
+  ; date : string
+  ; excerpt : string
+  ; url : string
+  }
 
 (** Navigation route type for client-side routing *)
-type route = 
+type route =
   | Home
-  | About
+  | Work
   | Projects
+  | Project_detail of string
+  | About
   | Resume
-[@@deriving sexp, equal, typed_variants]
+[@@deriving sexp, equal]
+
+let normalize_route_path path =
+  match String.chop_suffix path ~suffix:"/" with
+  | Some trimmed when not (String.is_empty trimmed) -> trimmed
+  | _ -> path
 
 (** Convert route to string for URLs *)
 let route_to_string = function
   | Home -> "/"
-  | About -> "/about"
+  | Work -> "/work"
   | Projects -> "/projects"
+  | Project_detail slug -> "/projects/" ^ slug
+  | About -> "/about"
   | Resume -> "/resume"
 
 (** Parse route from URL path *)
-let route_of_string = function
+let route_of_string raw_path =
+  let path = normalize_route_path raw_path in
+  match path with
   | "/" | "" -> Some Home
-  | "/about" -> Some About
+  | "/work" -> Some Work
   | "/projects" -> Some Projects
+  | "/about" -> Some About
   | "/resume" -> Some Resume
-  | path when String.length path >= 6 && String.sub path 0 6 = "/about" -> Some About
-  | path when String.length path >= 9 && String.sub path 0 9 = "/projects" -> Some Projects
-  | path when String.length path >= 7 && String.sub path 0 7 = "/resume" -> Some Resume
+  | _ when String.is_prefix path ~prefix:"/projects/" ->
+      let slug = String.drop_prefix path (String.length "/projects/") in
+      if String.is_empty slug || String.mem slug '/'
+      then None
+      else Some (Project_detail slug)
   | _ -> None
 
 (** Get page title for route *)
 let route_to_title = function
   | Home -> "Home"
+  | Work -> "Work"
+  | Projects | Project_detail _ -> "Projects"
   | About -> "About"
-  | Projects -> "Projects"
   | Resume -> "Resume"
+
+let route_matches_nav current target =
+  match target with
+  | Projects ->
+      (match current with
+       | Projects | Project_detail _ -> true
+       | _ -> false)
+  | _ -> equal_route current target
+
+let project_slug = function
+  | Project_detail slug -> Some slug
+  | _ -> None

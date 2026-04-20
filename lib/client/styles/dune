@@ -1,7 +1,7 @@
 (library
  (public_name ocaml_portfolio.styles)
  (name styles)
- (modules styles theme_styles)
+ (modules styles theme_styles editorial_styles)
  (libraries 
    core
    virtual_dom

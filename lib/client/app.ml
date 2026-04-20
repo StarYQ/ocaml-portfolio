@@ -32,8 +32,10 @@ let app_computation =
   let%sub content = 
     match%sub current_route with
     | Home -> Pages.Page_home.component ~theme ()
+    | Work -> Pages.Page_work.component ~theme ()
     | About -> Pages.Page_about.component ~theme ()
     | Projects -> Pages.Page_projects.component ~theme ()
+    | Project_detail slug -> Pages.Page_project_detail.component ~theme ~slug ()
     | Resume -> Pages.Page_resume.component ~theme ()
   in
   

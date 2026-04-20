@@ -1,84 +1,246 @@
 open! Core
 open Types
 
-(** Actual portfolio projects from resume *)
-let portfolio_projects = [
-  {
-    id = "prediction-market-bot";
-    title = "Prediction Market Maker Bot";
-    description = "Market-making system for prediction markets on Polymarket (US exchange currently in closed beta). Stats will be regularly updated";
-    long_description = "Developing a market-making system for prediction markets on Polymarket, a US-based prediction market exchange currently in closed beta. The system implements automated market-making strategies to provide liquidity and capture spreads.";
-    tags = ["trading"];
-    tech_stack = ["Python"; "Redis"; "PM2"; "AWS EC2"];
-    github_url = None;
-    demo_url = Some "https://lbtradingllc.com/polymarket-us";
-    current = true;
-    description_link = Some ("here", "https://lbtradingllc.com/polymarket-us");
-  };
-  {
-    id = "ta-tools";
-    title = "TA Tools";
-    description = "Full-stack web application to automate teaching assistant logistics tasks";
-    long_description = "Developed a full-stack web application to automate logistics tasks for teaching assistants at a previous workplace, improving task efficiency by approximately 200% for those who used it. Built the backend with Python and Flask for seamless web integration, using Jinja and JavaScript for the frontend and SQLite for database management.";
-    tags = ["web"; "backend"; "fullstack"];
-    tech_stack = ["Python"; "Flask"; "Beautiful Soup"; "Selenium WebDriver"; "SQLite"; "JavaScript"];
-    github_url = None;
-    demo_url = None;
-    current = false;
-    description_link = None;
-  };
+let stat label value = { label; value }
 
-  {
-    id = "portfolio";
-    title = "Portfolio Website";
-    description = "";
-    long_description = "My personal portfolio website, written entirely in OCaml.";
-    tags = ["web"; "ocaml"; "fullstack"];
-    tech_stack = ["OCaml"; "Js_of_ocaml"; "Bonsai"; "Dream"; "Dune"; "Cloudflare"; "GitHub Actions"];
-    github_url = Some "https://github.com/StarYQ/ocaml-portfolio";
-    demo_url = Some "https://arnabb.dev/";
-    current = true;
-    description_link = None;
-  };
-  
-  {
-    id = "seawolf-accessibility";
-    title = "Seawolf Accessibility";
-    description = "Interactive campus navigation web app for accessible route recommendations";
-    long_description = "Developing an interactive campus navigation web app to recommend and visualize optimal accessible routes in real time. Built a custom OpenStreetMap parser in C to extract and preprocess map data to use in Dijkstra's algorithm. Mapped building entrances/exits to support indoor traversal, yielding more inclusive routing. Enhanced the route cost function using scikit-learn and NumPy to perform linear regression on aggregated cost data based on stair penalties and slope gradients computed using Google Maps Elevation API data. Using the K-nearest neighbors (KNN) algorithm to recommend alternative routes with similar accessibility characteristics.";
-    tags = ["web"; "fullstack"; "ai";];
-    tech_stack = ["Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API"];
-    github_url = Some "https://github.com/tarunvaid05/Seawolf-Accessibility";
-    demo_url = Some "https://seawolf-accessibility.up.railway.app/";
-    current = false;
-    description_link = None;
-  };
-  
-  (* {
-    id = "real-estate-ai-assistant";
-    title = "Real Estate Closing AI Assistant";
-    description = "AI classification system for real estate deal-closing platform";
-    long_description = "Developing an AI classification system for a startup's real estate deal-closing platform using LangGraph workflows, integrating with WordPress and using Pinecone vector search to automatically organize documents, emails, and attachments for streamlined document management and communication. Managing backend infrastructure using Terraform on AWS EC2, refining data ingestion pipelines and modifying CI/CD workflows.";
-    tags = ["backend"; "ai"; "api"];
-    tech_stack = ["PHP"; "OpenAI API"; "Pinecone"; "AWS EC2"; "Terraform"];
-    github_url = None;
-    demo_url = None;
-    current = true;
-  }; *)
-  
-  {
-    id = "nutriproof";
-    title = "NutriProof";
-    description = "Chrome extension for health and nutrition claim verification using AI";
-    long_description = "Built a Chrome extension that uses a GPT model fine-tuned on self-curated labeled data to analyze user-selected text about health and nutrition, automatically querying Wolfram Alpha's Full Results API for factual validation. Parsed claims, generated optimized Wolfram queries, and re-integrated verified results into GPT for more accurate verdicts. Implemented interactive charts with Chart.js and color-coded verdicts for quick, intuitive accuracy assessments.";
-    tags = ["ai"; "web"];
-    tech_stack = ["Python"; "Flask"; "JavaScript"; "OpenAI API"; "Wolfram Alpha API"];
-    github_url = Some "https://github.com/TheGordon/NutriProof";
-    demo_url = Some "https://devpost.com/software/nutriproof";
-    current = false;
-    description_link = None;
-  };
-]
+(** Portfolio projects for the v2 project listing/detail experience *)
+let portfolio_projects =
+  [ { id = "001"
+    ; slug = "prediction-market-bot"
+    ; title = "PREDICTION MARKET MAKER BOT"
+    ; subtitle = "Automated trading system for prediction markets"
+    ; year = "DEC 2025 — PRESENT"
+    ; summary = "Designed and deployed a market-making system for prediction markets, actively trading on Polymarket."
+    ; overview =
+        [ "Designed and deployed a market-making system for prediction markets, actively trading on Polymarket in the US closed beta."
+        ; "Implemented automated quoting, inventory management, and risk controls to provide continuous liquidity across markets."
+        ; "Processed 180K+ trades and 8.5M+ contracts with over $4M in notional volume while generating $100K+ in profit."
+        ; "Built the production runtime around Redis state management, PM2 supervision, AWS EC2 deployment, and system-health alerting."
+        ]
+    ; tags = [ "trading"; "backend" ]
+    ; tech_stack = [ "Python"; "Redis"; "PM2"; "AWS EC2" ]
+    ; stats =
+        [ stat "TOTAL PROFIT" "$100,000+"
+        ; stat "RETURN ON CAPITAL" "2,000%+"
+        ; stat "CONTRACTS TRADED" "8.5M+"
+        ; stat "NOTIONAL VOLUME" "$4M+"
+        ; stat "TOTAL TRADES" "180K+"
+        ]
+    ; github_url = None
+    ; demo_url = Some "https://lbtradingllc.com/polymarket-us"
+    ; current = true
+    ; featured = true
+    }
+  ; { id = "002"
+    ; slug = "ta-tools"
+    ; title = "TA TOOLS"
+    ; subtitle = "Automation platform for teaching assistants"
+    ; year = "JUL 2024 — AUG 2024"
+    ; summary = "Built a full-stack automation app for teaching assistant logistics, improving task efficiency by approximately 200%."
+    ; overview =
+        [ "Developed a full-stack web application using Flask, Jinja, and SQLite to automate logistics tasks for teaching assistants at a tutoring center."
+        ; "Improved task efficiency by approximately 200% for active users through automation of repetitive administrative work."
+        ; "Integrated Beautiful Soup and Selenium WebDriver for scraping and process automation where the workflow needed live site interaction."
+        ]
+    ; tags = [ "web"; "backend" ]
+    ; tech_stack = [ "Python"; "Flask"; "Beautiful Soup"; "Selenium WebDriver"; "SQLite"; "JavaScript" ]
+    ; stats = [ stat "EFFICIENCY GAIN" "+200%" ]
+    ; github_url = None
+    ; demo_url = None
+    ; current = false
+    ; featured = true
+    }
+  ; { id = "003"
+    ; slug = "healthbyte"
+    ; title = "HEALTHBYTE"
+    ; subtitle = "Post-surgery recovery monitoring platform"
+    ; year = "SEP 2024 — PRESENT"
+    ; summary = "Led development of patient-facing iOS and clinician-facing web experiences for post-surgery recovery monitoring."
+    ; overview =
+        [ "Led the HealthByte subteam within Stony Brook's VIP Program, coordinating onboarding, delegation, and product direction."
+        ; "Developed prototype patient-facing iOS application flows using Swift, HealthKit, and ResearchKit for post-surgery recovery monitoring."
+        ; "Built clinician-facing full-stack web tooling and a shared PostgreSQL-backed data model across mobile and web surfaces."
+        ]
+    ; tags = [ "mobile"; "web" ]
+    ; tech_stack = [ "Swift"; "HealthKit"; "ResearchKit"; "PostgreSQL"; "Next.js" ]
+    ; stats = []
+    ; github_url = None
+    ; demo_url = None
+    ; current = true
+    ; featured = false
+    }
+  ; { id = "004"
+    ; slug = "regio-vinco"
+    ; title = "REGIO VINCO"
+    ; subtitle = "Educational geography game for primary schools"
+    ; year = "SEP 2024 — PRESENT"
+    ; summary = "Interactive geography game designed to improve learning outcomes for elementary and middle school students."
+    ; overview =
+        [ "Developing an interactive web-based geography education game within the Stony Brook VIP Program."
+        ; "Iterating on versions tested with 150+ students at partnering schools to improve engagement and classroom usability."
+        ; "Balancing game mechanics, curriculum alignment, and lightweight delivery for school settings."
+        ]
+    ; tags = [ "web" ]
+    ; tech_stack = [ "Web"; "Interactive"; "Education"; "JavaScript" ]
+    ; stats = [ stat "STUDENTS TESTED" "150+" ]
+    ; github_url = None
+    ; demo_url = None
+    ; current = true
+    ; featured = false
+    }
+  ; { id = "005"
+    ; slug = "penguinlearn"
+    ; title = "PENGUINLEARN"
+    ; subtitle = "Full-stack educational platform"
+    ; year = "JUL 2024 — MAY 2025"
+    ; summary = "Led full-stack development of a production educational platform, reducing operational costs by about 20%."
+    ; overview =
+        [ "Led full-stack development of PenguinLearn using Next.js, React, Supabase, and Prisma ORM."
+        ; "Implemented real-time parent-teacher messaging, Stripe payment processing, and Zoom API meeting automation."
+        ; "Built Jest and Playwright test coverage and set up CI/CD to support reliable delivery."
+        ]
+    ; tags = [ "web"; "backend" ]
+    ; tech_stack = [ "Next.js"; "React"; "Supabase"; "Prisma ORM"; "Stripe"; "Zoom API"; "Jest"; "Playwright" ]
+    ; stats = [ stat "COST REDUCTION" "~20%" ]
+    ; github_url = None
+    ; demo_url = None
+    ; current = false
+    ; featured = false
+    }
+  ; { id = "006"
+    ; slug = "ocaml-portfolio"
+    ; title = "OCAML PORTFOLIO"
+    ; subtitle = "Personal site built end-to-end in OCaml"
+    ; year = "2025 — PRESENT"
+    ; summary = "Personal portfolio site written in OCaml with Dream, Bonsai Web, js_of_ocaml, and Cloudflare Workers."
+    ; overview =
+        [ "Built the portfolio entirely in OCaml using Dream for the server, Bonsai Web for the client, and js_of_ocaml for the browser bundle."
+        ; "Supports dual deployment paths with GitHub Pages and Cloudflare Workers."
+        ; "This v2 redesign is focused on moving the site toward a more editorial, minimal visual system while preserving the OCaml-first architecture."
+        ]
+    ; tags = [ "web"; "backend" ]
+    ; tech_stack = [ "OCaml"; "Bonsai"; "Dream"; "js_of_ocaml"; "Dune"; "Cloudflare Workers" ]
+    ; stats = []
+    ; github_url = Some "https://github.com/StarYQ/ocaml-portfolio"
+    ; demo_url = Some "https://arnabb.dev/"
+    ; current = true
+    ; featured = false
+    }
+  ; { id = "007"
+    ; slug = "seawolf-accessibility"
+    ; title = "SEAWOLF ACCESSIBILITY"
+    ; subtitle = "Accessible campus navigation and route recommendation"
+    ; year = "2024 — PRESENT"
+    ; summary = "Interactive campus navigation system focused on accessible route recommendations and visualization."
+    ; overview =
+        [ "Developed an accessible campus navigation experience with real-time route recommendation and visualization."
+        ; "Built a custom OpenStreetMap parser in C to preprocess graph data for shortest-path computation."
+        ; "Combined elevation and accessibility features with scikit-learn and NumPy to better model route cost and suggest alternatives."
+        ]
+    ; tags = [ "web"; "ai"; "backend" ]
+    ; tech_stack = [ "Next.js"; "FastAPI"; "Python"; "C"; "scikit-learn"; "NumPy"; "Google Maps API" ]
+    ; stats = []
+    ; github_url = Some "https://github.com/tarunvaid05/Seawolf-Accessibility"
+    ; demo_url = Some "https://seawolf-accessibility.up.railway.app/"
+    ; current = false
+    ; featured = false
+    }
+  ; { id = "008"
+    ; slug = "nutriproof"
+    ; title = "NUTRIPROOF"
+    ; subtitle = "Nutrition and health-claim verification extension"
+    ; year = "2024"
+    ; summary = "Chrome extension for analyzing health and nutrition claims with AI-assisted factual validation."
+    ; overview =
+        [ "Built a Chrome extension that analyzes user-selected text about health and nutrition claims."
+        ; "Combined GPT-based claim processing with Wolfram Alpha queries for factual validation and verdict generation."
+        ; "Added charts and color-coded verdict displays for fast interpretation of the results."
+        ]
+    ; tags = [ "ai"; "web" ]
+    ; tech_stack = [ "Python"; "Flask"; "JavaScript"; "OpenAI API"; "Wolfram Alpha API" ]
+    ; stats = []
+    ; github_url = Some "https://github.com/TheGordon/NutriProof"
+    ; demo_url = Some "https://devpost.com/software/nutriproof"
+    ; current = false
+    ; featured = false
+    }
+  ]
+
+let work_experiences =
+  [ { id = "001"
+    ; company = "COREWEAVE"
+    ; role = "Software Engineering Intern"
+    ; team = "Cloud Platform API / IAM"
+    ; location = "New York, NY"
+    ; period = "JUN 2026 — AUG 2026"
+    ; status = "INCOMING"
+    ; bullets = []
+    }
+  ; { id = "002"
+    ; company = "GLAXOSMITHKLINE"
+    ; role = "Compute Platform Engineering Intern"
+    ; team = "HPC & Cloud Infrastructure"
+    ; location = "Seattle, WA"
+    ; period = "MAY 2025 — AUG 2025"
+    ; status = "COMPLETED"
+    ; bullets =
+        [ "Built an interactive Python CLI that diagnoses workloads and selects optimal HPC environments across Slurm and Google Batch, reducing compute costs by about 10%."
+        ; "Containerized and shipped the tool with Docker and Apptainer for cross-platform rollout to 3,000+ computational scientists."
+        ; "Built proof-of-concept orchestration improvements for an AI/ML agentic system, reducing context consumption by about 35% while improving performance."
+        ]
+    }
+  ; { id = "003"
+    ; company = "STONY BROOK UNIVERSITY"
+    ; role = "Teaching Assistant"
+    ; team = "CSE 216 & CSE 316"
+    ; location = "Stony Brook, NY"
+    ; period = "JAN 2025 — DEC 2025"
+    ; status = "ACTIVE"
+    ; bullets =
+        [ "Led recitations, office hours, and review sessions for Programming Abstractions and Software Development."
+        ; "Supported 250+ students across functional programming, software design, testing, and large-program engineering."
+        ; "Revised course materials, graded assignments and exams, and helped keep course operations running smoothly."
+        ]
+    }
+  ; { id = "004"
+    ; company = "STONY BROOK VIP PROGRAM"
+    ; role = "Student Software Developer"
+    ; team = "HealthByte & Regio Vinco"
+    ; location = "Stony Brook, NY"
+    ; period = "SEP 2024 — PRESENT"
+    ; status = "ACTIVE"
+    ; bullets =
+        [ "Led the HealthByte subteam through delegation, onboarding, and planning."
+        ; "Developed prototype patient-facing iOS and clinician-facing web apps for post-surgery recovery monitoring."
+        ; "Helped build Regio Vinco, an educational geography game tested with 150+ students."
+        ]
+    }
+  ; { id = "005"
+    ; company = "QUATTRONKIDS / PENGUINLEARN"
+    ; role = "Full Stack Developer"
+    ; team = "Core Platform"
+    ; location = "Remote"
+    ; period = "JUL 2024 — MAY 2025"
+    ; status = "COMPLETED"
+    ; bullets =
+        [ "Led full-stack development using Next.js, React, Supabase, and Prisma ORM, reducing operational costs by about 20%."
+        ; "Implemented real-time messaging, Stripe payment processing, and Zoom API meeting scheduling."
+        ; "Added Jest and Playwright test coverage and set up CI/CD for dependable deployments."
+        ]
+    }
+  ; { id = "006"
+    ; company = "ABCMATH"
+    ; role = "Teaching Assistant"
+    ; team = "Programming, math, and science instruction"
+    ; location = "Queens, NY"
+    ; period = "SEP 2022 — OCT 2024"
+    ; status = "COMPLETED"
+    ; bullets =
+        [ "Tutored programming, chemistry, English, and math across multiple grade levels."
+        ; "Supported classroom instruction, supervised programming sessions, and revised class materials."
+        ]
+    }
+  ]
 
 (** Get all unique tags from projects *)
 let get_all_tags projects =
@@ -101,8 +263,17 @@ let search_projects (projects : project list) query =
   let query_lower = String.lowercase query in
   List.filter projects ~f:(fun p ->
     String.is_substring (String.lowercase p.title) ~substring:query_lower ||
-    String.is_substring (String.lowercase p.description) ~substring:query_lower ||
-    List.exists p.tech_stack ~f:(fun tech -> 
+    String.is_substring (String.lowercase p.summary) ~substring:query_lower ||
+    List.exists p.tech_stack ~f:(fun tech ->
       String.is_substring (String.lowercase tech) ~substring:query_lower
     )
   )
+
+let featured_projects =
+  List.filter portfolio_projects ~f:(fun project -> project.featured)
+
+let secondary_projects =
+  List.filter portfolio_projects ~f:(fun project -> not project.featured)
+
+let find_project_by_slug slug =
+  List.find portfolio_projects ~f:(fun project -> String.equal project.slug slug)
