@@ -163,12 +163,8 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
             [ Vdom.Node.p ~attrs:[ Ui.section_label ] [ Vdom.Node.text "CONTACT" ]
             ; Vdom.Node.div
                 ~attrs:[ Ui.section_content ]
-                [ External_link.mailto
-                    "arnab.bhowmik@stonybrook.edu"
-                    ~attrs:
-                      [ Styles.contact_link
-                      ; Ui.inline_link
-                      ]
+                [ Vdom.Node.p
+                    ~attrs:[ Styles.contact_link; Ui.body_text ]
                     [ Vdom.Node.text "arnab.bhowmik@stonybrook.edu" ]
                 ; Vdom.Node.p ~attrs:[ Ui.body_text ] [ Vdom.Node.text "929-452-9190" ]
                 ; Vdom.Node.div

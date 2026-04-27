@@ -62,13 +62,17 @@ module Styles = [%css
         border-left: 1px solid var(--border-color);
       }
 
-      .trading_link {
+      .trading_link,
+      .trading_static {
         display: block;
         padding: 1.25rem;
         border-right: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
         color: inherit;
         text-decoration: none;
+      }
+
+      .trading_link {
         transition: background-color 0.2s ease, color 0.2s ease;
       }
 
@@ -119,11 +123,8 @@ let footer () =
             [ Vdom.Node.text "BRONX, NY" ]
         ; Vdom.Node.div
             ~attrs:[ Ui.footer_links ]
-            [ External_link.mailto
-                "arnab.bhowmik@stonybrook.edu"
-                ~attrs:
-                  [ Ui.subtle_link
-                  ]
+            [ Vdom.Node.span
+                ~attrs:[ Ui.muted_text ]
                 [ Vdom.Node.text "EMAIL" ]
             ; Vdom.Node.a
                 ~attrs:
@@ -205,11 +206,8 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                       ; Vdom.Attr.create "rel" "noopener noreferrer"
                       ]
                     [ Vdom.Node.p ~attrs:[ Styles.trading_value ] [ Vdom.Node.text "lbtrading.com" ] ]
-                ; External_link.mailto
-                    "arnab@lbtrading.com"
-                    ~attrs:
-                      [ Styles.trading_link
-                      ]
+                ; Vdom.Node.div
+                    ~attrs:[ Styles.trading_static ]
                     [ Vdom.Node.p
                         ~attrs:[ Styles.trading_value ]
                         [ Vdom.Node.text "arnab@lbtrading.com" ]

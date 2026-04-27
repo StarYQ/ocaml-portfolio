@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Email Link Removal
+- Removed nonfunctional email link behavior so email text no longer opens tabs, popups, or mail handlers
+
 ## 2026-04-27 - Mailto Blank Tab Fix
 - Removed `_blank` target handling from email links to avoid blank browser tabs when no mail handler opens
 
