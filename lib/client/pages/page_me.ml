@@ -154,7 +154,7 @@ let footer () =
         ~attrs:[ Ui.footer_inner ]
         [ Vdom.Node.p
             ~attrs:[ Ui.muted_text ]
-            [ Vdom.Node.text "PERSONAL INTERESTS / CURRENTLY READING" ]
+            [ Vdom.Node.text "PERSONAL INTERESTS" ]
         ; Vdom.Node.div
             ~attrs:[ Ui.footer_links ]
             [ Nav_link.create'
@@ -185,19 +185,19 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
         ~attrs:[ Ui.section ]
         [ Vdom.Node.div
             ~attrs:[ Ui.container; Ui.section_grid ]
-            [ Vdom.Node.p ~attrs:[ Ui.section_label ] [ Vdom.Node.text "OUTSIDE CS" ]
+            [ Vdom.Node.p ~attrs:[ Ui.section_label ] [ Vdom.Node.text "HOBBIES" ]
             ; Vdom.Node.div
                 ~attrs:[ Ui.section_content ]
                 [ Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "I like reading manhwa, playing badminton, rock climbing, traveling with friends, karaoke, and calisthenics."
+                        "When I'm not coding, I like to read manhwa, play badminton, go rock climbing, travel with friends, sing karaoke, and do calisthenics."
                     ]
-                ; Vdom.Node.p
+                (* ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
                         "This page is here to show the parts of my life that make the professional work feel more personal: the places I go, the hobbies I keep coming back to, and the stories I enjoy."
-                    ]
+                    ] *)
                 ]
             ]
         ]
