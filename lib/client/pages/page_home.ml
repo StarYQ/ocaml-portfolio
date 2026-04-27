@@ -119,10 +119,10 @@ let footer () =
             [ Vdom.Node.text "BRONX, NY" ]
         ; Vdom.Node.div
             ~attrs:[ Ui.footer_links ]
-            [ Vdom.Node.a
+            [ External_link.mailto
+                "arnab.bhowmik@stonybrook.edu"
                 ~attrs:
                   [ Ui.subtle_link
-                  ; Vdom.Attr.href "mailto:arnab.bhowmik@stonybrook.edu"
                   ]
                 [ Vdom.Node.text "EMAIL" ]
             ; Vdom.Node.a
@@ -205,10 +205,10 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                       ; Vdom.Attr.create "rel" "noopener noreferrer"
                       ]
                     [ Vdom.Node.p ~attrs:[ Styles.trading_value ] [ Vdom.Node.text "lbtrading.com" ] ]
-                ; Vdom.Node.a
+                ; External_link.mailto
+                    "arnab@lbtrading.com"
                     ~attrs:
                       [ Styles.trading_link
-                      ; Vdom.Attr.href "mailto:arnab@lbtrading.com"
                       ]
                     [ Vdom.Node.p
                         ~attrs:[ Styles.trading_value ]

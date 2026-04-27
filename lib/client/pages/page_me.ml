@@ -185,6 +185,21 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
         ~attrs:[ Ui.section ]
         [ Vdom.Node.div
             ~attrs:[ Ui.container; Ui.section_grid ]
+            [ Vdom.Node.p ~attrs:[ Ui.section_label ] [ Vdom.Node.text "CURRENTLY" ]
+            ; Vdom.Node.div
+                ~attrs:[ Ui.section_content ]
+                [ Vdom.Node.p
+                    ~attrs:[ Ui.body_text ]
+                    [ Vdom.Node.text
+                        "Currently most excited about: joining CoreWeave this summer."
+                    ]
+                ]
+            ]
+        ]
+    ; Vdom.Node.section
+        ~attrs:[ Ui.section ]
+        [ Vdom.Node.div
+            ~attrs:[ Ui.container; Ui.section_grid ]
             [ Vdom.Node.p ~attrs:[ Ui.section_label ] [ Vdom.Node.text "HOBBIES" ]
             ; Vdom.Node.div
                 ~attrs:[ Ui.section_content ]
@@ -192,11 +207,6 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
                         "When I'm not coding, I like to read manhwa, play badminton, go rock climbing, travel with friends, sing karaoke, and do calisthenics."
-                    ]
-                ; Vdom.Node.p
-                    ~attrs:[ Ui.body_text ]
-                    [ Vdom.Node.text
-                        "Currently most excited about: joining CoreWeave this summer."
                     ]
                 ]
             ]

@@ -3,6 +3,7 @@
  (name components)
  (modules
    components
+   external_link
    layout_simple
    nav_link
    navigation_simple

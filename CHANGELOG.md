@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2026-04-27 - Mailto Links and Me Page Copy
+- Fixed email links to explicitly open the configured mail client
+- Separated the CoreWeave note from the hobbies copy on the Me page
+
 ## 2026-04-27 - Default Sunset Theme
 - Made the OCaml sunset theme the default first-load theme when no saved preference exists
 
