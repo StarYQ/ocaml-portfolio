@@ -170,7 +170,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.p
                     ~attrs:[ Styles.description ]
                     [ Vdom.Node.text
-                        "CS @ Stony Brook University. Building high-performance systems, trading infrastructure, cloud tooling, and developer-facing software. Previously at GSK, incoming at CoreWeave."
+                        "CS @ Stony Brook University. Interested in HPC infrastructure, cloud tooling, distributed systems, and agentic AI. Prev SWE Intern @ GSK, incoming @ CoreWeave."
                     ]
                 ; Vdom.Node.div
                     ~attrs:[ Ui.button_row ]

@@ -213,7 +213,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
             ; Vdom.Node.p
                 ~attrs:[ Ui.body_text ]
                 [ Vdom.Node.text
-                    "Internships, teaching, and product development across cloud infrastructure, high-performance computing, education, and full-stack software."
+                    "Internships, teaching, and software engineering across cloud infrastructure, high-performance computing, ed tech, and full-stack software."
                 ]
             ]
         ]

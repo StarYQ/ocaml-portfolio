@@ -55,7 +55,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
             ; Vdom.Node.h1 ~attrs:[ Ui.page_title ] [ Vdom.Node.text "RESUME" ]
             ; Vdom.Node.p
                 ~attrs:[ Ui.body_text ]
-                [ Vdom.Node.text "Download the latest PDF or view it inline below." ]
+                [ Vdom.Node.text "Download the latest PDF below." ]
             ]
         ]
     ; Vdom.Node.section

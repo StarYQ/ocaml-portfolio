@@ -50,7 +50,7 @@ let portfolio_projects =
     ; current = false
     ; featured = true
     }
-  ; { id = "003"
+  (* ; { id = "003"
     ; slug = "healthbyte"
     ; title = "HEALTHBYTE"
     ; subtitle = "Post-surgery recovery monitoring platform"
@@ -68,8 +68,8 @@ let portfolio_projects =
     ; demo_url = None
     ; current = true
     ; featured = false
-    }
-  ; { id = "004"
+    } *)
+  (* ; { id = "004"
     ; slug = "regio-vinco"
     ; title = "REGIO VINCO"
     ; subtitle = "Educational geography game for primary schools"
@@ -87,8 +87,8 @@ let portfolio_projects =
     ; demo_url = None
     ; current = true
     ; featured = false
-    }
-  ; { id = "005"
+    } *)
+  (* ; { id = "005"
     ; slug = "penguinlearn"
     ; title = "PENGUINLEARN"
     ; subtitle = "Full-stack educational platform"
@@ -106,8 +106,8 @@ let portfolio_projects =
     ; demo_url = None
     ; current = false
     ; featured = false
-    }
-  ; { id = "006"
+    } *)
+  ; { id = "003"
     ; slug = "ocaml-portfolio"
     ; title = "OCAML PORTFOLIO"
     ; subtitle = "Personal site built end-to-end in OCaml"
@@ -126,7 +126,7 @@ let portfolio_projects =
     ; current = true
     ; featured = false
     }
-  ; { id = "007"
+  ; { id = "004"
     ; slug = "seawolf-accessibility"
     ; title = "SEAWOLF ACCESSIBILITY"
     ; subtitle = "Accessible campus navigation and route recommendation"
@@ -145,7 +145,7 @@ let portfolio_projects =
     ; current = false
     ; featured = false
     }
-  ; { id = "008"
+  ; { id = "005"
     ; slug = "nutriproof"
     ; title = "NUTRIPROOF"
     ; subtitle = "Nutrition and health-claim verification extension"

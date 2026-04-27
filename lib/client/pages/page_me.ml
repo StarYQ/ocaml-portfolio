@@ -193,11 +193,11 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                     [ Vdom.Node.text
                         "When I'm not coding, I like to read manhwa, play badminton, go rock climbing, travel with friends, sing karaoke, and do calisthenics."
                     ]
-                (* ; Vdom.Node.p
+                ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "This page is here to show the parts of my life that make the professional work feel more personal: the places I go, the hobbies I keep coming back to, and the stories I enjoy."
-                    ] *)
+                        "Currently most excited about: joining CoreWeave this summer."
+                    ]
                 ]
             ]
         ]
