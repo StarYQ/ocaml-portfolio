@@ -74,6 +74,7 @@ type route =
   | Projects
   | Project_detail of string
   | About
+  | Me
   | Resume
 [@@deriving sexp, equal]
 
@@ -89,6 +90,7 @@ let route_to_string = function
   | Projects -> "/projects"
   | Project_detail slug -> "/projects/" ^ slug
   | About -> "/about"
+  | Me -> "/me"
   | Resume -> "/resume"
 
 (** Parse route from URL path *)
@@ -99,6 +101,7 @@ let route_of_string raw_path =
   | "/work" -> Some Work
   | "/projects" -> Some Projects
   | "/about" -> Some About
+  | "/me" -> Some Me
   | "/resume" -> Some Resume
   | _ when String.is_prefix path ~prefix:"/projects/" ->
       let slug = String.drop_prefix path (String.length "/projects/") in
@@ -113,6 +116,7 @@ let route_to_title = function
   | Work -> "Work"
   | Projects | Project_detail _ -> "Projects"
   | About -> "About"
+  | Me -> "Me"
   | Resume -> "Resume"
 
 let route_matches_nav current target =

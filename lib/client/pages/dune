@@ -4,6 +4,7 @@
  (modules
   pages
   page_about
+  page_me
   page_home
   page_work
   page_projects

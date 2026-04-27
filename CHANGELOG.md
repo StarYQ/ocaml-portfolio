@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-04-27 - Personal Me Page
+- Added a `/me` route and navigation item for personal interests outside of CS
+- Added placeholder image slots for traveling and rock climbing, plus a currently-reading section
+- Relabeled the home page LB Trading prompt to read as a clearer call to learn more
+
 ## 2026-04-20 - Work Page Experience Logos
 - Added optional `logo_file` support for work experiences so logos can be configured from shared data by filename only
 - Rendered company logos beside work entries with a responsive framed layout that tolerates different aspect ratios

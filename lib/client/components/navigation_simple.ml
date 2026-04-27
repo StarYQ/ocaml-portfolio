@@ -192,6 +192,7 @@ let component ~theme ~set_theme =
                 ; nav_item Styles.nav_link Work "WORK"
                 ; nav_item Styles.nav_link Projects "PROJECTS"
                 ; nav_item Styles.nav_link About "ABOUT"
+                ; nav_item Styles.nav_link Me "ME"
                 ]
             ; Vdom.Node.button
                 ~attrs:
@@ -224,6 +225,7 @@ let component ~theme ~set_theme =
         ; nav_item Styles.mobile_nav_link Work "WORK"
         ; nav_item Styles.mobile_nav_link Projects "PROJECTS"
         ; nav_item Styles.mobile_nav_link About "ABOUT"
+        ; nav_item Styles.mobile_nav_link Me "ME"
         ]
     ]
 
@@ -250,6 +252,7 @@ let render ~current_route =
             ; nav_item Styles.nav_link Work "WORK"
             ; nav_item Styles.nav_link Projects "PROJECTS"
             ; nav_item Styles.nav_link About "ABOUT"
+            ; nav_item Styles.nav_link Me "ME"
             ]
         ]
     ; Vdom.Node.div
@@ -258,5 +261,6 @@ let render ~current_route =
         ; nav_item Styles.mobile_nav_link Work "WORK"
         ; nav_item Styles.mobile_nav_link Projects "PROJECTS"
         ; nav_item Styles.mobile_nav_link About "ABOUT"
+        ; nav_item Styles.mobile_nav_link Me "ME"
         ]
     ]
