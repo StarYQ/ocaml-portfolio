@@ -5,10 +5,7 @@ let create ?(attrs = []) ~href children =
   Vdom.Node.a
     ~attrs:
       (attrs
-       @ [ Vdom.Attr.href href
-         ; Vdom.Attr.target "_blank"
-         ; Vdom.Attr.create "rel" "noopener noreferrer"
-         ])
+       @ [ Vdom.Attr.href href ])
     children
 ;;
 

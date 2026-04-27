@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Mailto Blank Tab Fix
+- Removed `_blank` target handling from email links to avoid blank browser tabs when no mail handler opens
+
 ## 2026-04-27 - Native Mailto Links
 - Changed email links to native external `mailto:` anchors so browser and OS mail handlers can open them directly
 
