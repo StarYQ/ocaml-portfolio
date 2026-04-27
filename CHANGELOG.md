@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Me Page Feature Toggle
+- Added a shared `show_me_page` config flag that controls Me page routing and navigation visibility
+
 ## 2026-04-27 - Home Bio and Footer Cleanup
 - Updated the home hero bio wording and removed the inactive email item from the footer
 

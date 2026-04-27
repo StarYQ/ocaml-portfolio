@@ -78,6 +78,12 @@ type route =
   | Resume
 [@@deriving sexp, equal]
 
+let show_me_page = Site_config.show_me_page
+
+let route_is_enabled = function
+  | Me -> show_me_page
+  | _ -> true
+
 let normalize_route_path path =
   match String.chop_suffix path ~suffix:"/" with
   | Some trimmed when not (String.is_empty trimmed) -> trimmed
@@ -101,7 +107,7 @@ let route_of_string raw_path =
   | "/work" -> Some Work
   | "/projects" -> Some Projects
   | "/about" -> Some About
-  | "/me" -> Some Me
+  | "/me" -> if show_me_page then Some Me else None
   | "/resume" -> Some Resume
   | _ when String.is_prefix path ~prefix:"/projects/" ->
       let slug = String.drop_prefix path (String.length "/projects/") in

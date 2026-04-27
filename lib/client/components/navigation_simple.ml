@@ -155,6 +155,9 @@ let component ~theme ~set_theme =
     in
     Nav_link.create' ~route ~attrs [ Vdom.Node.text label ]
   in
+  let me_nav_item attr =
+    if route_is_enabled Me then [ nav_item attr Me "ME" ] else []
+  in
   Vdom.Node.create "nav"
     ~attrs:[ Styles.navbar ]
     [ Vdom.Node.div
@@ -209,13 +212,13 @@ let component ~theme ~set_theme =
             ~attrs:[ Styles.nav_actions ]
             [ Vdom.Node.div
                 ~attrs:[ Styles.nav_menu ]
-                [ nav_item Styles.nav_link Home "INDEX"
-                ; nav_item Styles.nav_link Work "WORK"
-                ; nav_item Styles.nav_link Projects "PROJECTS"
-                ; nav_item Styles.nav_link About "ABOUT"
-                ; nav_item Styles.nav_link Resume "RESUME"
-                ; nav_item Styles.nav_link Me "ME"
-                ]
+                ([ nav_item Styles.nav_link Home "INDEX"
+                 ; nav_item Styles.nav_link Work "WORK"
+                 ; nav_item Styles.nav_link Projects "PROJECTS"
+                 ; nav_item Styles.nav_link About "ABOUT"
+                 ; nav_item Styles.nav_link Resume "RESUME"
+                 ]
+                 @ me_nav_item Styles.nav_link)
             ; Vdom.Node.button
                 ~attrs:
                   [ Styles.theme_toggle
@@ -263,13 +266,13 @@ let component ~theme ~set_theme =
         ]
     ; Vdom.Node.div
         ~attrs:[ Styles.mobile_row ]
-        [ nav_item Styles.mobile_nav_link Home "INDEX"
-        ; nav_item Styles.mobile_nav_link Work "WORK"
-        ; nav_item Styles.mobile_nav_link Projects "PROJECTS"
-        ; nav_item Styles.mobile_nav_link About "ABOUT"
-        ; nav_item Styles.mobile_nav_link Resume "RESUME"
-        ; nav_item Styles.mobile_nav_link Me "ME"
-        ]
+        ([ nav_item Styles.mobile_nav_link Home "INDEX"
+         ; nav_item Styles.mobile_nav_link Work "WORK"
+         ; nav_item Styles.mobile_nav_link Projects "PROJECTS"
+         ; nav_item Styles.mobile_nav_link About "ABOUT"
+         ; nav_item Styles.mobile_nav_link Resume "RESUME"
+         ]
+         @ me_nav_item Styles.mobile_nav_link)
     ]
 
 let render ~current_route =
@@ -281,6 +284,9 @@ let render ~current_route =
     in
     Nav_link.create' ~route ~attrs [ Vdom.Node.text label ]
   in
+  let me_nav_item attr =
+    if route_is_enabled Me then [ nav_item attr Me "ME" ] else []
+  in
   Vdom.Node.create "nav"
     ~attrs:[ Styles.navbar ]
     [ Vdom.Node.div
@@ -291,21 +297,21 @@ let render ~current_route =
             [ Vdom.Node.text "ARNAB BHOWMIK" ]
         ; Vdom.Node.div
             ~attrs:[ Styles.nav_menu ]
-            [ nav_item Styles.nav_link Home "INDEX"
-            ; nav_item Styles.nav_link Work "WORK"
-            ; nav_item Styles.nav_link Projects "PROJECTS"
-            ; nav_item Styles.nav_link About "ABOUT"
-            ; nav_item Styles.nav_link Resume "RESUME"
-            ; nav_item Styles.nav_link Me "ME"
-            ]
+            ([ nav_item Styles.nav_link Home "INDEX"
+             ; nav_item Styles.nav_link Work "WORK"
+             ; nav_item Styles.nav_link Projects "PROJECTS"
+             ; nav_item Styles.nav_link About "ABOUT"
+             ; nav_item Styles.nav_link Resume "RESUME"
+             ]
+             @ me_nav_item Styles.nav_link)
         ]
     ; Vdom.Node.div
         ~attrs:[ Styles.mobile_row ]
-        [ nav_item Styles.mobile_nav_link Home "INDEX"
-        ; nav_item Styles.mobile_nav_link Work "WORK"
-        ; nav_item Styles.mobile_nav_link Projects "PROJECTS"
-        ; nav_item Styles.mobile_nav_link About "ABOUT"
-        ; nav_item Styles.mobile_nav_link Resume "RESUME"
-        ; nav_item Styles.mobile_nav_link Me "ME"
-        ]
+        ([ nav_item Styles.mobile_nav_link Home "INDEX"
+         ; nav_item Styles.mobile_nav_link Work "WORK"
+         ; nav_item Styles.mobile_nav_link Projects "PROJECTS"
+         ; nav_item Styles.mobile_nav_link About "ABOUT"
+         ; nav_item Styles.mobile_nav_link Resume "RESUME"
+         ]
+         @ me_nav_item Styles.mobile_nav_link)
     ]
