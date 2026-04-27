@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Me Page Interest Captions
+- Simplified Me page image cards to use a single caption line and updated the second card to sports with friends
+
 ## 2026-04-27 - Mailto Links and Me Page Copy
 - Fixed email links to explicitly open the configured mail client
 - Separated the CoreWeave note from the hobbies copy on the Me page

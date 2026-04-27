@@ -54,16 +54,9 @@ module Styles = [%css
         gap: 0.65rem;
       }
 
-      .interest_title {
-        margin: 0;
-        font-size: 1rem;
-        font-weight: 500;
-        text-transform: uppercase;
-      }
-
       .caption {
         margin: 0;
-        color: var(--text-tertiary);
+        color: var(--text-secondary);
         font-size: 0.72rem;
         letter-spacing: 0.18em;
         text-transform: uppercase;
@@ -102,22 +95,19 @@ module Styles = [%css
     |}]
 
 type interest =
-  { title : string
-  ; image_file : string
+  { image_file : string
   ; alt : string
   ; caption : string
   }
 
 let interests =
-  [ { title = "TRAVELING"
-    ; image_file = "me-travel-placeholder.svg"
+  [ { image_file = "me-travel-placeholder.svg"
     ; alt = "Traveling placeholder"
-    ; caption = "Washington, DC photo placeholder"
+    ; caption = "Washington, DC group photo"
     }
-  ; { title = "ROCK CLIMBING"
-    ; image_file = "me-climbing-placeholder.svg"
-    ; alt = "Rock climbing placeholder"
-    ; caption = "Rock climbing photo placeholder"
+  ; { image_file = "me-climbing-placeholder.svg"
+    ; alt = "Playing football with friends"
+    ; caption = "Weekend football with friends"
     }
   ]
 
@@ -142,9 +132,7 @@ let interest_card interest =
         ]
     ; Vdom.Node.div
         ~attrs:[ Styles.interest_body ]
-        [ Vdom.Node.h2 ~attrs:[ Styles.interest_title ] [ Vdom.Node.text interest.title ]
-        ; Vdom.Node.p ~attrs:[ Styles.caption ] [ Vdom.Node.text interest.caption ]
-        ]
+        [ Vdom.Node.p ~attrs:[ Styles.caption ] [ Vdom.Node.text interest.caption ] ]
     ]
 
 let footer () =
@@ -206,7 +194,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "When I'm not coding, I like to read manhwa, play badminton, go rock climbing, travel with friends, sing karaoke, and do calisthenics."
+                        "When I'm not coding, I like to read manhwa, play badminton, play sports with friends, travel, sing karaoke, and do calisthenics."
                     ]
                 ]
             ]
