@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
-  <title id="title">Traveling photo placeholder</title>
-  <desc id="desc">Placeholder image for a future travel photo.</desc>
-  <rect width="1200" height="900" fill="#f5f2ea"/>
-  <path d="M120 690h960M180 690V365h96v325M338 690V250h120v440M520 690V330h88v360M680 690V210h145v480M900 690V390h120v300" fill="none" stroke="#111111" stroke-width="18"/>
-  <path d="M160 760h880" stroke="#111111" stroke-width="18"/>
-  <text x="600" y="815" text-anchor="middle" fill="#111111" font-family="monospace" font-size="34" letter-spacing="8">TRAVEL PHOTO PLACEHOLDER</text>
-</svg>

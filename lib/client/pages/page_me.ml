@@ -103,11 +103,11 @@ type interest =
   }
 
 let interests =
-  [ { image_file = "me-travel-placeholder.svg"
+  [ { image_file = "washington-dc.png"
     ; alt = "Traveling placeholder"
     ; caption = "Washington, DC group photo"
     }
-  ; { image_file = "me-climbing-placeholder.svg"
+  ; { image_file = "football.jpg"
     ; alt = "Playing football with friends"
     ; caption = "Weekend football with friends"
     }
