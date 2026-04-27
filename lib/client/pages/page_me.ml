@@ -179,11 +179,6 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
             ~attrs:[ Ui.container ]
             [ Vdom.Node.p ~attrs:[ Ui.eyebrow ] [ Vdom.Node.text "006 — ME" ]
             ; Vdom.Node.h1 ~attrs:[ Ui.page_title ] [ Vdom.Node.text "ME" ]
-            ; Vdom.Node.p
-                ~attrs:[ Ui.body_text; Styles.intro ]
-                [ Vdom.Node.text
-                    "Outside of coding, I'm interested in stories, movement, and time with friends."
-                ]
             ]
         ]
     ; Vdom.Node.section
@@ -224,9 +219,6 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.h2
                     ~attrs:[ Styles.reading_title ]
                     [ Vdom.Node.text "Omniscient Reader's Viewpoint" ]
-                ; Vdom.Node.p
-                    ~attrs:[ Ui.body_text ]
-                    [ Vdom.Node.text "I enjoy reading manhwas, especially long-form stories with big worlds and sharp character dynamics." ]
                 ]
             ]
         ]
