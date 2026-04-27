@@ -32,19 +32,21 @@ module Styles = [%css
         border-bottom: 1px solid var(--border-color);
         background: var(--surface-muted);
         overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
       .interest_image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         filter: grayscale(1);
-        transition: filter 0.35s ease, transform 0.35s ease;
+        transition: filter 0.35s ease;
       }
 
       .interest_card:hover .interest_image {
         filter: grayscale(0);
-        transform: scale(1.015);
       }
 
       .interest_body {

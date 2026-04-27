@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Me Page Image Framing
+- Updated Me page image frames to show full photos without cropping across different source aspect ratios
+
 ## 2026-04-27 - Me Page Interest Captions
 - Simplified Me page image cards to use a single caption line and updated the second card to sports with friends
 
