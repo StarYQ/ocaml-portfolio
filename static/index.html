@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>arnab bhowmik</title>
     <script>
-        (function() {
+        (function () {
             var theme = 'dark';
             try {
                 var storedTheme = window.localStorage && window.localStorage.getItem('theme');
-                if (storedTheme === 'light' || storedTheme === 'dark') {
+                if (storedTheme === 'light' || storedTheme === 'sunset' || storedTheme === 'dark') {
                     theme = storedTheme;
                 }
-            } catch (_) {}
+            } catch (_) { }
             document.documentElement.classList.add(theme + '-theme');
         })();
     </script>
@@ -25,7 +26,8 @@
             src: url('static/fonts-jetbrains-mono-latin.woff2') format('woff2');
         }
 
-        :root, .light-theme {
+        :root,
+        .light-theme {
             --bg-primary: #f5f2ea;
             --text-primary: #111111;
             --border-strong: rgba(17, 17, 17, 0.72);
@@ -37,20 +39,26 @@
             --border-strong: rgba(244, 241, 234, 0.8);
         }
 
+        .sunset-theme {
+            --bg-primary: oklch(0.18 0.02 45);
+            --text-primary: oklch(0.85 0.08 55);
+            --border-strong: oklch(0.7 0.12 50);
+        }
+
         /* CSS Reset */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'JetBrains Mono', monospace;
             line-height: 1.6;
             color: var(--text-primary);
             background-color: var(--bg-primary);
         }
-        
+
         /* Loading styles */
         #loading {
             position: fixed;
@@ -65,17 +73,17 @@
             color: var(--text-primary);
             background: var(--bg-primary);
         }
-        
+
         /* App container */
         #app {
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         #app.loaded {
             opacity: 1;
         }
-        
+
         /* Responsive design helpers */
         @media (max-width: 768px) {
             body {
@@ -84,23 +92,24 @@
         }
     </style>
 </head>
+
 <body>
     <div id="loading">Loading arnab bhowmik...</div>
     <div id="app"></div>
-    
+
     <script>
         // Show the app once loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
                 const loading = document.getElementById('loading');
                 const app = document.getElementById('app');
-                
+
                 if (loading) loading.style.display = 'none';
                 if (app) app.classList.add('loaded');
             }, 100);
         });
     </script>
-    
+
     <!-- Load the compiled OCaml/Bonsai JavaScript -->
     <script>
         // Detect if we're running on GitHub Pages or locally
@@ -111,4 +120,5 @@
         document.body.appendChild(script);
     </script>
 </body>
+
 </html>

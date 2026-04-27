@@ -8,12 +8,15 @@ module Theme_styles = Styles.Theme_styles.Styles
 let apply_theme_to_body theme =
   let open Js_of_ocaml in
   let body = Dom_html.document##.body in
-  let class_list = body##.classList in
-  (* Remove both classes first *)
-  class_list##remove (Js.string "light-theme");
-  class_list##remove (Js.string "dark-theme");
-  (* Add the appropriate class *)
-  class_list##add (Js.string (Theme.to_class_name theme))
+  let root = Dom_html.document##.documentElement in
+  let remove_classes class_list =
+    List.iter Theme.class_names ~f:(fun class_name ->
+      class_list##remove (Js.string class_name))
+  in
+  remove_classes body##.classList;
+  remove_classes root##.classList;
+  body##.classList##add (Js.string (Theme.to_class_name theme));
+  root##.classList##add (Js.string (Theme.to_class_name theme))
 
 let app_computation =
   (* Initialize theme state with proper state management *)

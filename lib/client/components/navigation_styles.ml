@@ -164,7 +164,7 @@ module Styles = [%css
         position: relative;
         display: flex;
         align-items: center;
-        width: 3.5rem;
+        width: 4.5rem;
         height: 1.5rem;
         padding: 0;
         border: 1px solid var(--border-strong);
@@ -182,7 +182,9 @@ module Styles = [%css
       }
 
       .theme_icon_background,
-      .theme_icon_foreground {
+      .theme_icon_foreground,
+      .theme_logo_background,
+      .theme_logo_foreground {
         position: absolute;
         top: 50%;
         width: 0.75rem;
@@ -199,7 +201,13 @@ module Styles = [%css
         right: 0.375rem;
       }
 
-      .theme_icon_background {
+      .theme_icon_center {
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .theme_icon_background,
+      .theme_logo_background {
         z-index: 10;
       }
 
@@ -207,7 +215,7 @@ module Styles = [%css
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 50%;
+        width: 33.333333%;
         background: var(--text-primary);
         transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         transition-delay: 75ms;
@@ -217,13 +225,18 @@ module Styles = [%css
         transform: translateX(0);
       }
 
-      .theme_slider_dark {
+      .theme_slider_sunset {
         transform: translateX(100%);
       }
 
-      .theme_icon_foreground {
+      .theme_slider_dark {
+        transform: translateX(200%);
+      }
+
+      .theme_icon_foreground,
+      .theme_logo_foreground {
         z-index: 20;
-        transition: color 0.5s ease;
+        transition: color 0.5s ease, filter 0.5s ease, opacity 0.5s ease;
         transition-delay: 75ms;
       }
 
@@ -233,6 +246,16 @@ module Styles = [%css
 
       .theme_icon_inverted {
         color: var(--bg-primary);
+      }
+
+      .theme_logo_muted {
+        filter: grayscale(1);
+        opacity: 0.7;
+      }
+
+      .theme_logo_active {
+        filter: none;
+        opacity: 1;
       }
 
       .mobile_row {

@@ -106,10 +106,15 @@ let toggle_theme ~theme ~set_theme =
   let new_theme = Theme.toggle theme in
   let open Js_of_ocaml in
   let body = Dom_html.document##.body in
-  let class_list = body##.classList in
-  class_list##remove (Js.string "light-theme");
-  class_list##remove (Js.string "dark-theme");
-  class_list##add (Js.string (Theme.to_class_name new_theme));
+  let root = Dom_html.document##.documentElement in
+  let remove_classes class_list =
+    List.iter Theme.class_names ~f:(fun class_name ->
+      class_list##remove (Js.string class_name))
+  in
+  remove_classes body##.classList;
+  remove_classes root##.classList;
+  body##.classList##add (Js.string (Theme.to_class_name new_theme));
+  root##.classList##add (Js.string (Theme.to_class_name new_theme));
   Theme.store_theme new_theme;
   set_theme new_theme
 
@@ -118,12 +123,28 @@ let component ~theme ~set_theme =
   let%arr theme = theme
   and set_theme = set_theme
   and current_route = current_route in
-  let slider_class, left_foreground_class, right_foreground_class =
+  let
+    ( slider_class
+    , left_foreground_class
+    , center_foreground_class
+    , right_foreground_class )
+    =
     match theme with
     | Theme.Light ->
-      Styles.theme_slider_light, Styles.theme_icon_inverted, Styles.theme_icon_default
+      ( Styles.theme_slider_light
+      , Styles.theme_icon_inverted
+      , Styles.theme_logo_muted
+      , Styles.theme_icon_default )
+    | Theme.Sunset ->
+      ( Styles.theme_slider_sunset
+      , Styles.theme_icon_default
+      , Styles.theme_logo_active
+      , Styles.theme_icon_default )
     | Theme.Dark ->
-      Styles.theme_slider_dark, Styles.theme_icon_default, Styles.theme_icon_inverted
+      ( Styles.theme_slider_dark
+      , Styles.theme_icon_default
+      , Styles.theme_logo_muted
+      , Styles.theme_icon_inverted )
   in
   let logo_src = Router.get_base_path () ^ "/static/ocaml-logo.svg" in
   let nav_item attr route label =
@@ -199,11 +220,21 @@ let component ~theme ~set_theme =
                   [ Styles.theme_toggle
                   ; Vdom.Attr.on_click (fun _ -> toggle_theme ~theme ~set_theme)
                   ; Vdom.Attr.create "type" "button"
-                  ; Vdom.Attr.create "aria-label" "Toggle theme"
-                  ; Vdom.Attr.create "aria-pressed"
-                      (if Theme.equal theme Theme.Dark then "true" else "false")
+                  ; Vdom.Attr.create
+                      "aria-label"
+                      ("Cycle theme. Current theme: " ^ Theme.to_string theme)
                   ]
                 [ sun_icon [ Styles.theme_icon_background; Styles.theme_icon_left ]
+                ; Vdom.Node.create "img"
+                    ~attrs:
+                      [ Styles.theme_logo_background
+                      ; Styles.theme_icon_center
+                      ; Styles.theme_logo_muted
+                      ; Vdom.Attr.src logo_src
+                      ; Vdom.Attr.alt ""
+                      ; Vdom.Attr.create "aria-hidden" "true"
+                      ]
+                    []
                 ; moon_icon [ Styles.theme_icon_background; Styles.theme_icon_right ]
                 ; Vdom.Node.div ~attrs:[ Styles.theme_slider; slider_class ] []
                 ; sun_icon
@@ -211,6 +242,16 @@ let component ~theme ~set_theme =
                     ; Styles.theme_icon_left
                     ; left_foreground_class
                     ]
+                ; Vdom.Node.create "img"
+                    ~attrs:
+                      [ Styles.theme_logo_foreground
+                      ; Styles.theme_icon_center
+                      ; center_foreground_class
+                      ; Vdom.Attr.src logo_src
+                      ; Vdom.Attr.alt ""
+                      ; Vdom.Attr.create "aria-hidden" "true"
+                      ]
+                    []
                 ; moon_icon
                     [ Styles.theme_icon_foreground
                     ; Styles.theme_icon_right

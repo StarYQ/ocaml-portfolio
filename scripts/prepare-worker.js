@@ -41,7 +41,7 @@ const indexContent = `<!DOCTYPE html>
             var theme = 'dark';
             try {
                 var storedTheme = window.localStorage && window.localStorage.getItem('theme');
-                if (storedTheme === 'light' || storedTheme === 'dark') {
+                if (storedTheme === 'light' || storedTheme === 'sunset' || storedTheme === 'dark') {
                     theme = storedTheme;
                 }
             } catch (_) {}
@@ -71,6 +71,14 @@ const indexContent = `<!DOCTYPE html>
             --text-secondary: rgba(244, 241, 234, 0.8);
             --border-strong: rgba(244, 241, 234, 0.8);
             --spinner-track: rgba(255, 255, 255, 0.1);
+        }
+
+        .sunset-theme {
+            --bg-primary: oklch(0.18 0.02 45);
+            --text-primary: oklch(0.85 0.08 55);
+            --text-secondary: oklch(0.85 0.08 55 / 0.8);
+            --border-strong: oklch(0.7 0.12 50);
+            --spinner-track: oklch(0.7 0.12 50 / 0.16);
         }
 
         /* Base styles */

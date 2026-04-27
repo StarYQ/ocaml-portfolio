@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 2026-04-27 - OCaml Sunset Theme
+- Added a third `sunset` theme between light and dark using the OCaml logo as the middle toggle icon
+- Updated theme storage, first-paint shell classes, and Worker shell generation to preserve the new theme
+- Added sunset color tokens so cards, links, borders, and hover states inherit the same theme behavior as light and dark
+
 ## 2026-04-27 - Personal Me Page
 - Added a `/me` route and navigation item for personal interests outside of CS
 - Added placeholder image slots for traveling and rock climbing, plus a currently-reading section

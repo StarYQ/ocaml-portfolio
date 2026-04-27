@@ -9,7 +9,7 @@
             var theme = 'dark';
             try {
                 var storedTheme = window.localStorage && window.localStorage.getItem('theme');
-                if (storedTheme === 'light' || storedTheme === 'dark') {
+                if (storedTheme === 'light' || storedTheme === 'sunset' || storedTheme === 'dark') {
                     theme = storedTheme;
                 }
             } catch (_) {}
@@ -27,6 +27,12 @@
             --bg-primary: #0f0f10;
             --text-primary: #f4f1ea;
             --text-secondary: rgba(244, 241, 234, 0.7);
+        }
+
+        .sunset-theme {
+            --bg-primary: oklch(0.18 0.02 45);
+            --text-primary: oklch(0.85 0.08 55);
+            --text-secondary: oklch(0.6 0.05 50);
         }
 
         /* CSS Reset */

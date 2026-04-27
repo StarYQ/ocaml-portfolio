@@ -1,8 +1,8 @@
 open! Core
 open Bonsai_web
 
-(* Theme type - Light or Dark mode *)
-type t = Light | Dark [@@deriving sexp, equal]
+(* Theme type - Light, OCaml/sunset, or Dark mode *)
+type t = Light | Sunset | Dark [@@deriving sexp, equal]
 
 (* Create Dynamic_scope variable for global theme state *)
 let variable =
@@ -20,24 +20,31 @@ let provide ~theme component =
 
 (* Helper to toggle between themes *)
 let toggle = function
-  | Light -> Dark
+  | Light -> Sunset
+  | Sunset -> Dark
   | Dark -> Light
 
 (* Convert theme to string for CSS class *)
 let to_class_name = function
   | Light -> "light-theme"
+  | Sunset -> "sunset-theme"
   | Dark -> "dark-theme"
 
 (* Convert theme to string for storage *)
 let to_string = function
   | Light -> "light"
+  | Sunset -> "sunset"
   | Dark -> "dark"
 
 (* Parse theme from string *)
 let of_string = function
   | "dark" -> Some Dark
+  | "sunset" -> Some Sunset
   | "light" -> Some Light
   | _ -> None
+
+let class_names =
+  [ to_class_name Light; to_class_name Sunset; to_class_name Dark ]
 
 (* Get theme from localStorage *)
 let get_stored_theme () =

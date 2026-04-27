@@ -54,6 +54,21 @@ let inject_styles () =
       --font-family-mono: "JetBrains Mono", monospace;
     }
 
+    .sunset-theme {
+      --bg-primary: oklch(0.18 0.02 45);
+      --bg-secondary: oklch(0.25 0.03 45);
+      --surface-muted: oklch(0.25 0.03 45 / 0.65);
+      --surface-elevated: oklch(0.25 0.03 45 / 0.45);
+      --text-primary: oklch(0.85 0.08 55);
+      --text-secondary: oklch(0.85 0.08 55 / 0.8);
+      --text-tertiary: oklch(0.6 0.05 50);
+      --border-color: oklch(0.7 0.12 50 / 0.24);
+      --border-strong: oklch(0.7 0.12 50);
+      --focus-ring: oklch(0.7 0.12 50 / 0.55);
+      --shadow-soft: 0 12px 40px oklch(0.1 0.02 45 / 0.34);
+      --font-family-mono: "JetBrains Mono", monospace;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
