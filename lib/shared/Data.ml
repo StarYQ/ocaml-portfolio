@@ -14,17 +14,16 @@ let portfolio_projects =
     ; overview =
         [ "Designed and deployed a market-making system for prediction markets, actively trading on Polymarket in the US closed beta."
         ; "Implemented automated quoting, inventory management, and risk controls to provide continuous liquidity across markets."
-        ; "Processed 180K+ trades and 8.5M+ contracts with over $4M in notional volume while generating $100K+ in profit."
         ; "Built the production runtime around Redis state management, PM2 supervision, AWS EC2 deployment, and system-health alerting."
         ]
     ; tags = [ "trading"; "backend" ]
     ; tech_stack = [ "Python"; "Redis"; "PM2"; "AWS EC2" ]
     ; stats =
-        [ stat "TOTAL PROFIT" "$100,000+"
-        ; stat "RETURN ON CAPITAL" "2,000%+"
-        ; stat "CONTRACTS TRADED" "8.5M+"
-        ; stat "NOTIONAL VOLUME" "$4M+"
-        ; stat "TOTAL TRADES" "180K+"
+        [ stat "TOTAL PROFIT" "$160,000+"
+        ; stat "RETURN ON CAPITAL" "3,500%+"
+        ; stat "CONTRACTS TRADED" "20M+"
+        ; stat "NOTIONAL VOLUME" "$9.4M+"
+        ; stat "TOTAL TRADES" "330K+"
         ]
     ; github_url = None
     ; demo_url = Some "https://lbtradingllc.com/polymarket-us"
@@ -115,8 +114,6 @@ let portfolio_projects =
     ; summary = "Personal portfolio site written in OCaml with Dream, Bonsai Web, js_of_ocaml, and Cloudflare Workers."
     ; overview =
         [ "Built the portfolio entirely in OCaml using Dream for the server, Bonsai Web for the client, and js_of_ocaml for the browser bundle."
-        ; "Supports dual deployment paths with GitHub Pages and Cloudflare Workers."
-        ; "This v2 redesign is focused on moving the site toward a more editorial, minimal visual system while preserving the OCaml-first architecture."
         ]
     ; tags = [ "web"; "backend" ]
     ; tech_stack = [ "OCaml"; "Bonsai"; "Dream"; "js_of_ocaml"; "Dune"; "Cloudflare Workers" ]

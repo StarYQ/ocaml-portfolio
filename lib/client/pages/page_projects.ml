@@ -236,9 +236,9 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
             [ Vdom.Node.p ~attrs:[ Ui.eyebrow ] [ Vdom.Node.text "003 — PROJECTS" ]
             ; Vdom.Node.h1
                 ~attrs:[ Ui.page_title ]
-                [ Vdom.Node.text "SELECTED"
-                ; Vdom.Node.create "br" []
-                ; Vdom.Node.text "WORKS"
+                [ Vdom.Node.text "PROJECTS"
+                (* ; Vdom.Node.create "br" []
+                ; Vdom.Node.text "WORKS" *)
                 ]
             ]
         ]

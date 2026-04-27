@@ -167,7 +167,7 @@ let component ~theme ~set_theme =
             [ Nav_link.create'
                 ~route:Home
                 ~attrs:[ Styles.nav_brand ]
-                [ Vdom.Node.text "ARNAB BHOWMIK" ]
+                [ Vdom.Node.text "arnabb.dev" ]
             ; Vdom.Node.div
                 ~attrs:[ Styles.ocaml_badge_group ]
                 [ Vdom.Node.div
@@ -294,7 +294,7 @@ let render ~current_route =
         [ Nav_link.create'
             ~route:Home
             ~attrs:[ Styles.nav_brand ]
-            [ Vdom.Node.text "ARNAB BHOWMIK" ]
+            [ Vdom.Node.text "arnabb.dev" ]
         ; Vdom.Node.div
             ~attrs:[ Styles.nav_menu ]
             ([ nav_item Styles.nav_link Home "INDEX"
