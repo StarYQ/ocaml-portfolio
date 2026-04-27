@@ -194,7 +194,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
         ~attrs:[ Ui.section ]
         [ Vdom.Node.div
             ~attrs:[ Ui.container; Styles.trading_panel ]
-            [ Vdom.Node.p ~attrs:[ Ui.eyebrow ] [ Vdom.Node.text "Learn more about LB Trading:" ]
+            [ Vdom.Node.p ~attrs:[ Ui.eyebrow ] [ Vdom.Node.text "For LB Trading:" ]
             ; Vdom.Node.div
                 ~attrs:[ Styles.trading_links ]
                 [ Vdom.Node.a
