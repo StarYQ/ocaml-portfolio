@@ -8,7 +8,7 @@ type t = Light | Sunset | Dark [@@deriving sexp, equal]
 let variable =
   Bonsai.Dynamic_scope.create
     ~name:"theme"
-    ~fallback:Dark
+    ~fallback:Sunset
     ()
 
 (* Get current theme from Dynamic_scope *)
@@ -68,4 +68,4 @@ let store_theme theme =
 let initial_theme () =
   match get_stored_theme () with
   | Some theme -> theme
-  | None -> Dark
+  | None -> Sunset

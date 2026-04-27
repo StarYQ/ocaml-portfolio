@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Default Sunset Theme
+- Made the OCaml sunset theme the default first-load theme when no saved preference exists
+
 ## 2026-04-27 - Resume Navigation Link
 - Added the Resume page to the desktop and mobile navbar
 

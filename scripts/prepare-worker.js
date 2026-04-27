@@ -38,7 +38,7 @@ const indexContent = `<!DOCTYPE html>
     <title>arnab bhowmik</title>
     <script>
         (function() {
-            var theme = 'dark';
+            var theme = 'sunset';
             try {
                 var storedTheme = window.localStorage && window.localStorage.getItem('theme');
                 if (storedTheme === 'light' || storedTheme === 'sunset' || storedTheme === 'dark') {
