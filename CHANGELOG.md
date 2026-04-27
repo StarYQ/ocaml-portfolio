@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Native Mailto Links
+- Changed email links to native external `mailto:` anchors so browser and OS mail handlers can open them directly
+
 ## 2026-04-27 - Me Page Image Framing
 - Updated Me page image frames to show full photos without cropping across different source aspect ratios
 
