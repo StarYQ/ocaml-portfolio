@@ -265,6 +265,7 @@ module Styles = [%css
         padding: 0 1.5rem 0.75rem;
         align-items: center;
         justify-content: center;
+        flex-wrap: wrap;
         gap: 1.25rem;
         border-top: 1px solid var(--border-color);
       }

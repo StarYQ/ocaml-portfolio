@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Resume Navigation Link
+- Added the Resume page to the desktop and mobile navbar
+
 ## 2026-04-27 - Home Portrait Removal
 - Removed the portrait image slot from the home page hero across desktop and mobile layouts
 
