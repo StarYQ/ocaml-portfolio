@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Home Portrait Removal
+- Removed the portrait image slot from the home page hero across desktop and mobile layouts
+
 ## 2026-04-27 - OCaml Sunset Theme
 - Added a third `sunset` theme between light and dark using the OCaml logo as the middle toggle icon
 - Updated theme storage, first-paint shell classes, and Worker shell generation to preserve the new theme

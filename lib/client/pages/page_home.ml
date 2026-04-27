@@ -35,15 +35,6 @@ module Styles = [%css
         gap: 1.25rem;
       }
 
-      .desktop_photo {
-        display: none;
-      }
-
-      .mobile_photo {
-        display: block;
-        margin-top: 1.75rem;
-      }
-
       .hero_body {
         margin-top: 2rem;
         display: grid;
@@ -100,10 +91,6 @@ module Styles = [%css
           padding: 3.5rem 2rem 3rem;
         }
 
-        .desktop_photo {
-          display: block;
-        }
-
         .hero_body {
           grid-template-columns: minmax(0, 1fr) auto;
           align-items: end;
@@ -113,9 +100,6 @@ module Styles = [%css
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .mobile_photo {
-          display: none;
-        }
       }
 
       @media (max-width: 767px) {
@@ -163,7 +147,6 @@ let footer () =
 
 let component ?(theme = Bonsai.Value.return Theme.Light) () =
   let%arr _theme = theme in
-  let profile_path = Router.get_base_path () ^ "/static/profile.png" in
   Vdom.Node.div
     ~attrs:[ Ui.page; Styles.page_shell ]
     [ Vdom.Node.section
@@ -175,32 +158,12 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.p
                     ~attrs:[ Ui.eyebrow ]
                     [ Vdom.Node.text "001 — SOFTWARE ENGINEER" ]
-                ; Vdom.Node.div
-                    ~attrs:[ Styles.desktop_photo; Ui.photo_frame ]
-                    [ Vdom.Node.create "img"
-                        ~attrs:
-                          [ Ui.photo_image
-                          ; Vdom.Attr.src profile_path
-                          ; Vdom.Attr.alt "Arnab Bhowmik portrait"
-                          ]
-                        []
-                    ]
                 ]
             ; Vdom.Node.h1
                 ~attrs:[ Ui.display_title ]
                 [ Vdom.Node.text "ARNAB"
                 ; Vdom.Node.create "br" []
                 ; Vdom.Node.text "BHOWMIK"
-                ]
-            ; Vdom.Node.div
-                ~attrs:[ Styles.mobile_photo; Ui.photo_frame ]
-                [ Vdom.Node.create "img"
-                    ~attrs:
-                      [ Ui.photo_image
-                      ; Vdom.Attr.src profile_path
-                      ; Vdom.Attr.alt "Arnab Bhowmik portrait"
-                      ]
-                    []
                 ]
             ; Vdom.Node.div
                 ~attrs:[ Styles.hero_body ]
