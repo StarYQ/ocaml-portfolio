@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-04-27 - Home Bio and Footer Cleanup
+- Updated the home hero bio wording and removed the inactive email item from the footer
+
 ## 2026-04-27 - Email Link Removal
 - Removed nonfunctional email link behavior so email text no longer opens tabs, popups, or mail handlers
 

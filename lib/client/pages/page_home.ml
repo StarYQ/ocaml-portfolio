@@ -123,10 +123,7 @@ let footer () =
             [ Vdom.Node.text "BRONX, NY" ]
         ; Vdom.Node.div
             ~attrs:[ Ui.footer_links ]
-            [ Vdom.Node.span
-                ~attrs:[ Ui.muted_text ]
-                [ Vdom.Node.text "EMAIL" ]
-            ; Vdom.Node.a
+            [ Vdom.Node.a
                 ~attrs:
                   [ Ui.subtle_link
                   ; Vdom.Attr.href "https://github.com/StarYQ"
@@ -171,7 +168,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.p
                     ~attrs:[ Styles.description ]
                     [ Vdom.Node.text
-                        "CS @ Stony Brook University. Interested in HPC infrastructure, cloud tooling, distributed systems, and agentic AI. Prev SWE Intern @ GSK, incoming @ CoreWeave."
+                        "CS @ Stony Brook University. Passionate about HPC infrastructure, cloud tooling, distributed systems, and agentic AI. Prev SWE Intern @ GSK, incoming @ CoreWeave."
                     ]
                 ; Vdom.Node.div
                     ~attrs:[ Ui.button_row ]
