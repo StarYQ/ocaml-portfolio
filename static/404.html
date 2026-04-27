@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>arnab bhowmik</title>
     <script>
-        (function() {
+        (function () {
             var theme = 'dark';
             try {
                 var storedTheme = window.localStorage && window.localStorage.getItem('theme');
                 if (storedTheme === 'light' || storedTheme === 'sunset' || storedTheme === 'dark') {
                     theme = storedTheme;
                 }
-            } catch (_) {}
+            } catch (_) { }
             document.documentElement.classList.add(theme + '-theme');
         })();
     </script>
     <style>
-        :root, .light-theme {
+        :root,
+        .light-theme {
             --bg-primary: #f8f9fa;
             --text-primary: #333333;
             --text-secondary: #666666;
@@ -41,14 +43,14 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
             line-height: 1.6;
             color: var(--text-primary);
             background-color: var(--bg-primary);
         }
-        
+
         /* Loading styles */
         #loading {
             position: fixed;
@@ -58,17 +60,17 @@
             font-size: 1.2rem;
             color: var(--text-secondary);
         }
-        
+
         /* App container */
         #app {
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-        
+
         #app.loaded {
             opacity: 1;
         }
-        
+
         /* Responsive design helpers */
         @media (max-width: 768px) {
             body {
@@ -77,23 +79,24 @@
         }
     </style>
 </head>
+
 <body>
-    <div id="loading">Loading arnab bhowmik...</div>
+    <div id="loading">Loading arnabb.dev...</div>
     <div id="app"></div>
-    
+
     <script>
         // Show the app once loaded
-        document.addEventListener('DOMContentLoaded', function() {
-            setTimeout(function() {
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
                 const loading = document.getElementById('loading');
                 const app = document.getElementById('app');
-                
+
                 if (loading) loading.style.display = 'none';
                 if (app) app.classList.add('loaded');
             }, 100);
         });
     </script>
-    
+
     <!-- Load the compiled OCaml/Bonsai JavaScript -->
     <script>
         // Detect if we're running on GitHub Pages or locally
@@ -104,4 +107,5 @@
         document.body.appendChild(script);
     </script>
 </body>
+
 </html>

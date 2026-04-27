@@ -135,7 +135,7 @@ const indexContent = `<!DOCTYPE html>
     <div id="app">
         <div class="loading">
             <div class="spinner"></div>
-            <span>Loading arnab bhowmik...</span>
+            <span>Loading arnabb.dev...</span>
         </div>
     </div>
     <!-- Load the OCaml compiled JavaScript -->
