@@ -93,7 +93,7 @@ jobs:
       - name: Prepare Worker deployment
         run: |
           echo "Preparing deployment files for Cloudflare Workers..."
-          npm run build:worker
+          opam exec -- npm run build:worker
           
           # Verify deployment files
           echo "📋 Verifying deployment artifacts..."
