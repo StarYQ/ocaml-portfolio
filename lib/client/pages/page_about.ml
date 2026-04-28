@@ -180,7 +180,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                     ; Vdom.Node.a
                         ~attrs:
                           [ Ui.subtle_link
-                          ; Vdom.Attr.href "https://linkedin.com/in/arnabbhowmik"
+                          ; Vdom.Attr.href "https://www.linkedin.com/in/arnab-bhowmik-12422426b/"
                           ; Vdom.Attr.target "_blank"
                           ; Vdom.Attr.create "rel" "noopener noreferrer"
                           ]
