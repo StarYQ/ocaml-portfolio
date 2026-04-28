@@ -38,7 +38,7 @@ let portfolio_projects =
     ; summary = "Built a full-stack automation app for teaching assistant logistics, improving task efficiency by approximately 200%."
     ; overview =
         [ "Developed a full-stack web application using Flask, Jinja, and SQLite to automate logistics tasks for teaching assistants at a tutoring center."
-        ; "Improved task efficiency by approximately 200% for active users through automation of repetitive administrative work."
+        ; "Improved task efficiency for active users through automation of repetitive administrative work."
         ; "Integrated Beautiful Soup and Selenium WebDriver for scraping and process automation where the workflow needed live site interaction."
         ]
     ; tags = [ "web"; "backend" ]
@@ -172,7 +172,7 @@ let work_experiences =
     ; location = "New York, NY"
     ; period = "JUN 2026 — AUG 2026"
     ; status = "INCOMING"
-    ; bullets = []
+    ; bullets = [ "Incoming Summer 2026, Cloud Platform API/IAM team "]
     }
   ; { id = "002"
     ; company = "GLAXOSMITHKLINE"
@@ -183,9 +183,8 @@ let work_experiences =
     ; period = "MAY 2025 — AUG 2025"
     ; status = "COMPLETED"
     ; bullets =
-        [ "Built an interactive Python CLI that diagnoses workloads and selects optimal HPC environments across Slurm and Google Batch, reducing compute costs by about 10%."
-        ; "Containerized and shipped the tool with Docker and Apptainer for cross-platform rollout to 3,000+ computational scientists."
-        ; "Built proof-of-concept orchestration improvements for an AI/ML agentic system, reducing context consumption by about 35% while improving performance."
+        [ "Built an interactive Python CLI that diagnoses workloads and selects optimal HPC environments across Slurm and Google Batch; containerized and shipped the tool with Docker and Apptainer."
+        ; "Built proof-of-concept orchestration improvements for an AI/ML agentic system, reducing context consumption while improving performance."
         ]
     }
   ; { id = "003"
@@ -213,7 +212,7 @@ let work_experiences =
     ; bullets =
         [ "Led the HealthByte subteam through delegation, onboarding, and planning."
         ; "Developed prototype patient-facing iOS and clinician-facing web apps for post-surgery recovery monitoring."
-        ; "Helped build Regio Vinco, an educational geography game tested with 150+ students."
+        ; "Currently helping build Regio Vinco, an educational geography game."
         ]
     }
   ; { id = "005"
@@ -225,7 +224,7 @@ let work_experiences =
     ; period = "JUL 2024 — MAY 2025"
     ; status = "COMPLETED"
     ; bullets =
-        [ "Led full-stack development using Next.js, React, Supabase, and Prisma ORM, reducing operational costs by about 20%."
+        [ "Led full-stack development of the platform using Next.js, React, Supabase, and Prisma ORM."
         ; "Implemented real-time messaging, Stripe payment processing, and Zoom API meeting scheduling."
         ; "Added Jest and Playwright test coverage and set up CI/CD for dependable deployments."
         ]

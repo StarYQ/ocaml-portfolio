@@ -115,7 +115,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "Incoming Software Engineering Intern at CoreWeave for Summer 2026. Previously at GlaxoSmithKline working on compute platform engineering."
+                        "Incoming Software Engineering Intern at CoreWeave for Summer 2026. Previously interned at GlaxoSmithKline working on compute platform engineering."
                     ]
                 ]
             ]
