@@ -19,11 +19,11 @@ let portfolio_projects =
     ; tags = [ "trading"; "backend" ]
     ; tech_stack = [ "Python"; "Redis"; "PM2"; "AWS EC2" ]
     ; stats =
-        [ stat "TOTAL PROFIT" "$160,000+"
-        ; stat "RETURN ON CAPITAL" "3,500%+"
-        ; stat "CONTRACTS TRADED" "20M+"
-        ; stat "NOTIONAL VOLUME" "$9.4M+"
-        ; stat "TOTAL TRADES" "330K+"
+        [ stat "TOTAL PROFIT" "$240,000+"
+        ; stat "RETURN ON CAPITAL" "7,000%+"
+        ; stat "CONTRACTS TRADED" "35M+"
+        ; stat "NOTIONAL VOLUME" "$16M+"
+        ; stat "TOTAL TRADES" "500K+"
         ]
     ; github_url = None
     ; demo_url = Some "https://lbtradingllc.com/polymarket-us"
@@ -188,20 +188,6 @@ let work_experiences =
         ]
     }
   ; { id = "003"
-    ; company = "STONY BROOK UNIVERSITY"
-    ; logo_file = Some "sbu-logo.png"
-    ; role = "Teaching Assistant"
-    ; team = "CSE 216 & CSE 316"
-    ; location = "Stony Brook, NY"
-    ; period = "JAN 2025 — DEC 2025"
-    ; status = "ACTIVE"
-    ; bullets =
-        [ "Led recitations, office hours, and review sessions for Programming Abstractions and Software Development."
-        ; "Supported 250+ students across functional programming, software design, testing, and large-program engineering."
-        ; "Revised course materials, graded assignments and exams, and helped keep course operations running smoothly."
-        ]
-    }
-  ; { id = "004"
     ; company = "STONY BROOK VIP PROGRAM"
     ; logo_file = Some "sbu-logo.png"
     ; role = "Student Software Developer"
@@ -215,8 +201,22 @@ let work_experiences =
         ; "Currently helping build Regio Vinco, an educational geography game."
         ]
     }
+  ; { id = "004"
+    ; company = "STONY BROOK UNIVERSITY"
+    ; logo_file = Some "sbu-logo.png"
+    ; role = "Teaching Assistant"
+    ; team = "CSE 216 & CSE 316"
+    ; location = "Stony Brook, NY"
+    ; period = "JAN 2025 — DEC 2025"
+    ; status = "COMPLETED"
+    ; bullets =
+        [ "Led recitations, office hours, and review sessions for Programming Abstractions and Software Development."
+        ; "Supported 250+ students across functional programming, software design, testing, and large-program engineering."
+        ; "Revised course materials, graded assignments and exams, and helped keep course operations running smoothly."
+        ]
+    }
   ; { id = "005"
-    ; company = "QUATTRONKIDS / PENGUINLEARN"
+    ; company = "PENGUINLEARN"
     ; logo_file = Some "penguinlearn-logo.png"
     ; role = "Full Stack Developer"
     ; team = "Core Platform"
