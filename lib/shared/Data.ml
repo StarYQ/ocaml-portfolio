@@ -26,7 +26,7 @@ let portfolio_projects =
         ; stat "TOTAL TRADES" "500K+"
         ]
     ; github_url = None
-    ; demo_url = Some "https://lbtrading.com/polymarket-us"
+    ; demo_url = Some "https://lbtrading.com/stats/polymarket-us"
     ; current = true
     ; featured = true
     }
