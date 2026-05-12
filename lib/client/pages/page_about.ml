@@ -69,7 +69,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
     [ ("LANGUAGES", [ "Java"; "Python"; "SQL"; "Bash"; "C"; "OCaml"; "JavaScript"; "PHP"; "Swift" ])
     ; ("FRAMEWORKS", [ "NumPy"; "pandas"; "React"; "Vue"; "LangChain"; "PyTorch"; "scikit-learn"; "Next.js"; "Express.js"; "Node.js"; "FastAPI" ])
     ; ("TOOLS", [ "PostgreSQL"; "MySQL"; "SQLite"; "MongoDB"; "Redis"; "Pinecone"; "Git"; "Docker"; "Kubernetes"; "GitHub Actions"; "Ansible"; "Terraform"; "PM2"; "Jira"; "Slurm"; "GCP"; "AWS" ])
-    ; ("CONCEPTS", [ "Distributed Systems"; "RESTful APIs"; "Agile Development"; "Machine Learning"; "NLP"; "HPC"; "Linux/Unix"; "LLMs"; "MCP" ])
+    (* ; ("CONCEPTS", [ "Distributed Systems"; "RESTful APIs"; "Agile Development"; "Machine Learning"; "NLP"; "HPC"; "Linux/Unix"; "LLMs"; "MCP" ]) *)
     ]
   in
   let coursework =
@@ -105,7 +105,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "Software engineer based in Bronx, NY. Currently pursuing a Bachelor of Science with Honors in Computer Science at Stony Brook University (GPA: 3.83), graduating May 2027."
+                        "Software engineer based in NYC. Currently pursuing a Bachelor of Science with Honors in Computer Science at Stony Brook University, graduating May 2027."
                     ]
                 ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
