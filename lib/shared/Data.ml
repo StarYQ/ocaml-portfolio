@@ -19,11 +19,11 @@ let portfolio_projects =
     ; tags = [ "trading"; "backend" ]
     ; tech_stack = [ "Python"; "Redis"; "PM2"; "AWS EC2" ]
     ; stats =
-        [ stat "TOTAL PROFIT" "$240,000+"
-        ; stat "RETURN ON CAPITAL" "7,000%+"
-        ; stat "CONTRACTS TRADED" "35M+"
-        ; stat "NOTIONAL VOLUME" "$16M+"
-        ; stat "TOTAL TRADES" "500K+"
+        [ stat "TOTAL PROFIT" "$285,000+"
+        ; stat "RETURN ON CAPITAL" "8,000%+"
+        ; stat "CONTRACTS TRADED" "50M+"
+        ; stat "NOTIONAL VOLUME" "$23M+"
+        ; stat "TOTAL TRADES" "700K+"
         ]
     ; github_url = None
     ; demo_url = Some "https://lbtrading.com/stats/polymarket-us"
