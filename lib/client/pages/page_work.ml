@@ -210,11 +210,11 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
             ~attrs:[ Ui.container ]
             [ Vdom.Node.p ~attrs:[ Ui.eyebrow ] [ Vdom.Node.text "002 — EXPERIENCE" ]
             ; Vdom.Node.h1 ~attrs:[ Ui.page_title ] [ Vdom.Node.text "WORK" ]
-            ; Vdom.Node.p
+            (* ; Vdom.Node.p
                 ~attrs:[ Ui.body_text ]
                 [ Vdom.Node.text
                     "Internships, teaching, and software engineering across cloud infrastructure, high-performance computing, ed tech, and full-stack software."
-                ]
+                ] *)
             ]
         ]
     ]
