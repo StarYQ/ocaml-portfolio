@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-06-12 - Market-Making Stats Toggle
+- Added a shared config flag that hides market-making project stats by default while keeping them easy to re-enable
+
 ## 2026-04-27 - Me Page Feature Toggle
 - Added a shared `show_me_page` config flag that controls Me page routing and navigation visibility
 
