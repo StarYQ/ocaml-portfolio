@@ -158,6 +158,9 @@ let component ~theme ~set_theme =
   let me_nav_item attr =
     if route_is_enabled Me then [ nav_item attr Me "ME" ] else []
   in
+  let resume_nav_item attr =
+    if route_is_enabled Resume then [ nav_item attr Resume "RESUME" ] else []
+  in
   Vdom.Node.create "nav"
     ~attrs:[ Styles.navbar ]
     [ Vdom.Node.div
@@ -216,8 +219,8 @@ let component ~theme ~set_theme =
                  ; nav_item Styles.nav_link Work "WORK"
                  ; nav_item Styles.nav_link Projects "PROJECTS"
                  ; nav_item Styles.nav_link About "ABOUT"
-                 ; nav_item Styles.nav_link Resume "RESUME"
                  ]
+                 @ resume_nav_item Styles.nav_link
                  @ me_nav_item Styles.nav_link)
             ; Vdom.Node.button
                 ~attrs:
@@ -270,8 +273,8 @@ let component ~theme ~set_theme =
          ; nav_item Styles.mobile_nav_link Work "WORK"
          ; nav_item Styles.mobile_nav_link Projects "PROJECTS"
          ; nav_item Styles.mobile_nav_link About "ABOUT"
-         ; nav_item Styles.mobile_nav_link Resume "RESUME"
          ]
+         @ resume_nav_item Styles.mobile_nav_link
          @ me_nav_item Styles.mobile_nav_link)
     ]
 
@@ -287,6 +290,9 @@ let render ~current_route =
   let me_nav_item attr =
     if route_is_enabled Me then [ nav_item attr Me "ME" ] else []
   in
+  let resume_nav_item attr =
+    if route_is_enabled Resume then [ nav_item attr Resume "RESUME" ] else []
+  in
   Vdom.Node.create "nav"
     ~attrs:[ Styles.navbar ]
     [ Vdom.Node.div
@@ -301,8 +307,8 @@ let render ~current_route =
              ; nav_item Styles.nav_link Work "WORK"
              ; nav_item Styles.nav_link Projects "PROJECTS"
              ; nav_item Styles.nav_link About "ABOUT"
-             ; nav_item Styles.nav_link Resume "RESUME"
              ]
+             @ resume_nav_item Styles.nav_link
              @ me_nav_item Styles.nav_link)
         ]
     ; Vdom.Node.div
@@ -311,7 +317,7 @@ let render ~current_route =
          ; nav_item Styles.mobile_nav_link Work "WORK"
          ; nav_item Styles.mobile_nav_link Projects "PROJECTS"
          ; nav_item Styles.mobile_nav_link About "ABOUT"
-         ; nav_item Styles.mobile_nav_link Resume "RESUME"
          ]
+         @ resume_nav_item Styles.mobile_nav_link
          @ me_nav_item Styles.mobile_nav_link)
     ]

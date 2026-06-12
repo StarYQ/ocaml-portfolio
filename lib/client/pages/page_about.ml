@@ -3,6 +3,7 @@ open Bonsai_web
 open Bonsai.Let_syntax
 open Virtual_dom
 open Components
+open Shared.Types
 
 module Ui = Styles.Editorial_styles.Styles
 
@@ -44,13 +45,16 @@ let footer () =
         [ Vdom.Node.p
             ~attrs:[ Ui.muted_text ]
             [ Vdom.Node.text "CONTACT / EDUCATION / SKILLS" ]
-        ; Vdom.Node.div
-            ~attrs:[ Ui.footer_links ]
-            [ Nav_link.create'
-                ~route:Resume
-                ~attrs:[ Ui.subtle_link ]
-                [ Vdom.Node.text "OPEN RESUME" ]
-            ]
+        ; (if route_is_enabled Resume
+           then
+             Vdom.Node.div
+               ~attrs:[ Ui.footer_links ]
+               [ Nav_link.create'
+                   ~route:Resume
+                   ~attrs:[ Ui.subtle_link ]
+                   [ Vdom.Node.text "OPEN RESUME" ]
+               ]
+           else Vdom.Node.none)
         ]
     ]
 
@@ -85,6 +89,16 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
     ]
   in
   let%arr _theme = theme in
+  let resume_contact_link =
+    if route_is_enabled Resume
+    then
+      [ Nav_link.create'
+          ~route:Resume
+          ~attrs:[ Ui.subtle_link ]
+          [ Vdom.Node.text "RESUME" ]
+      ]
+    else []
+  in
   Vdom.Node.div
     ~attrs:[ Ui.page ]
     [ Vdom.Node.section
@@ -169,27 +183,24 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 ; Vdom.Node.p ~attrs:[ Ui.body_text ] [ Vdom.Node.text "929-452-9190" ]
                 ; Vdom.Node.div
                     ~attrs:[ Ui.footer_links ]
-                    [ Vdom.Node.a
-                        ~attrs:
-                          [ Ui.subtle_link
-                          ; Vdom.Attr.href "https://github.com/StarYQ"
-                          ; Vdom.Attr.target "_blank"
-                          ; Vdom.Attr.create "rel" "noopener noreferrer"
-                          ]
-                        [ Vdom.Node.text "GITHUB" ]
-                    ; Vdom.Node.a
-                        ~attrs:
-                          [ Ui.subtle_link
-                          ; Vdom.Attr.href "https://www.linkedin.com/in/arnab-bhowmik-12422426b/"
-                          ; Vdom.Attr.target "_blank"
-                          ; Vdom.Attr.create "rel" "noopener noreferrer"
-                          ]
-                        [ Vdom.Node.text "LINKEDIN" ]
-                    ; Nav_link.create'
-                        ~route:Resume
-                        ~attrs:[ Ui.subtle_link ]
-                        [ Vdom.Node.text "RESUME" ]
-                    ]
+                    ([ Vdom.Node.a
+                         ~attrs:
+                           [ Ui.subtle_link
+                           ; Vdom.Attr.href "https://github.com/StarYQ"
+                           ; Vdom.Attr.target "_blank"
+                           ; Vdom.Attr.create "rel" "noopener noreferrer"
+                           ]
+                         [ Vdom.Node.text "GITHUB" ]
+                     ; Vdom.Node.a
+                         ~attrs:
+                           [ Ui.subtle_link
+                           ; Vdom.Attr.href "https://www.linkedin.com/in/arnab-bhowmik-12422426b/"
+                           ; Vdom.Attr.target "_blank"
+                           ; Vdom.Attr.create "rel" "noopener noreferrer"
+                           ]
+                         [ Vdom.Node.text "LINKEDIN" ]
+                     ]
+                     @ resume_contact_link)
                 ]
             ]
         ]

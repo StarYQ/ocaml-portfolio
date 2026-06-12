@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-06-12 - Resume Page Toggle
+- Added a shared config flag that hides Resume links and routing by default while keeping the page easy to re-enable
+
 ## 2026-06-12 - Market-Making Stats Toggle
 - Added a shared config flag that hides market-making project stats by default while keeping them easy to re-enable
 

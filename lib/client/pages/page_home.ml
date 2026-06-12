@@ -3,6 +3,7 @@ open Bonsai_web
 open Bonsai.Let_syntax
 open Virtual_dom
 open Components
+open Shared.Types
 
 module Ui = Styles.Editorial_styles.Styles
 
@@ -145,6 +146,16 @@ let footer () =
 
 let component ?(theme = Bonsai.Value.return Theme.Light) () =
   let%arr _theme = theme in
+  let resume_button =
+    if route_is_enabled Resume
+    then
+      [ Nav_link.create'
+          ~route:Resume
+          ~attrs:[ Ui.button_secondary ]
+          [ Vdom.Node.text "RESUME" ]
+      ]
+    else []
+  in
   Vdom.Node.div
     ~attrs:[ Ui.page; Styles.page_shell ]
     [ Vdom.Node.section
@@ -172,19 +183,16 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                     ]
                 ; Vdom.Node.div
                     ~attrs:[ Ui.button_row ]
-                    [ Nav_link.create'
-                        ~route:Projects
-                        ~attrs:[ Ui.button_primary ]
-                        [ Vdom.Node.text "VIEW PROJECTS" ]
-                    ; Nav_link.create'
-                        ~route:Work
-                        ~attrs:[ Ui.button_secondary ]
-                        [ Vdom.Node.text "EXPERIENCE" ]
-                    ; Nav_link.create'
-                        ~route:Resume
-                        ~attrs:[ Ui.button_secondary ]
-                        [ Vdom.Node.text "RESUME" ]
-                    ]
+                    ([ Nav_link.create'
+                         ~route:Projects
+                         ~attrs:[ Ui.button_primary ]
+                         [ Vdom.Node.text "VIEW PROJECTS" ]
+                     ; Nav_link.create'
+                         ~route:Work
+                         ~attrs:[ Ui.button_secondary ]
+                         [ Vdom.Node.text "EXPERIENCE" ]
+                     ]
+                     @ resume_button)
                 ]
             ]
         ]

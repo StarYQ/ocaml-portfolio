@@ -41,7 +41,8 @@ let app_computation =
     | Me -> Pages.Page_home.component ~theme ()
     | Projects -> Pages.Page_projects.component ~theme ()
     | Project_detail slug -> Pages.Page_project_detail.component ~theme ~slug ()
-    | Resume -> Pages.Page_resume.component ~theme ()
+    | Resume when route_is_enabled Resume -> Pages.Page_resume.component ~theme ()
+    | Resume -> Pages.Page_home.component ~theme ()
   in
   
   let%arr content = content 

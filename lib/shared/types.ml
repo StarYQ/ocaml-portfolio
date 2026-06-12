@@ -79,9 +79,11 @@ type route =
 [@@deriving sexp, equal]
 
 let show_me_page = Site_config.show_me_page
+let show_resume_page = Site_config.show_resume_page
 
 let route_is_enabled = function
   | Me -> show_me_page
+  | Resume -> show_resume_page
   | _ -> true
 
 let normalize_route_path path =
@@ -108,7 +110,7 @@ let route_of_string raw_path =
   | "/projects" -> Some Projects
   | "/about" -> Some About
   | "/me" -> if show_me_page then Some Me else None
-  | "/resume" -> Some Resume
+  | "/resume" -> if show_resume_page then Some Resume else None
   | _ when String.is_prefix path ~prefix:"/projects/" ->
       let slug = String.drop_prefix path (String.length "/projects/") in
       if String.is_empty slug || String.mem slug '/'

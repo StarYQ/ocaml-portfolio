@@ -112,22 +112,25 @@ module Styles = [%css
     |}]
 
 let footer () =
-  Vdom.Node.footer
-    ~attrs:[ Ui.footer ]
-    [ Vdom.Node.div
-        ~attrs:[ Ui.footer_inner ]
-        [ Vdom.Node.p
-            ~attrs:[ Ui.muted_text ]
-            [ Vdom.Node.text "FULL RESUME AVAILABLE ON SITE" ]
-        ; Vdom.Node.div
-            ~attrs:[ Ui.footer_links ]
-            [ Components.Nav_link.create'
-                ~route:Resume
-                ~attrs:[ Ui.subtle_link ]
-                [ Vdom.Node.text "OPEN RESUME" ]
-            ]
-        ]
-    ]
+  if route_is_enabled Resume
+  then
+    Vdom.Node.footer
+      ~attrs:[ Ui.footer ]
+      [ Vdom.Node.div
+          ~attrs:[ Ui.footer_inner ]
+          [ Vdom.Node.p
+              ~attrs:[ Ui.muted_text ]
+              [ Vdom.Node.text "FULL RESUME AVAILABLE ON SITE" ]
+          ; Vdom.Node.div
+              ~attrs:[ Ui.footer_links ]
+              [ Components.Nav_link.create'
+                  ~route:Resume
+                  ~attrs:[ Ui.subtle_link ]
+                  [ Vdom.Node.text "OPEN RESUME" ]
+              ]
+          ]
+      ]
+  else Vdom.Node.none
 
 let logo_node (entry : experience) =
   match entry.logo_file with
