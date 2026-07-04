@@ -174,8 +174,8 @@ let work_experiences =
     ; team = "Cloud Platform API / IAM"
     ; location = "New York, NY"
     ; period = "JUN 2026 — AUG 2026"
-    ; status = "INCOMING"
-    ; bullets = [ "Incoming Summer 2026, Cloud Platform API/IAM team "]
+    ; status = "ACTIVE"
+    ; bullets = [ "Cloud Platform IAM team, working on IAM for CoreWeave’s Slurm on Kubernetes (SUNK) service"]
     }
   ; { id = "002"
     ; company = "GLAXOSMITHKLINE"
