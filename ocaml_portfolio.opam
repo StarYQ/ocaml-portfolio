@@ -11,7 +11,7 @@ homepage: "https://github.com/StarYQ/ocaml-portfolio"
 bug-reports: "https://github.com/StarYQ/ocaml-portfolio/issues"
 depends: [
   "ocaml"
-  "dune" {>= "3.15"}
+  "dune" {>= "3.15" & < "3.24.0"}
   "dream"
   "lwt_ppx"
   "bonsai" {= "v0.16.0"}

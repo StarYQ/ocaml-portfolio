@@ -20,7 +20,8 @@
   "A portfolio website built entirely in OCaml using Dream backend and Bonsai Web frontend")
  (depends
   ocaml
-  dune
+  (dune
+   (< 3.24.0))
   dream
   lwt_ppx
   (bonsai

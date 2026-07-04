@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2026-07-04 - Dune Version Constraint for CI Fix
+- Constrained dune to < 3.24.0 because dune 3.24.0's `./`-prefixed `%{deps}` expansion breaks ppx_css v0.16.0's css_inliner when building bonsai v0.16.0 in CI
+
 ## 2026-06-12 - Resume Page Toggle
 - Added a shared config flag that hides Resume links and routing by default while keeping the page easy to re-enable
 
