@@ -124,7 +124,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "My work spans cloud infrastructure, high-performance computing, trading systems, and full-stack development. I've built systems that process millions of contracts, optimized HPC workflows for thousands of scientists, and shipped platforms used by real students and educators."
+                        "My work spans cloud infrastructure, high-performance computing, trading systems, and full-stack development. I've built systems that process millions of contracts, secured infrastructure for enterprise-scale client data, optimized HPC workflows for thousands of scientists, and shipped platforms used by real students and educators."
                     ]
                 ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
