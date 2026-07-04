@@ -12,7 +12,7 @@ let portfolio_projects =
     ; year = "DEC 2025 — PRESENT"
     ; summary = "Designed and deployed a market-making system for prediction markets, actively trading on Polymarket."
     ; overview =
-        [ "Designed and deployed a market-making system for prediction markets, actively trading on Polymarket in the US closed beta."
+        [ "Designed and deployed a market-making system for prediction markets, actively trading on Polymarket."
         ; "Implemented automated quoting, inventory management, and risk controls to provide continuous liquidity across markets."
         (* ; "Built the production runtime around Redis state management, PM2 supervision, AWS EC2 deployment, and system-health alerting." *)
         ]
