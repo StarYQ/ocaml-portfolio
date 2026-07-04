@@ -171,11 +171,11 @@ let work_experiences =
     ; company = "COREWEAVE"
     ; logo_file = Some "coreweave_logo.jpg"
     ; role = "Software Engineering Intern"
-    ; team = "Cloud Platform API / IAM"
+    ; team = "Cloud Platform IAM"
     ; location = "New York, NY"
     ; period = "JUN 2026 — AUG 2026"
     ; status = "ACTIVE"
-    ; bullets = [ "Cloud Platform IAM team, working on IAM for CoreWeave’s Slurm on Kubernetes (SUNK) service"]
+    ; bullets = [ "Working on IAM for CoreWeave's Slurm on Kubernetes (SUNK) service"]
     }
   ; { id = "002"
     ; company = "GLAXOSMITHKLINE"
