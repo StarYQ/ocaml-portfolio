@@ -86,21 +86,6 @@ let external_links (project : project) =
     ; Option.map project.demo_url ~f:(fun href -> ("LIVE", href))
     ]
 
-let footer () =
-  Vdom.Node.footer
-    ~attrs:[ Ui.footer ]
-    [ Vdom.Node.div
-        ~attrs:[ Ui.footer_inner ]
-        [ Vdom.Node.div
-            ~attrs:[ Ui.footer_links ]
-            [ Nav_link.create'
-                ~route:Projects
-                ~attrs:[ Ui.subtle_link ]
-                [ Vdom.Node.text "ALL PROJECTS" ]
-            ]
-        ]
-    ]
-
 let project_view (project : project) =
   Vdom.Node.div
     ~attrs:[ Ui.page ]
@@ -182,7 +167,6 @@ let project_view (project : project) =
                 ]
             ]
         ]
-    ; footer ()
     ]
 
 let not_found_view slug =
@@ -209,7 +193,6 @@ let not_found_view slug =
                 [ Vdom.Node.text ("No project entry exists for slug: " ^ slug) ]
             ]
         ]
-    ; footer ()
     ]
 
 let component ?(theme = Bonsai.Value.return Theme.Light) ~slug () =
