@@ -41,7 +41,7 @@ let portfolio_projects =
     ; summary = "Built a full-stack automation app for teaching assistant logistics, improving task efficiency by approximately 200%."
     ; overview =
         [ "Developed a full-stack web application using Flask, Jinja, and SQLite to automate logistics tasks for teaching assistants at a tutoring center."
-        ; "Improved task efficiency for active users by ~200% through automation of repetitive administrative work."
+        ; "Improved task efficiency for active users by ~200% through the automation of repetitive administrative work."
         ; "Integrated Beautiful Soup and Selenium WebDriver for scraping and process automation where the workflow needed live site interaction."
         ]
     ; tags = [ "web"; "backend" ]
