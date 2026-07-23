@@ -118,10 +118,7 @@ let footer () =
       ~attrs:[ Ui.footer ]
       [ Vdom.Node.div
           ~attrs:[ Ui.footer_inner ]
-          [ Vdom.Node.p
-              ~attrs:[ Ui.muted_text ]
-              [ Vdom.Node.text "FULL RESUME AVAILABLE ON SITE" ]
-          ; Vdom.Node.div
+          [ Vdom.Node.div
               ~attrs:[ Ui.footer_links ]
               [ Components.Nav_link.create'
                   ~route:Resume
