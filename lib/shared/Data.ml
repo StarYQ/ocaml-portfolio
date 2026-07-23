@@ -46,7 +46,7 @@ let portfolio_projects =
         ]
     ; tags = [ "web"; "backend" ]
     ; tech_stack = [ "Python"; "Flask"; "Beautiful Soup"; "Selenium WebDriver"; "SQLite"; "JavaScript" ]
-    ; stats = [ stat "EFFICIENCY GAIN" "+200%" ]
+    ; stats = [] (* [ stat "EFFICIENCY GAIN" "+200%" ] *)
     ; github_url = None
     ; demo_url = None
     ; current = false
