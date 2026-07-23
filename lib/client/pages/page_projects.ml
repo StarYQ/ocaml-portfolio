@@ -161,10 +161,7 @@ let footer () =
     ~attrs:[ Ui.footer ]
     [ Vdom.Node.div
         ~attrs:[ Ui.footer_inner ]
-        [ Vdom.Node.p
-            ~attrs:[ Ui.muted_text ]
-            [ Vdom.Node.text "SELECTED PROJECTS AND EXPERIMENTS" ]
-        ; Vdom.Node.div
+        [ Vdom.Node.div
             ~attrs:[ Ui.footer_links ]
             [ Nav_link.create'
                 ~route:Home
