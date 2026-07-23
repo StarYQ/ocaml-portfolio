@@ -175,7 +175,7 @@ let work_experiences =
     ; location = "New York, NY"
     ; period = "JUN 2026 — AUG 2026"
     ; status = "ACTIVE"
-    ; bullets = [ "Working on IAM for CoreWeave's Slurm on Kubernetes (SUNK) service"]
+    ; bullets = [ "Developing IAM features for CoreWeave's Slurm on Kubernetes (SUNK) service"]
     }
   ; { id = "002"
     ; company = "GLAXOSMITHKLINE"
