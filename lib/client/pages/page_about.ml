@@ -70,22 +70,24 @@ let skill_group label items =
 
 let component ?(theme = Bonsai.Value.return Theme.Light) () =
   let skills =
-    [ ("LANGUAGES", [ "Java"; "Python"; "SQL"; "Bash"; "C"; "OCaml"; "JavaScript"; "PHP"; "Swift" ])
+    [ ("LANGUAGES", [ "Java"; "Python"; "SQL"; "Bash"; "C"; "Go"; "OCaml"; "JavaScript"; "PHP"; "Swift" ])
     ; ("FRAMEWORKS", [ "NumPy"; "pandas"; "React"; "Vue"; "LangChain"; "PyTorch"; "scikit-learn"; "Next.js"; "Express.js"; "Node.js"; "FastAPI" ])
-    ; ("TOOLS", [ "PostgreSQL"; "MySQL"; "SQLite"; "MongoDB"; "Redis"; "Pinecone"; "Git"; "Docker"; "Kubernetes"; "GitHub Actions"; "Ansible"; "Terraform"; "PM2"; "Jira"; "Slurm"; "GCP"; "AWS" ])
+    ; ("TOOLS", [ "PostgreSQL"; "MySQL"; "SQLite"; "MongoDB"; "Redis"; "Pinecone"; "Git"; "Docker"; "Kubernetes"; "GitHub Actions"; "Ansible"; "Terraform"; "Slurm"; "GCP"; "AWS" ])
     (* ; ("CONCEPTS", [ "Distributed Systems"; "RESTful APIs"; "Agile Development"; "Machine Learning"; "NLP"; "HPC"; "Linux/Unix"; "LLMs"; "MCP" ]) *)
     ]
   in
   let coursework =
-    [ "Software Development"
+    [ "Cloud Computing"
+    ; "Computer Networks"
+    ; "Software Development"
     ; "Software Engineering"
     ; "Theory of Computation: Honors"
     ; "Analysis of Algorithms: Honors"
-    ; "Data Structures"
-    ; "Object-Oriented Programming"
+    ; "Machine Learning"
     ; "Systems Programming"
     ; "Programming Abstractions"
-    ; "Machine Learning"
+    ; "Data Structures"
+    ; "Object-Oriented Programming"
     ]
   in
   let%arr _theme = theme in
@@ -119,17 +121,17 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "Software engineer based in NYC. Currently pursuing a Bachelor of Science with Honors in Computer Science at Stony Brook University, graduating May 2027."
+                        "Software engineer based in NYC. Currently pursuing a Bachelor of Science with Honors in Computer Science at Stony Brook University, graduating December 2026."
                     ]
                 ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "My work spans cloud infrastructure, high-performance computing, trading systems, and full-stack development. I've built systems that process millions of contracts, secured infrastructure for enterprise-scale client data, optimized HPC workflows for thousands of scientists, and shipped platforms used by real students and educators."
+                        "My work spans cloud infrastructure, high-performance computing, trading systems, and full-stack development. I've built systems that process millions of contracts, helped enable zero-trust cloud infrastructure for billions of $ in enterprise-scale client data, optimized HPC workflows for thousands of scientists, and shipped platforms used by real students and educators."
                     ]
                 ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "Currently a Software Engineering Intern at CoreWeave. Previously interned at GlaxoSmithKline working on compute platform engineering."
+                        "Previously interned at CoreWeave working on cutting-edge IAM, and at GlaxoSmithKline doing compute platform engineering."
                     ]
                 ]
             ]
@@ -150,7 +152,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 ; Vdom.Node.div
                     ~attrs:[ Ui.footer_links ]
                     [ Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text "GPA: 3.83" ]
-                    ; Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text "MAY 2027" ]
+                    ; Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text "DECEMBER 2026" ]
                     ]
                 ; Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text "RELEVANT COURSEWORK" ]
                 ; Vdom.Node.div
@@ -180,7 +182,6 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 [ Vdom.Node.p
                     ~attrs:[ Styles.contact_link; Ui.body_text ]
                     [ Vdom.Node.text "arnab.bhowmik@stonybrook.edu" ]
-                ; Vdom.Node.p ~attrs:[ Ui.body_text ] [ Vdom.Node.text "929-452-9190" ]
                 ; Vdom.Node.div
                     ~attrs:[ Ui.footer_links ]
                     ([ Vdom.Node.a

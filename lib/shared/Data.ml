@@ -174,8 +174,8 @@ let work_experiences =
     ; team = "Cloud Platform IAM"
     ; location = "New York, NY"
     ; period = "JUN 2026 — AUG 2026"
-    ; status = "ACTIVE"
-    ; bullets = [ "Developing IAM features for CoreWeave's Slurm on Kubernetes (SUNK) service"]
+    ; status = "COMPLETED"
+    ; bullets = [ "Implemented per-user workload identity for CoreWeave’s Slurm on Kubernetes (SUNK), automatically provisioning short-lived credentials for zero-trust authentication to cloud services with no user intervention or long-lived secrets."]
     }
   ; { id = "002"
     ; company = "GLAXOSMITHKLINE"
