@@ -175,13 +175,13 @@ let work_experiences =
     ; location = "New York, NY"
     ; period = "JUN 2026 — AUG 2026"
     ; status = "COMPLETED"
-    ; bullets = [ "Implemented per-user workload identity for CoreWeave’s Slurm on Kubernetes (SUNK), automatically provisioning short-lived credentials for zero-trust authentication to cloud services with no user intervention or long-lived secrets."]
+    ; bullets = [ "Implemented per-user workload identity for CoreWeave’s Slurm on Kubernetes (SUNK)"]
     }
   ; { id = "002"
     ; company = "GLAXOSMITHKLINE"
     ; logo_file = Some "gsk-logo.png"
     ; role = "Compute Platform Engineering Intern"
-    ; team = "HPC & Cloud Infrastructure"
+    ; team = "Compute Platform Engineering"
     ; location = "Seattle, WA"
     ; period = "MAY 2025 — AUG 2025"
     ; status = "COMPLETED"
