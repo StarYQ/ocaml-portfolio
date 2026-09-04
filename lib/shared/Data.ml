@@ -197,7 +197,7 @@ let work_experiences =
     ; team = "HealthByte & Regio Vinco"
     ; location = "Stony Brook, NY"
     ; period = "SEP 2024 — PRESENT"
-    ; status = "ACTIVE"
+    ; status = "COMPLETED"
     ; bullets =
         [ "Led the HealthByte subteam through delegation, onboarding, and planning."
         ; "Developed prototype patient-facing iOS and clinician-facing web apps for post-surgery recovery monitoring."
