@@ -1,0 +1,25 @@
+name: Keep opam cache warm
+
+on:
+  schedule:
+    - cron: '0 12 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      # Path and key must match cloudflare.yml exactly; a restore resets the 7-day eviction clock.
+      - name: Restore opam switch
+        uses: actions/cache/restore@v6
+        with:
+          path: |
+            ~/.opam
+            _opam
+          key: opam-${{ runner.os }}-${{ hashFiles('ocaml_portfolio.opam.locked') }}
