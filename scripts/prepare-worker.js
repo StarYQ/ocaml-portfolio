@@ -36,7 +36,7 @@ const indexContent = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio Website created using functional web development with Bonsai and Dream">
     <title>arnab bhowmik</title>
-    <link rel="icon" type="image/png" href="/static/favicon.png">
+    <link rel="icon" href="/favicon.ico">
     <script>
         (function() {
             var theme = 'sunset';
@@ -228,6 +228,8 @@ function copyStaticAssets(sourceDir, destDir, relativeDir = '') {
 }
 
 copyStaticAssets(staticSourceDir, staticDestDir);
+fs.copyFileSync(path.join(staticSourceDir, 'favicon.ico'), path.join(distDir, 'favicon.ico'));
+console.log('✓ Copied favicon.ico to dist root');
 
 // Create a manifest file for debugging
 const manifest = {

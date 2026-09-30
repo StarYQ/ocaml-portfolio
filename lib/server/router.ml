@@ -34,6 +34,9 @@ let run_server =
     (* Serve static files from static/ directory *)
     Dream.get "/static/**" (Dream.static "static");
     
+    (* Serve favicon at site root *)
+    Dream.get "/favicon.ico" (Dream.from_filesystem "static" "favicon.ico");
+    
     (* SPA catch-all: serve index.html for all other routes *)
     Dream.get "/**" serve_index_html;
   ]
