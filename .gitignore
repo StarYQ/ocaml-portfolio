@@ -4,6 +4,7 @@
 tmp/
 
 _build/
+_opam/
 dist/
 node_modules/
 
