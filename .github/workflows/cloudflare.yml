@@ -46,11 +46,11 @@ jobs:
           ocaml-compiler: 5.1.1
           cache: false
 
-      # libev-dev is needed to link lwt even when the switch is restored
+      # Link-time libs for bin/main.exe; on a cache miss opam installs the other depexts itself
       - name: Install system dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y m4 pkg-config libgmp-dev libev-dev
+          sudo apt-get install -y libev-dev libssl-dev
 
       - name: Install OCaml dependencies
         if: steps.opam-cache.outputs.cache-hit != 'true'
