@@ -36,6 +36,7 @@ const indexContent = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Portfolio Website created using functional web development with Bonsai and Dream">
     <title>arnab bhowmik</title>
+    <link rel="icon" type="image/png" href="/static/favicon.png">
     <script>
         (function() {
             var theme = 'sunset';
