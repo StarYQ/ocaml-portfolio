@@ -175,7 +175,7 @@ let work_experiences =
     ; location = "New York, NY"
     ; period = "JUN 2026 — AUG 2026"
     ; status = "COMPLETED"
-    ; bullets = [ "Implemented per-user workload identity for CoreWeave’s Slurm on Kubernetes (SUNK)"]
+    ; bullets = [ "Implemented ephemeral per-user workload identity for CoreWeave’s Slurm on Kubernetes (SUNK)"]
     }
   ; { id = "002"
     ; company = "GLAXOSMITHKLINE"
@@ -201,7 +201,7 @@ let work_experiences =
     ; bullets =
         [ "Led the HealthByte subteam through delegation, onboarding, and planning."
         ; "Developed prototype patient-facing iOS and clinician-facing web apps for post-surgery recovery monitoring."
-        ; "Currently helping build Regio Vinco, an educational geography game."
+        ; "Developed features for Regio Vinco, an educational geography game."
         ]
     }
   ; { id = "004"
