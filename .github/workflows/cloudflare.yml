@@ -30,7 +30,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      # Restored before setup-ocaml (cache: false) so it reuses the switch instead of rebuilding it.
+      # Restored before setup-ocaml (cache: false) so it reuses the switch instead of rebuilding it
       - name: Cache opam switch
         id: opam-cache
         uses: actions/cache@v6
@@ -46,7 +46,7 @@ jobs:
           ocaml-compiler: 5.1.1
           cache: false
 
-      # libev-dev is needed to link lwt even when the switch is restored.
+      # libev-dev is needed to link lwt even when the switch is restored
       - name: Install system dependencies
         run: |
           sudo apt-get update

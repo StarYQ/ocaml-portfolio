@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      # Path and key must match cloudflare.yml exactly; a restore resets the 7-day eviction clock.
+      # Path and key must match cloudflare.yml exactly; a restore resets the 7-day eviction clock
       - name: Restore opam switch
         uses: actions/cache/restore@v6
         with:
