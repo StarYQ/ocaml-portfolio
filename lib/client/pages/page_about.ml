@@ -70,10 +70,11 @@ let skill_group label items =
 
 let component ?(theme = Bonsai.Value.return Theme.Light) () =
   let skills =
-    [ ("LANGUAGES", [ "Java"; "Python"; "SQL"; "Bash"; "C"; "Go"; "OCaml"; "JavaScript"; "PHP"; "Swift" ])
-    ; ("FRAMEWORKS", [ "NumPy"; "pandas"; "React"; "Vue"; "LangChain"; "PyTorch"; "scikit-learn"; "Next.js"; "Express.js"; "Node.js"; "FastAPI" ])
-    ; ("TOOLS", [ "PostgreSQL"; "MySQL"; "SQLite"; "MongoDB"; "Redis"; "Pinecone"; "Git"; "Docker"; "Kubernetes"; "GitHub Actions"; "Ansible"; "Terraform"; "Slurm"; "GCP"; "AWS" ])
-    (* ; ("CONCEPTS", [ "Distributed Systems"; "RESTful APIs"; "Agile Development"; "Machine Learning"; "NLP"; "HPC"; "Linux/Unix"; "LLMs"; "MCP" ]) *)
+    [ ("LANGUAGES", [ "Java"; "Python"; "Go"; "SQL"; "Bash"; "C"; "OCaml"; "JavaScript"; "TypeScript"; "Swift" ])
+    ; ("FRAMEWORKS", [ "NumPy"; "React"; "LangChain"; "PyTorch"; "scikit-learn"; "Next.js"; "Express.js"; "Node.js"; "FastAPI"; "SQLAlchemy" ])
+    ; ("DATABASES", [ "PostgreSQL"; "MySQL"; "SQLite"; "MongoDB"; "Redis"; "Pinecone" ])
+    ; ("TOOLS", [ "Git"; "Linux"; "Unix"; "Apptainer"; "Docker"; "Kubernetes"; "Kustomize"; "SPIFFE/SPIRE"; "GitHub Actions"; "Ansible"; "Terraform"; "Slurm"; "AWS"; "GCP"; "GKE" ])
+    (* ; ("CONCEPTS", [ "Distributed Systems"; "IAM"; "OIDC"; "IaC"; "Machine Learning"; "NLP"; "HPC"; "LLMs"; "MCP" ]) *)
     ]
   in
   let coursework =
@@ -126,12 +127,20 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                 ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "My work spans cloud infrastructure, high-performance computing, trading systems, and full-stack development. I've built systems that process millions of contracts, helped enable zero-trust cloud infrastructure for billions of $ in enterprise-scale client data, optimized HPC workflows for thousands of scientists, and shipped platforms used by real students and educators."
+                        "My work spans cloud infrastructure, high-performance computing, trading systems, and full-stack development. I've built systems that process hundreds of millions of dollars in trading volume and helped enable zero-trust cloud infrastructure for enterprise-scale workloads."
                     ]
                 ; Vdom.Node.p
                     ~attrs:[ Ui.body_text ]
                     [ Vdom.Node.text
-                        "Previously interned at CoreWeave working on cutting-edge IAM, and at GlaxoSmithKline doing compute platform engineering."
+                        "I'm currently open to a broad range of technical roles — reach out at "
+                    ; Vdom.Node.a
+                        ~attrs:
+                          [ Ui.inline_link
+                          ; Vdom.Attr.href "mailto:arnab@lbtrading.com"
+                          ]
+                        [ Vdom.Node.text "arnab@lbtrading.com" ]
+                    ; Vdom.Node.text
+                        " to chat if you think I could be a good fit."
                     ]
                 ]
             ]
@@ -151,7 +160,7 @@ let component ?(theme = Bonsai.Value.return Theme.Light) () =
                     [ Vdom.Node.text "Bachelor of Science with Honors in Computer Science" ]
                 ; Vdom.Node.div
                     ~attrs:[ Ui.footer_links ]
-                    [ Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text "GPA: 3.83" ]
+                    [ Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text "GPA: 3.81" ]
                     ; Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text "DECEMBER 2026" ]
                     ]
                 ; Vdom.Node.p ~attrs:[ Ui.muted_text ] [ Vdom.Node.text "RELEVANT COURSEWORK" ]

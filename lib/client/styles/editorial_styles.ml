@@ -138,7 +138,7 @@ module Styles = [%css
       }
 
       .inline_link:hover {
-        background-size: 100% 100%;
+        background-size: 100% 2px;
       }
 
       .photo_frame {
